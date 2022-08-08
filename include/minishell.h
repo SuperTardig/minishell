@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/08 13:36:56 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/08 15:00:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,4 +32,5 @@
 # include <term.h>
 
 
-#endif MINISHELL_H
+
+#endif
