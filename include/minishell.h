@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/08 15:00:53 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/09 13:10:50 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
-
+# include "../libft/libft.h"
 
 
 #endif
