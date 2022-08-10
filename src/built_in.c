@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/10 09:44:38 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/10 11:22:06 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,15 @@
 //va falloir mettre les bons parametre
 void	exit(void)
 {
-	//free_all(); va falloir la creer
+	int	status;
+
+
 	//if () regarder si un argument a ete donner
-	//  exit (a la valeur de l'argument);
-	//exit (a la valeur du dernier exit status)
+	//	status = arg;
+	//else 
+	//	status = last_status;
+	//free_all(); va falloir la creer
+	//exit (status);
 }
 
 //sert a imprimer quelque chose
@@ -43,4 +48,14 @@ void	echo(void)
 	else
 		printf("%s", argument);
 	soit on fait ca de meme ou dans le parsing on rajoute un \n mais je */
+}
+
+//sert a print le working directory
+//va falloir mettre les parametre
+void	pwd(void)
+{
+	//if (argument == 1)
+		//printf("%s\n", arg);
+	//else
+	//	printf("pwd: too many arguments");
 }
