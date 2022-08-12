@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/09 13:10:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/12 10:40:12 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,14 @@
 # include <term.h>
 # include "../libft/libft.h"
 
+//signal.c
+
+void	signal_handling(void);
+void	sighandler(int signum, siginfo_t *s_info, void *content);
+void	sighandlerc(int signum, siginfo_t *s_info, void *content);
+
+//utils.c
+
+void	cmd_prompt(void);
 
 #endif

@@ -1,41 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/12 10:45:00 by bperron          ###   ########.fr       */
+/*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
+/*   Updated: 2022/08/12 10:45:34 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	parsing(char *cmd)
+void	cmd_prompt(void)
 {
-	(void) cmd;
-}
+	//static int	first_open = 1;
 
-int	main(int argc, char **argv, char **envp)
-{
-	char	*cmd;
-
-	(void) argv;
-	(void) envp;
-	if (argc == 1)
+	/* if (first_open == 1) //check for first time opening command prompt
 	{
-		while (argc == 1)
-		{
-			signal_handling();
-			cmd_prompt();
-			cmd = get_next_line(0);
-			if (cmd == NULL)
-				return (0);
-			//parsing(cmd);
-		}
-	}
-	else
-		perror("Too many arguments\nUsage : ./minishell\nError code ");
-	return (0);
+		printf("\e[1;1H\e[2J"); //clear screen
+		first_open = 0;
+	} */
+	printf("\e[0;29mMinishell >"); //command line
 }

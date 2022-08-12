@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/10 11:22:06 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/12 10:41:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 void	exit(void)
 {
 	int	status;
-
 
 	//if () regarder si un argument a ete donner
 	//	status = arg;

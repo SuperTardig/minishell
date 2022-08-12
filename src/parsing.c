@@ -1,41 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/12 10:45:00 by bperron          ###   ########.fr       */
+/*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
+/*   Updated: 2022/08/12 10:42:06 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	parsing(char *cmd)
+char	*ft_strtok(char *cmd, char *meta)
 {
-	(void) cmd;
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	char	*cmd;
-
-	(void) argv;
-	(void) envp;
-	if (argc == 1)
-	{
-		while (argc == 1)
-		{
-			signal_handling();
-			cmd_prompt();
-			cmd = get_next_line(0);
-			if (cmd == NULL)
-				return (0);
-			//parsing(cmd);
-		}
-	}
-	else
-		perror("Too many arguments\nUsage : ./minishell\nError code ");
-	return (0);
+	static char	*next_command;
 }
