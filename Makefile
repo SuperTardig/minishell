@@ -6,7 +6,7 @@
 #    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/08/12 10:42:14 by bperron          ###   ########.fr        #
+#    Updated: 2022/08/12 10:55:00 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(SRCS) $(OBJS) $(HEADERS)
 	$(LIBFT)
-	$(CC) $(CFLAGS) $(LIBFTA) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline $(LIBFTA) $(OBJS) -o $(NAME)
 	echo "Mandatory compilation done"
 
 clean:
