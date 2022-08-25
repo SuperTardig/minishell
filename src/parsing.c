@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/25 11:26:04 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:26:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,82 @@ void	ft_strtok(t_vars *vars)
 		i++;
 	}
 	vars->metas[j] = '\0';
+}
+
+int	cmp(char *cmd, char *try)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] && try[i] && cmd[i] == try[i])
+		i++;
+	if (cmd[i] || try[i])
+		return (0);
+	return (1);
+}
+
+void	find_path(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (i <= vars->cmd_len)
+	{
+		if (cmp(&vars->cmd[i], "echo") == 1)
+			vars->path_to_take = 1;
+		else if (cmp(&vars->cmd[i], "exit") == 1)
+			vars->path_to_take = 2;
+		else if (cmp(&vars->cmd[i], "cd") == 1)
+			vars->path_to_take = 3;
+		else if (cmp(&vars->cmd[i], "pwd") == 1)
+			vars->path_to_take = 4;
+		else if (cmp(&vars->cmd[i], "export") == 1)
+			vars->path_to_take = 5;
+		else if (cmp(&vars->cmd[i], "env") == 1)
+			vars->path_to_take = 6;
+		else if (cmp(&vars->cmd[i], "unset") == 1)
+			vars->path_to_take = 7;
+		else
+			vars->path_to_take = 8;
+		while (vars->cmd[i])
+			i++;
+		i++;
+	}
+}
+
+void	exec_cmd(t_vars *vars)
+{
+	if (vars->path_to_take == 1)
+		ft_echo(vars);
+	else if (vars->path_to_take == 2)
+		ft_exit(vars);
+	else if (vars->path_to_take == 3)
+		ft_cd(vars);
+	else if (vars->path_to_take == 4)
+		ft_pwd(vars);
+	else if (vars->path_to_take == 5)
+		ft_export(vars);
+	else if (vars->path_to_take == 6)
+		ft_env(vars);
+	else if (vars->path_to_take == 7)
+		ft_unset(vars);
+	else
+		find_cmd(vars);
+}
+
+void	parsing(t_vars *vars)
+{
+	int	i;
+
+	ft_strtok(vars);
+	i = 0;
+	while (i <= vars->cmd_len)
+	{
+		find_path(vars);
+		printf("%d\n", vars->path_to_take);
+		exec_cmd(vars);
+		while (vars->cmd[i])
+			i++;
+		i++;
+	}
 }

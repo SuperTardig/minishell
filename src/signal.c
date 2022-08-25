@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/25 11:24:38 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/25 14:49:39 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,12 @@ void	sighandlerc(int signum)
 	rl_redisplay();
 }
 
-void	sighandler(int signum)
-{
-	(void) signum;
-//	rl_replace_line("minishell > ", 0);
-//	rl_redisplay();
-//	return ;
-}
-
 void	signal_handling(void)
 {
+	struct sigaction	sig;
+
+	ft_bzero(&sig, sizeof(sig));
+	sig.__sigaction_u.__sa_handler = SIG_IGN;
+	sigaction(SIGQUIT, &sig, NULL);
 	signal(SIGINT, sighandlerc);
-	signal(SIGQUIT, sighandler);
 }
