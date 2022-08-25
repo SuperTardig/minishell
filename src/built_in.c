@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/12 10:41:54 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/24 12:40:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 //sert a quitter le shell avec un exit code donner par le user ou celui de la dernier commande utiliser
 //va falloir mettre les bons parametre
-void	exit(void)
+void	ft_exit(void)
 {
 	int	status;
 
@@ -28,7 +28,7 @@ void	exit(void)
 
 //sert a imprimer quelque chose
 //va falloir mettre les bons parametre
-void	echo(void)
+void	ft_echo(void)
 {
 	int	i;
 	int	flags;
@@ -51,7 +51,7 @@ void	echo(void)
 
 //sert a print le working directory
 //va falloir mettre les parametre
-void	pwd(void)
+void	ft_pwd(void)
 {
 	//if (argument == 1)
 		//printf("%s\n", arg);

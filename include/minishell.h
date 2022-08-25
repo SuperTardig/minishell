@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/12 10:52:52 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/25 11:24:03 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include <readline/readline.h> //de readline (a verifier)
-# include <readline/history.h> //de readline (a verifier)
+# include "../readline/readline.h"
+# include "../readline/history.h" 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -32,14 +32,26 @@
 # include <term.h>
 # include "../libft/libft.h"
 
-//signal.c
+typedef struct s_vars{
+	char	*cmd;
+	char	*metas;
+	int		cmd_len;
+}	t_vars;
 
+//signal.c
 void	signal_handling(void);
-void	sighandler(int signum, siginfo_t *s_info, void *content);
-void	sighandlerc(int signum, siginfo_t *s_info, void *content);
+void	sighandler(int signum);
+void	sighandlerc(int signum);
+
+//parsing.c
+void	ft_strtok(t_vars *vars);
+
+//built_in.c
+void	ft_exit(void);
+void	ft_echo(void);
+void	ft_pwd(void);
 
 //utils.c
-
 void	cmd_prompt(void);
 
 #endif

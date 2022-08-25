@@ -6,37 +6,31 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/12 10:41:47 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/25 11:24:38 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	sighandlerc(int signum, siginfo_t *s_info, void *content)
+void	sighandlerc(int signum)
 {
 	(void) signum;
-	(void) s_info;
-	(void) content;
-	cmd_prompt();
+	write(1, "\n", 1);
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	rl_redisplay();
 }
 
-void	sighandler(int signum, siginfo_t *s_info, void *content)
+void	sighandler(int signum)
 {
 	(void) signum;
-	(void) s_info;
-	(void) content;
-	return ;
+//	rl_replace_line("minishell > ", 0);
+//	rl_redisplay();
+//	return ;
 }
 
 void	signal_handling(void)
 {
-	struct sigaction	sigc;
-	struct sigaction	sig;
-
-	ft_memset(&sigc, 0, sizeof(struct sigaction));
-	ft_memset(&sig, 0, sizeof(struct sigaction));
-	sigc.sa_sigaction = &sighandlerc;
-	sig.sa_sigaction = &sighandler;
-	sigaction(SIGINT, &sigc, NULL);
-	sigaction(SIGABRT, &sig, NULL);
+	signal(SIGINT, sighandlerc);
+	signal(SIGQUIT, sighandler);
 }
