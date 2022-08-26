@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/26 13:42:54 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/26 14:28:49 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 void	ft_exit(t_vars *vars)
 {
 	(void) vars;
+	printf("exit\n");
 	//int	status;
 
 	//if () regarder si un argument a ete donner
@@ -59,9 +60,16 @@ void	ft_echo(t_vars *vars)
 //va falloir mettre les parametre
 void	ft_pwd(t_vars *vars)
 {
-	(void) vars;
-	//if (argument == 1)
-		//printf("%s\n", arg);
+	int	i;
+
+	i = -1;
+	while (vars->env[++i])
+	{
+		if (ft_strnstr(vars->env[i], "PWD", 3) != NULL)
+			break ;
+	}
+	//if ( == 1)
+		printf("%s\n", &vars->env[i][4]);
 	//else
 	//	printf("pwd: too many arguments");
 }
@@ -76,14 +84,18 @@ void	ft_export(t_vars *vars)
 	(void) vars;
 }
 
-void	find_cd(t_vars *vars)
+void	find_cmd(t_vars *vars)
 {
 	(void) vars;
 }
 
 void	ft_env(t_vars *vars)
 {
-	(void) vars;
+	int	i;
+
+	i = -1;
+	while (vars->env[++i])
+		printf("%s\n", vars->env[i]);
 }
 
 void	ft_unset(t_vars *vars)
