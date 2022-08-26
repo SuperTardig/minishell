@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/25 14:26:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/26 10:17:31 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,31 +62,22 @@ int	cmp(char *cmd, char *try)
 
 void	find_path(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
-	while (i <= vars->cmd_len)
-	{
-		if (cmp(&vars->cmd[i], "echo") == 1)
-			vars->path_to_take = 1;
-		else if (cmp(&vars->cmd[i], "exit") == 1)
-			vars->path_to_take = 2;
-		else if (cmp(&vars->cmd[i], "cd") == 1)
-			vars->path_to_take = 3;
-		else if (cmp(&vars->cmd[i], "pwd") == 1)
-			vars->path_to_take = 4;
-		else if (cmp(&vars->cmd[i], "export") == 1)
-			vars->path_to_take = 5;
-		else if (cmp(&vars->cmd[i], "env") == 1)
-			vars->path_to_take = 6;
-		else if (cmp(&vars->cmd[i], "unset") == 1)
-			vars->path_to_take = 7;
-		else
-			vars->path_to_take = 8;
-		while (vars->cmd[i])
-			i++;
-		i++;
-	}
+	if (cmp(&vars->cmd[vars->i_cmd], "echo") == 1)
+		vars->path_to_take = 1;
+	else if (cmp(&vars->cmd[vars->i_cmd], "exit") == 1)
+		vars->path_to_take = 2;
+	else if (cmp(&vars->cmd[vars->i_cmd], "cd") == 1)
+		vars->path_to_take = 3;
+	else if (cmp(&vars->cmd[vars->i_cmd], "pwd") == 1)
+		vars->path_to_take = 4;
+	else if (cmp(&vars->cmd[vars->i_cmd], "export") == 1)
+		vars->path_to_take = 5;
+	else if (cmp(&vars->cmd[vars->i_cmd], "env") == 1)
+		vars->path_to_take = 6;
+	else if (cmp(&vars->cmd[vars->i_cmd], "unset") == 1)
+		vars->path_to_take = 7;
+	else
+		vars->path_to_take = 8;
 }
 
 void	exec_cmd(t_vars *vars)
@@ -111,17 +102,15 @@ void	exec_cmd(t_vars *vars)
 
 void	parsing(t_vars *vars)
 {
-	int	i;
-
 	ft_strtok(vars);
-	i = 0;
-	while (i <= vars->cmd_len)
+	vars->i_cmd = 0;
+	vars->i_meta = 0;
+	while (vars->i_cmd <= vars->cmd_len)
 	{
 		find_path(vars);
-		printf("%d\n", vars->path_to_take);
 		exec_cmd(vars);
-		while (vars->cmd[i])
-			i++;
-		i++;
+		while (vars->cmd[vars->i_cmd])
+			vars->i_cmd++;
+		vars->i_cmd++;
 	}
 }

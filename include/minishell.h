@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/25 14:24:20 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/26 10:16:02 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct s_vars{
 	char	*metas;
 	int		cmd_len;
 	int		path_to_take;
+	int		i_cmd;
+	int		i_meta;
 }	t_vars;
 
 //signal.c

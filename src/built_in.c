@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/25 14:24:09 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/26 10:18:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,22 @@ void	ft_echo(t_vars *vars)
 
 	i = 0;
 	flags = 0;
-	(void) vars;
-	//while (i <= 4)
-	//	i++;
-	//if (str[i] == '-') check for flags
-/* 	{
+	while (i < 4)
+		i++;
+	vars->i_meta++;
+	if (vars->metas[vars->i_meta] == '-')
+	{
 		flags = 1;
-		i += 3;
-	} on pourrait probablement mettre cette partie la dans le parsing en meme temps de toute checker*/
-	/*if (flags == 0)
-		printf ("%s\n", argument);
+		i += 4;
+	}
+	while (i <= vars->cmd_len)
+		if (vars->cmd[i++])
+			break ;
+	i--;
+	if (flags == 0)
+		printf ("%s\n", &vars->cmd[i]);
 	else
-		printf("%s", argument);
-	soit on fait ca de meme ou dans le parsing on rajoute un \n mais je */
+		printf("%s", &vars->cmd[i]);
 }
 
 //sert a print le working directory
