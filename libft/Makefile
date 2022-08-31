@@ -3,16 +3,16 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+         #
+#    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 09:41:33 by fleduc            #+#    #+#              #
-#    Updated: 2022/06/07 15:59:08 by fleduc           ###   ########.fr        #
+#    Updated: 2022/08/30 13:41:53 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
-NAME = libft.a
+
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra -g
 RM = rm -f
 
 LIB = ar rcs

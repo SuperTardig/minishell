@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/26 10:16:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/30 11:35:47 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+# include <errno.h>
 # include "../libft/libft.h"
 
 typedef struct s_vars{
@@ -40,6 +41,7 @@ typedef struct s_vars{
 	int		path_to_take;
 	int		i_cmd;
 	int		i_meta;
+	int		last_status;
 }	t_vars;
 
 //signal.c
@@ -64,5 +66,6 @@ void	ft_env(t_vars *vars);
 
 //utils.c
 void	cmd_prompt(void);
+int		check_args(t_vars *vars);
 
 #endif
