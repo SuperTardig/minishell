@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/26 14:29:10 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/01 09:44:44 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			signal_handling();
-			vars.cmd = readline("minishell > ");
+			vars.cmd = readline("MiniShit > ");
 			if (vars.cmd == NULL)
 				return (0);
 			parsing(&vars);

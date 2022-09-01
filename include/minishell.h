@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/30 11:35:47 by bperron          ###   ########.fr       */
+/*   Updated: 2022/08/31 10:47:16 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void	ft_unset(t_vars *vars);
 void	ft_env(t_vars *vars);
 
 //utils.c
-void	cmd_prompt(void);
 int		check_args(t_vars *vars);
 
 #endif
