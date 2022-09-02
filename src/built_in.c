@@ -6,81 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/01 11:35:06 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 09:48:24 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	check_arg(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	while (vars->cmd[i])
-	{
-		if (ft_isdigit(vars->cmd[i]) == 0)
-			return (255);
-		i++;
-	}
-	if (i > 19)
-		return (20);
-	else
-		return (i);
-}
-
-void	go_to_next(t_vars *vars)
-{
-	while (vars->i_cmd < vars->cmd_len && vars->cmd[0])
-	{
-		vars->cmd++;
-		vars->i_cmd++;
-	}
-	while (vars->i_cmd < vars->cmd_len && vars->cmd[0] == '\0')
-	{
-		if (vars->cmd[0] == '\0')
-			vars->i_meta++;
-		vars->i_cmd++;
-		vars->cmd++;
-	}
-}
-
-void	set_status(t_vars *vars, unsigned char *status)
-{
-	go_to_next(vars);
-	if (check_arg(vars) > 19)
-	{
-		errno = 22;
-		perror("MiniShit: exit");
-		*status = 255;
-	}
-	else
-		*status = atoll(vars->cmd);
-}
-
-//sert a quitter le shell avec un exit code donner par le user ou celui de la dernier commande utiliser
-//faut creer un fprintf pour pouvoir ecrire sur stderror
-void	ft_exit(t_vars *vars)
-{
-	unsigned char	status;
-	int				args;
-
-	status = 0;
-	printf("exit\n");
-	args = check_args(vars);
-	if (args == 1)
-		set_status(vars, &status);
-	else if (args == 0)
-		status = vars->last_status;
-	else
-	{
-		errno = 7;
-		perror("MiniShit: exit");
-		return ;
-	}
-	free(vars->metas);
-	exit (status);
-}
 
 //sert a imprimer quelque chose
 //va falloircheck pour les flags multiples et pour les variable bash
@@ -187,8 +117,12 @@ void	ft_cd(t_vars *vars)
 	change_pwd(old, new, vars);
 	free(old);
 	free(new);
+	go_to_next(vars);
 	if (vars->last_status == -1)
-		perror("cd: ");
+	{
+		ft_fprintf(2, "cd : %s", vars->cmd);
+		perror(" ");
+	}
 }
 
 void	ft_export(t_vars *vars)

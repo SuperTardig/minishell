@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:09:40 by fleduc            #+#    #+#             */
-/*   Updated: 2022/08/31 12:46:57 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 08:56:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include "ft_fprintf/ft_fprintf.h"
 
 typedef struct s_list
 {
@@ -68,7 +69,7 @@ int				ft_atoi(const char *str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
-long long	ft_atoll(const char *str);
+long long		ft_atoll(const char *str);
 
 size_t			ft_strlen(const char *c);
 size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);

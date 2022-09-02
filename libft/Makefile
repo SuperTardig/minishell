@@ -6,7 +6,7 @@
 #    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 09:41:33 by fleduc            #+#    #+#              #
-#    Updated: 2022/08/31 12:47:25 by bperron          ###   ########.fr        #
+#    Updated: 2022/09/02 09:07:16 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ RM = rm -f
 
 LIB = ar rcs
 PRINTF = ft_printf
+FPRINTF = ft_fprintf
 
 SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	   ft_isdigit.c ft_isprint.c ft_itoa.c ft_memchr.c ft_memcmp.c ft_memcpy.c \
@@ -40,20 +41,25 @@ OBJS_BONUS = $(SRCS_BONUS:.c=.o)
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(MAKE) -C $(PRINTF)
+	$(MAKE) -sC $(PRINTF)
+	$(MAKE) -sC $(FPRINTF)
 	cp $(PRINTF)/libftprintf.a .
 	mv libftprintf.a libft.a
+	cp $(FPRINTF)/libftfprintf.a .
+	mv libftfprintf.a libft.a
 	$(LIB) $(NAME) $(OBJS)
 
 bonus: $(OBJS) $(OBJS_BONUS)
 	$(LIB) $(NAME) $(OBJS) $(OBJS_BONUS)
 
 clean:
-	$(MAKE) -C $(PRINTF) clean
+	$(MAKE) -sC $(PRINTF) clean
+	$(MAKE) -sC $(FPRINTF) clean
 	$(RM) $(OBJS) $(OBJS_BONUS)
 
 fclean: clean
-	$(MAKE) -C $(PRINTF) fclean
+	$(MAKE) -sC $(PRINTF) fclean
+	$(MAKE) -sC $(FPRINTF) fclean
 	$(RM) $(NAME)
 
 re: fclean all

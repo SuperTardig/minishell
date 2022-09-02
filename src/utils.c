@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/31 10:47:19 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 09:46:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,20 @@ int	check_args(t_vars *vars)
 		i++;
 	}
 	return (args);
+}
+
+void	go_to_next(t_vars *vars)
+{
+	while (vars->i_cmd < vars->cmd_len && vars->cmd[0])
+	{
+		vars->cmd++;
+		vars->i_cmd++;
+	}
+	while (vars->i_cmd < vars->cmd_len && vars->cmd[0] == '\0')
+	{
+		if (vars->cmd[0] == '\0')
+			vars->i_meta++;
+		vars->i_cmd++;
+		vars->cmd++;
+	}
 }
