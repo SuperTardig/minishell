@@ -6,34 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/30 13:57:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 09:48:24 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-//sert a quitter le shell avec un exit code donner par le user ou celui de la dernier commande utiliser
-//va falloir mettre les bons parametre
-void	ft_exit(t_vars *vars)
-{
-	int	status = 0;
-
-	printf("exit\n");
-	if (check_args(vars) == 1)
-	{
-		
-	}
-	else if (check_args(vars) == 0)
-		status = vars->last_status;
-	else
-	{
-		errno = 7;
-		perror("exit:");
-		return ;
-	}
-	free(vars->metas);
-	exit (status);
-}
 
 //sert a imprimer quelque chose
 //va falloircheck pour les flags multiples et pour les variable bash
@@ -90,23 +67,17 @@ void	change_pwd(char *old, char *new, t_vars *vars)
 	while (vars->env[++i])
 	{
 		if (ft_strnstr(vars->env[i], "PWD", 3) != NULL)
-			vars->env[i] = ft_strjoin(ft_strtrim(vars->env[i], "="), new);
+			vars->env[i] = ft_strjoin(ft_substr(vars->env[i], 0, 4), new);
 		else if (ft_strnstr(vars->env[i], "OLDPWD", 6) != NULL)
-			vars->env[i] = ft_strjoin(ft_strtrim(vars->env[i], "="), old);
+			vars->env[i] = ft_strjoin(ft_substr(vars->env[i], 0, 7), old);
 	}
 }
 
-//faut encore combiner le home et pas home pour que ca prenne moins de place
-void	ft_cd(t_vars *vars)
+static	char	*find_path(t_vars *vars)
 {
-	int		i;
-	char	*old;
-	char	*new;
-	//char	*path;
+	int	i;
 
 	i = -1;
-	old = ft_calloc(sizeof(char), 1000);
-	new = ft_calloc(sizeof(char), 1000);
 	if (check_args(vars) >= 1)
 	{
 		while (++i < vars->cmd_len)
@@ -115,26 +86,43 @@ void	ft_cd(t_vars *vars)
 			{
 				while (vars->cmd[i] == '\0' && i < vars->cmd_len)
 					i++;
-				getcwd(old, 1000);
-				vars->last_status = chdir(&vars->cmd[i]);
-				getcwd(new, 1000);
-				change_pwd(old, new, vars);
-				break ;
+				return (&vars->cmd[i]);
 			}
 		}
 	}
 	else
 	{
-		while (vars->env[i])
+		while (vars->env[++i])
 		{
 			if (ft_strnstr(vars->env[i], "HOME", 4) != NULL)
-				(void) vars;
+				return (&vars->env[i][5]);
 		}
 	}
+	return (NULL);
+}
+
+//faut encore combiner le home et pas home pour que ca prenne moins de place
+void	ft_cd(t_vars *vars)
+{
+	char	*old;
+	char	*new;
+	char	*path;
+
+	old = ft_calloc(sizeof(char), 1000);
+	new = ft_calloc(sizeof(char), 1000);
+	path = find_path(vars);
+	getcwd(old, 1000);
+	vars->last_status = chdir(path);
+	getcwd(new, 1000);
+	change_pwd(old, new, vars);
 	free(old);
 	free(new);
+	go_to_next(vars);
 	if (vars->last_status == -1)
-		perror("cd: ");
+	{
+		ft_fprintf(2, "cd : %s", vars->cmd);
+		perror(" ");
+	}
 }
 
 void	ft_export(t_vars *vars)

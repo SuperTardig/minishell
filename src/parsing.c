@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/26 14:24:24 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/01 09:47:23 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	cmp(char *cmd, char *try)
 	return (1);
 }
 
-void	find_path(t_vars *vars)
+static	void	find_path(t_vars *vars)
 {
 	if (cmp(&vars->cmd[vars->i_cmd], "CD") == 1)
 		vars->path_to_take = 0;
