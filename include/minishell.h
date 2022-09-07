@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 09:48:19 by bperron          ###   ########.fr       */
+/*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
+/*   Updated: 2022/09/07 10:34:33 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_vars{
 	char	*cmd;
 	char	*metas;
 	int		cmd_len;
+	int		cmd_len_each;
 	int		path_to_take;
 	int		i_cmd;
 	int		i_meta;
@@ -72,5 +73,11 @@ void	ft_exit(t_vars *vars);
 //utils.c
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+
+//find_cmd.c
+char	*look_path(t_vars *vars, char *cmd);
+char	*get_cmd(t_vars *vars);
+void	find_cmd(t_vars *vars);
+void	mini_pipe(t_vars *vars, char *path);
 
 #endif

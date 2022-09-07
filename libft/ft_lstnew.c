@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 18:06:53 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/25 13:43:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/31 12:30:42 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
 
 t_list	*ft_lstnew(void *content)

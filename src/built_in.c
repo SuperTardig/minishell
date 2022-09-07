@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 10:30:51 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/07 10:36:18 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,11 +126,6 @@ void	ft_echo(t_vars *vars)
 
 
 void	ft_export(t_vars *vars)
-{
-	(void) vars;
-}
-
-void	find_cmd(t_vars *vars)
 {
 	(void) vars;
 }
