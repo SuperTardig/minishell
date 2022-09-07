@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/08/31 14:48:43 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/07 14:53:23 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	mini_pipe(t_vars *vars, char *path)
 	if (pid == 0)
 		execve(path, argv, vars->env);
 	waitpid(pid, NULL, 0);
-}
+} 
 
 void	find_cmd(t_vars *vars)
 {
@@ -70,6 +70,7 @@ void	find_cmd(t_vars *vars)
 
 	if (vars->cmd[vars->i_cmd] != '\0')
 	{
+		printf("ok\n");
 		cmd = get_cmd(vars);
 		cmd_path = look_path(vars, cmd);
 		if (cmd_path == NULL)

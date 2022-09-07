@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 11:35:34 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/07 14:52:27 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,8 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	//else
-	//	find_cmd(vars);
+	else
+		find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)

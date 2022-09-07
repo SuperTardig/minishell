@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 11:35:13 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/07 14:52:00 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,5 +82,9 @@ char	*look_path(t_vars *vars, char *cmd);
 char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
 void	mini_pipe(t_vars *vars, char *path);
+
+//variables.c
+char	*get_cmd2(t_vars *vars);
+void	variables(t_vars *vars);
 
 #endif
