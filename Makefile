@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
+#    By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/08/25 14:25:10 by bperron          ###   ########.fr        #
+#    Updated: 2022/08/31 12:40:48 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ LIBFT =  @$(MAKE) -sC ./libft
 LIBFTA = ./libft/libft.a
 
 HEADERS = include/minishell.h
-SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c
+SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c src/find_cmd.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
 $(NAME): $(SRCS) $(OBJS) $(HEADERS)
 	$(LIBFT)
-	$(CC) $(CFLAGS) -lreadline -L /Users/bperron/.brew/opt/readline/lib -I /Users/bperron/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline -L /Users/fleduc/.brew/opt/readline/lib -I /Users/fleduc/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
 	echo "Mandatory compilation done"
 
 clean:
