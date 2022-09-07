@@ -6,40 +6,12 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 09:48:24 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 10:30:51 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-//sert a imprimer quelque chose
-//va falloircheck pour les flags multiples et pour les variable bash
-void	ft_echo(t_vars *vars)
-{
-	int	i;
-	int	flags;
-
-	i = 0;
-	flags = 0;
-	while (i < 4)
-		i++;
-	vars->i_meta++;
-	if (vars->metas[vars->i_meta] == '-')
-	{
-		flags = 1;
-		i += 4;
-	}
-	while (i <= vars->cmd_len)
-		if (vars->cmd[i++])
-			break ;
-	i--;
-	if (flags == 0)
-		printf ("%s\n", &vars->cmd[i]);
-	else
-		printf("%s", &vars->cmd[i]);
-}
-
-//sert a print le working directory
 void	ft_pwd(t_vars *vars)
 {
 	char	*buf;
@@ -101,7 +73,6 @@ static	char	*find_path(t_vars *vars)
 	return (NULL);
 }
 
-//faut encore combiner le home et pas home pour que ca prenne moins de place
 void	ft_cd(t_vars *vars)
 {
 	char	*old;
@@ -124,6 +95,35 @@ void	ft_cd(t_vars *vars)
 		perror(" ");
 	}
 }
+
+//sert a imprimer quelque chose
+//va falloircheck pour les flags multiples et pour les variable bash
+void	ft_echo(t_vars *vars)
+{
+	int	i;
+	int	flags;
+
+	i = 0;
+	flags = 0;
+	while (i < 4)
+		i++;
+	vars->i_meta++;
+	if (vars->metas[vars->i_meta] == '-')
+	{
+		flags = 1;
+		i += 4;
+	}
+	while (i <= vars->cmd_len)
+		if (vars->cmd[i++])
+			break ;
+	i--;
+	if (flags == 0)
+		printf ("%s\n", &vars->cmd[i]);
+	else
+		printf("%s", &vars->cmd[i]);
+}
+
+
 
 void	ft_export(t_vars *vars)
 {

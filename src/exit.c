@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 09:47:44 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/02 10:30:58 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void	set_status(t_vars *vars, unsigned char *status)
 		*status = atoll(vars->cmd);
 }
 
-//sert a quitter le shell avec un exit code donner par le user ou celui de la dernier commande utiliser
 void	ft_exit(t_vars *vars)
 {
 	unsigned char	status;
