@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_fformat_d_i.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/01 09:44:44 by bperron          ###   ########.fr       */
+/*   Created: 2022/04/08 10:52:30 by fleduc            #+#    #+#             */
+/*   Updated: 2022/09/02 09:01:39 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "ft_fprintf.h"
 
-int	main(int argc, char **argv, char **envp)
+int	ft_fformat_d_i(int nb, int std)
 {
-	t_vars	vars;
+	int		n;
+	int		ret;
 
-	(void) argv;
-	if (argc == 1)
+	ret = 0;
+	n = nb;
+	if (nb < 0)
+		ret++;
+	else if (nb == 0)
+		ret++;
+	while (nb > 0 || nb < 0)
 	{
-		vars.env = envp;
-		while (1)
-		{
-			signal_handling();
-			vars.cmd = readline("MiniShit > ");
-			if (vars.cmd == NULL)
-				return (0);
-			parsing(&vars);
-		}
+		++ret;
+		nb /= 10;
 	}
-	else
-		printf("Too many arguments\nUsage : ./minishell\n");
-	return (0);
+	ft_putnbr_fd(n, std);
+	return (ret);
 }

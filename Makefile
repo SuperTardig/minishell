@@ -6,7 +6,7 @@
 #    By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/08/31 12:40:48 by fleduc           ###   ########.fr        #
+#    Updated: 2022/09/07 10:31:32 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ LIBFTA = ./libft/libft.a
 
 HEADERS = include/minishell.h
 SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c src/find_cmd.c
+SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c src/exit.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/31 10:49:35 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/07 10:31:09 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,18 @@ int	check_args(t_vars *vars)
 	return (args);
 }
 
-int	cmp(char *cmd, char *try)
+void	go_to_next(t_vars *vars)
 {
-	int	i;
-
-	i = 0;
-	while (cmd[i] && try[i] && cmd[i] == try[i])
-		i++;
-	if (cmd[i] || try[i])
-		return (0);
-	return (1);
+	while (vars->i_cmd < vars->cmd_len && vars->cmd[0])
+	{
+		vars->cmd++;
+		vars->i_cmd++;
+	}
+	while (vars->i_cmd < vars->cmd_len && vars->cmd[0] == '\0')
+	{
+		if (vars->cmd[0] == '\0')
+			vars->i_meta++;
+		vars->i_cmd++;
+		vars->cmd++;
+	}
 }

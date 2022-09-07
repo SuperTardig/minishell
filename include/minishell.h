@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/08/31 14:28:51 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/07 10:29:31 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # include <term.h>
 # include <errno.h>
 # include "../libft/libft.h"
+# include "../libft/ft_fprintf/ft_fprintf.h"
 
 typedef struct s_vars{
 	char	**env;
@@ -56,7 +57,6 @@ void	ft_strtok(t_vars *vars);
 void	parsing(t_vars *vars);
 
 //built_in.c
-void	ft_exit(t_vars *vars);
 void	ft_echo(t_vars *vars);
 void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
@@ -65,9 +65,14 @@ void	find_cmd(t_vars *vars);
 void	ft_unset(t_vars *vars);
 void	ft_env(t_vars *vars);
 
+//exit.c
+int		check_arg(t_vars *vars);
+void	set_status(t_vars *vars, unsigned char *status);
+void	ft_exit(t_vars *vars);
+
 //utils.c
-int		cmp(char *cmd, char *try);
 int		check_args(t_vars *vars);
+void	go_to_next(t_vars *vars);
 
 //find_cmd.c
 char	*look_path(t_vars *vars, char *cmd);
