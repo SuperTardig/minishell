@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 10:34:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/07 11:35:13 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,12 @@
 # include <curses.h>
 # include <term.h>
 # include <errno.h>
+# include <stdbool.h>
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
 typedef struct s_vars{
+	bool	is_malloc;
 	char	**env;
 	char	*cmd;
 	char	*metas;
@@ -57,13 +59,14 @@ void	ft_strtok(t_vars *vars);
 void	parsing(t_vars *vars);
 
 //built_in.c
+void	ft_env(t_vars *vars);
 void	ft_echo(t_vars *vars);
+void	ft_export(t_vars *vars);
+void	ft_unset(t_vars *vars);
+
+//cd_pwd.c
 void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
-void	ft_export(t_vars *vars);
-void	find_cmd(t_vars *vars);
-void	ft_unset(t_vars *vars);
-void	ft_env(t_vars *vars);
 
 //exit.c
 int		check_arg(t_vars *vars);

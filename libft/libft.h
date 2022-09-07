@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:09:40 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/02 08:56:45 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/07 11:10:38 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # endif
 
 # include <stdlib.h>
+# include <stdio.h>
 # include <unistd.h>
 # include "ft_fprintf/ft_fprintf.h"
 

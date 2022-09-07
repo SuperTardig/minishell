@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 10:30:58 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/07 11:29:53 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ void	set_status(t_vars *vars, unsigned char *status)
 	if (check_arg(vars) > 19)
 	{
 		errno = 22;
-		ft_fprintf(2, "MiniShit : exit : %s", vars->cmd);
-		perror(":");
+		ft_fprintf(2, "MiniShit: exit: %s: ", vars->cmd);
+		perror("");
 		*status = 255;
 	}
 	else
