@@ -3,14 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 10:31:09 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/09 12:23:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	ft_strlen_until(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
+
+int	cmp(char *cmd, char *try)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] && try[i] && cmd[i] == try[i])
+		i++;
+	if (cmd[i] || try[i])
+		return (0);
+	return (1);
+}
 
 int	check_args(t_vars *vars)
 {
@@ -30,6 +52,8 @@ int	check_args(t_vars *vars)
 	return (args);
 }
 
+
+//major fuck avec. fait qui faut faire plus de controle d pour sortir
 void	go_to_next(t_vars *vars)
 {
 	while (vars->i_cmd < vars->cmd_len && vars->cmd[0])

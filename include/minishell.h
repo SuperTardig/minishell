@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 14:52:00 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:23:01 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,12 +31,10 @@
 # include <curses.h>
 # include <term.h>
 # include <errno.h>
-# include <stdbool.h>
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
 typedef struct s_vars{
-	bool	is_malloc;
 	char	**env;
 	char	*cmd;
 	char	*metas;
@@ -46,6 +44,9 @@ typedef struct s_vars{
 	int		i_cmd;
 	int		i_meta;
 	int		last_status;
+	int		variables;
+	int		is_malloc;
+	int		is_meta;
 }	t_vars;
 
 //signal.c
@@ -61,8 +62,12 @@ void	parsing(t_vars *vars);
 //built_in.c
 void	ft_env(t_vars *vars);
 void	ft_echo(t_vars *vars);
-void	ft_export(t_vars *vars);
 void	ft_unset(t_vars *vars);
+
+//export_utils.c
+int		check_if_exist(t_vars *vars);
+void	create_new_env(t_vars *vars);
+void	sort_env(t_vars *vars);
 
 //cd_pwd.c
 void	ft_pwd(t_vars *vars);
@@ -74,6 +79,8 @@ void	set_status(t_vars *vars, unsigned char *status);
 void	ft_exit(t_vars *vars);
 
 //utils.c
+int		ft_strlen_until(char *str, char c);
+int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
 

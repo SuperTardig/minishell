@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:09:40 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 11:10:38 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 10:27:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int				ft_isdigit(int c);
 int				ft_lstsize(t_list *lst);
 int				ft_atoi(const char *str);
 int				ft_memcmp(const void *s1, const void *s2, size_t n);
+int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
 long long		ft_atoll(const char *str);

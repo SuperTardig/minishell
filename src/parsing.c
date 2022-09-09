@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 14:52:27 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/08 09:04:18 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,13 @@ void	ft_strtok(t_vars *vars)
 	{
 		if (ft_strchr(";&| ()<>", vars->cmd[i]))
 		{
+			vars->is_meta = 1;
 			vars->metas[j++] = vars->cmd[i];
 			vars->cmd[i] = '\0';
 		}
 		i++;
 	}
 	vars->metas[j] = '\0';
-}
-
-int	cmp(char *cmd, char *try)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i] && try[i] && cmd[i] == try[i])
-		i++;
-	if (cmd[i] || try[i])
-		return (0);
-	return (1);
 }
 
 static	void	find_path(t_vars *vars)
@@ -112,10 +101,12 @@ void	parsing(t_vars *vars)
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
 	{
-		find_path(vars);
+		find_path(vars);	
 		exec_cmd(vars);
 		while (vars->cmd[vars->i_cmd])
 			vars->i_cmd++;
 		vars->i_cmd++;
 	}
+	if (vars->is_meta == 1)
+		free(vars->metas);
 }
