@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/09 12:22:51 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:37:32 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	check_if_exist(t_vars *vars)
 	i = -1;
 	while (vars->env[++i])
 	{
-		if (ft_strlen_until(vars->cmd, '=') == ft_strlen_until(vars->env[i], '='))
+		if (ft_strlen_until(vars->cmd, '=')
+			== ft_strlen_until(vars->env[i], '='))
 		{
 			if (ft_strncmp(vars->cmd, vars->env[i], size) == 0)
 			{

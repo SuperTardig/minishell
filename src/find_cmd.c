@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/08 08:19:31 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:39:00 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	mini_pipe(t_vars *vars, char *path)
 	if (pid == 0)
 		execve(path, argv, vars->env);
 	waitpid(pid, NULL, 0);
-} 
+}
 
 void	find_cmd(t_vars *vars)
 {

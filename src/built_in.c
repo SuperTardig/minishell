@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/09 12:21:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:47:14 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,5 +72,8 @@ void	ft_echo(t_vars *vars)
 
 void	ft_unset(t_vars *vars)
 {
-	(void) vars;
+	int	i;
+
+	i = -1;
+	go_to_next(vars);
 }

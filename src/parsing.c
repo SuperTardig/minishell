@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/08 09:04:18 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/09 12:37:57 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	parsing(t_vars *vars)
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
 	{
-		find_path(vars);	
+		find_path(vars);
 		exec_cmd(vars);
 		while (vars->cmd[vars->i_cmd])
 			vars->i_cmd++;
