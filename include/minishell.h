@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/21 09:25:30 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/22 13:48:10 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # include <errno.h>
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
+
+typedef struct s_parse {
+	int		pipes;
+	char	*red;
+	char	**cmd_sep;
+}	t_parse;
 
 typedef struct s_vars{
 	char	**env;
