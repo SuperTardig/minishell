@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
+#    By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 13:24:27 by fleduc            #+#    #+#              #
-#    Updated: 2022/09/02 08:47:46 by bperron          ###   ########.fr        #
+#    Updated: 2022/09/07 11:19:05 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftfprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 AR = ar rcs
 

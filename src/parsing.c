@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 10:29:13 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/20 12:43:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	meta_num(char *cmd)
 	num = 0;
 	while (cmd[++i])
 	{
-		if (ft_strchr(";&| ()<>-", (int) cmd[i]))
+		if (ft_strchr("$&| ()<>-'\"", (int) cmd[i]))
 			num++;
 	}
 	return (num);
@@ -38,7 +38,7 @@ void	ft_strtok(t_vars *vars)
 	j = 0;
 	while (vars->cmd[i])
 	{
-		if (ft_strchr(";&| ()<>", vars->cmd[i]))
+		if (ft_strchr("$&| ()<>'\"", vars->cmd[i]))
 		{
 			vars->metas[j++] = vars->cmd[i];
 			vars->cmd[i] = '\0';

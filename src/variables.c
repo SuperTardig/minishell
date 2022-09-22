@@ -1,38 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/20 12:49:45 by fleduc           ###   ########.fr       */
+/*   Created: 2022/09/07 10:53:16 by fleduc            #+#    #+#             */
+/*   Updated: 2022/09/07 11:00:36 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+char	*get_cmd(t_vars *vars)
 {
-	t_vars	vars;
+	int		i;
+	char	*cmd;
 
-	(void) argv;
-	if (argc == 1)
+	i = 0;
+	while (vars->cmd[vars->i_cmd + i])
+		++i;
+	cmd = malloc(sizeof(char) * i + 1);
+	i = 0;
+	while (vars->cmd[vars->i_cmd + i])
 	{
-		vars.env = envp;
-		while (1)
-		{
-			signal_handling();
-			vars.cmd = readline("MiniShit > ");
-			if (vars.cmd == NULL)
-				return (0);
-			//vars.cmd_len = ft_strlen(vars.cmd); //to remove
-			before_tok(&vars);
-			//ft_strtok(&vars);
-			parsing(&vars);
-		}
+		cmd[i] = vars->cmd[vars->i_cmd + i];
+		++i;
 	}
+	return (cmd);
+}
+
+void	variables(t_vars *vars)
+{
+	int		i;
+	char	*cmd;
+
+	i = 0;
+	cmd = get_cmd(vars);
+	if (get_env(cmd))
+		printf("%s", cmd);
 	else
-		printf("Too many arguments\nUsage : ./minishell\n");
-	return (0);
+		printf("variable does not exist\n");
+	free(cmd);
 }

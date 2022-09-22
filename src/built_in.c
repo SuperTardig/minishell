@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 10:36:18 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/07 11:02:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,8 +122,6 @@ void	ft_echo(t_vars *vars)
 	else
 		printf("%s", &vars->cmd[i]);
 }
-
-
 
 void	ft_export(t_vars *vars)
 {

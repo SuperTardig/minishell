@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 10:34:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/20 10:13:24 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
+typedef struct s_parse {
+	int		pipes;
+	char	*red;
+	char	**cmd_sep;
+}	t_parse;
+
 typedef struct s_vars{
 	char	**env;
 	char	*cmd;
@@ -44,6 +50,7 @@ typedef struct s_vars{
 	int		i_cmd;
 	int		i_meta;
 	int		last_status;
+	t_parse	parse;
 }	t_vars;
 
 //signal.c
@@ -79,5 +86,8 @@ char	*look_path(t_vars *vars, char *cmd);
 char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
 void	mini_pipe(t_vars *vars, char *path);
+
+//inspector_steve.c (before strtok())
+void	before_tok(t_vars *vars);
 
 #endif

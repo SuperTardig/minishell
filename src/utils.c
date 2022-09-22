@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 10:31:09 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/20 11:18:57 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,4 +44,20 @@ void	go_to_next(t_vars *vars)
 		vars->i_cmd++;
 		vars->cmd++;
 	}
+}
+
+int	check_meta(t_vars *vars, char meta)
+{
+	int	num;
+	int	i;
+
+	num = 0;
+	i = 0;
+	while (vars->metas[i])
+	{
+		if (vars->metas[i] == meta)
+			num++;
+		++i;
+	}
+	return (num);
 }

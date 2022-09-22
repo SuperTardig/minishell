@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/08/31 14:48:43 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/22 13:18:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,65 @@ char	*get_cmd(t_vars *vars)
 	return (cmd);
 }
 
+int	cmd_len(t_vars *vars, int i)
+{
+	int	len;
+
+	len = 0;
+	if (vars->cmd[i] == '\0' && vars->cmd[i + 1] != '\0')
+	{
+		++len;
+		++i;
+	}
+	while (vars->cmd[i] != '\0')
+	{
+		++len;
+		++i;
+	}
+	return (len);
+}
+
+char	**get_args(t_vars *vars, int len)
+{
+	int		nb_args;
+	char	**args;
+	int		i;
+	int		j;
+	int		k;
+
+	nb_args = check_args(vars);
+	args = ft_calloc(nb_args + 1, sizeof(char *));
+	i = 0;
+	k = -1;
+	while (i < vars->cmd_len)
+	{
+		j = -1;
+		len = cmd_len(vars, i);
+		args[++j] = ft_calloc(len + 1, sizeof(char));
+		args[j] = ft_substr(vars->cmd, i, len);
+		i += len;
+		while (vars->cmd[i] == '\0' && vars->metas[++k] != '-')
+			++i;
+	}
+	return (args);
+}
+
 void	mini_pipe(t_vars *vars, char *path)
 {
 	int		pid;
-	char	*argv[] = {path, NULL};
+	int		len;
+	char	**args;
 
+	len = 0;
+	args = get_args(vars, len);
 	pid = fork();
 	if (pid < 0)
 		return ;
 	if (pid == 0)
-		execve(path, argv, vars->env);
+	{
+		if (execve(path, args, vars->env) == -1)
+			perror("Could not execute execve\n");
+	}
 	waitpid(pid, NULL, 0);
 }
 
@@ -68,6 +117,7 @@ void	find_cmd(t_vars *vars)
 	char	*cmd_path;
 	char	*cmd;
 
+	printf("%s\n", vars->cmd);
 	if (vars->cmd[vars->i_cmd] != '\0')
 	{
 		cmd = get_cmd(vars);

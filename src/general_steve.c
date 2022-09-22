@@ -1,38 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   general_steve.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/20 12:49:45 by fleduc           ###   ########.fr       */
+/*   Created: 2022/09/07 15:48:08 by fleduc            #+#    #+#             */
+/*   Updated: 2022/09/07 16:04:33 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	main(int argc, char **argv, char **envp)
+void	sep_cmd(t_vars *vars)
 {
-	t_vars	vars;
+	int	i;
+	int	j;
+	int	seps;
 
-	(void) argv;
-	if (argc == 1)
+	i = 0;
+	j = 0;
+	seps = 0;
+	while (vars->cmd[i] == '\0' && vars->metas[j] == ' ')
 	{
-		vars.env = envp;
-		while (1)
-		{
-			signal_handling();
-			vars.cmd = readline("MiniShit > ");
-			if (vars.cmd == NULL)
-				return (0);
-			//vars.cmd_len = ft_strlen(vars.cmd); //to remove
-			before_tok(&vars);
-			//ft_strtok(&vars);
-			parsing(&vars);
-		}
+		++i;
+		++j;
 	}
-	else
-		printf("Too many arguments\nUsage : ./minishell\n");
-	return (0);
 }
