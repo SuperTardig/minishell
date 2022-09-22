@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 16:08:23 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/27 14:25:48 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/31 12:28:51 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
-#include<stdio.h>
 
 int	ft_putchar(unsigned char c)
 {

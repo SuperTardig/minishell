@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/03 09:40:39 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 09:48:19 by bperron          ###   ########.fr       */
+/*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
+/*   Updated: 2022/09/21 09:25:30 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,14 @@ typedef struct s_vars{
 	char	*cmd;
 	char	*metas;
 	int		cmd_len;
+	int		cmd_len_each;
 	int		path_to_take;
 	int		i_cmd;
 	int		i_meta;
 	int		last_status;
+	int		variables;
+	int		is_malloc;
+	int		is_meta;
 }	t_vars;
 
 //signal.c
@@ -56,13 +60,22 @@ void	ft_strtok(t_vars *vars);
 void	parsing(t_vars *vars);
 
 //built_in.c
+void	ft_env(t_vars *vars);
+void	ft_export(t_vars *vars);
+void	create_new_env2(t_vars *vars, char **new_env);
+void	ft_unset(t_vars *vars);
+
+//echo.c
 void	ft_echo(t_vars *vars);
+
+//export_utils.c
+int		check_if_exist(t_vars *vars);
+void	create_new_env(t_vars *vars);
+void	sort_env(t_vars *vars);
+
+//cd_pwd.c
 void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
-void	ft_export(t_vars *vars);
-void	find_cmd(t_vars *vars);
-void	ft_unset(t_vars *vars);
-void	ft_env(t_vars *vars);
 
 //exit.c
 int		check_arg(t_vars *vars);
@@ -70,7 +83,19 @@ void	set_status(t_vars *vars, unsigned char *status);
 void	ft_exit(t_vars *vars);
 
 //utils.c
+int		ft_strlen_until(char *str, char c);
+int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+
+//find_cmd.c
+char	*look_path(t_vars *vars, char *cmd);
+char	*get_cmd(t_vars *vars);
+void	find_cmd(t_vars *vars);
+void	mini_pipe(t_vars *vars, char *path);
+
+//variables.c
+char	*get_cmd2(t_vars *vars);
+void	variables(t_vars *vars);
 
 #endif

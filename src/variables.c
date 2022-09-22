@@ -1,39 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoll.c                                         :+:      :+:    :+:   */
+/*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/02 14:56:08 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/09 12:41:01 by bperron          ###   ########.fr       */
+/*   Created: 2022/09/07 13:23:26 by bperron           #+#    #+#             */
+/*   Updated: 2022/09/09 12:38:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/minishell.h"
 
-long long	ft_atoll(const char *str)
+char	*get_cmd2(t_vars *vars)
 {
-	int			i;
-	long long	sign;
-	long long	number;
+	int		i;
+	char	*cmd;
 
 	i = 0;
-	sign = 1;
-	number = 0;
-	while (str[i] >= '0' && str[i] <= '9')
+	while (vars->cmd[vars->i_cmd + i])
 		++i;
-	if ((str[i] == '-' || str[i] == '+')
-		&& (str[i + 1] >= '0' && str[i + 1] <= '9'))
+	cmd = malloc(sizeof(char) * i + 1);
+	i = 0;
+	while (vars->cmd[vars->i_cmd + i])
 	{
-		if (str[i] == '-')
-			sign = -1;
+		cmd[i] = vars->cmd[vars->i_cmd + i];
 		++i;
 	}
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		number = (number * 10) + (str[i] - '0');
-		++i;
-	}
-	return (number * sign);
+	return (cmd);
+}
+
+void	variables(t_vars *vars)
+{
+	int		i;
+	char	*cmd;
+
+	i = 0;
+	cmd = get_cmd(vars);
+	if (getenv(cmd))
+		printf("%s", cmd);
+	else
+		printf("variable does not exist\n");
+	free(cmd);
 }

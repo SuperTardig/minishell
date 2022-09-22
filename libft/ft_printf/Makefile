@@ -6,14 +6,14 @@
 #    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/07 13:24:27 by fleduc            #+#    #+#              #
-#    Updated: 2022/09/02 08:47:56 by bperron          ###   ########.fr        #
+#    Updated: 2022/09/07 11:37:12 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libftprintf.a
 
 CC = gcc
-CFLAGS = -Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra -g
 RM = rm -rf
 AR = ar rcs
 

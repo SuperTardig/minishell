@@ -6,11 +6,33 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/02 09:46:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:15:30 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	ft_strlen_until(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] && str[i] != c)
+		i++;
+	return (i);
+}
+
+int	cmp(char *cmd, char *try)
+{
+	int	i;
+
+	i = 0;
+	while (cmd[i] && try[i] && cmd[i] == try[i])
+		i++;
+	if (cmd[i] || try[i])
+		return (0);
+	return (1);
+}
 
 int	check_args(t_vars *vars)
 {
@@ -44,4 +66,5 @@ void	go_to_next(t_vars *vars)
 		vars->i_cmd++;
 		vars->cmd++;
 	}
+	vars->i_cmd++;
 }

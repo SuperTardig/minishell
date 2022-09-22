@@ -3,12 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 15:54:36 by fleduc            #+#    #+#             */
-/*   Updated: 2022/05/05 14:19:42 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/31 12:29:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
+
 int	ft_atoi(const char *str)
 {
 	int	i;

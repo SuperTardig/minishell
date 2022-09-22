@@ -3,12 +3,13 @@
 /*                                                        :::      ::::::::   */
 /*   ft_format_p.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <marvin@42quebec.com>               +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/06 15:40:28 by fleduc            #+#    #+#             */
-/*   Updated: 2022/04/27 14:33:15 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/08/31 12:28:28 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 static void	ft_hexa_mem(unsigned long nb, char *base, int *ret)
