@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/09 12:36:49 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:30:50 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,16 @@ void	ft_pwd(t_vars *vars)
 		else
 		{
 			vars->last_status = errno;
-			perror("pwd: ");
+			perror("pwd");
 		}
+		free(buf);
 	}
-	free(buf);
+	else
+	{
+		vars->last_status = 7;
+		errno = 7;
+		ft_fprintf(2, "pwd: too many arguments\n");
+	}
 }
 
 void	change_pwd(char *old, char *new, t_vars *vars)

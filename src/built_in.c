@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/09 12:47:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/21 09:24:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,37 +43,40 @@ void	ft_export(t_vars *vars)
 		sort_env(vars);
 }
 
-//sert a imprimer quelque chose
-//va falloircheck pour les flags multiples et pour les variable bash
-void	ft_echo(t_vars *vars)
+void	create_new_env2(t_vars *vars, char **new_env)
 {
 	int	i;
-	int	flags;
+	int	j;
 
-	i = 0;
-	flags = 0;
-	while (i < 4)
-		i++;
-	vars->i_meta++;
-	if (vars->metas[vars->i_meta] == '-')
+	i = -1;
+	j = -1;
+	while (vars->env[++i])
 	{
-		flags = 1;
-		i += 4;
+		if (ft_strncmp(vars->cmd, vars->env[i], ft_strlen(vars->cmd)) == 0)
+			i++;
+		new_env[++j] = vars->env[i];
 	}
-	while (i <= vars->cmd_len)
-		if (vars->cmd[i++])
-			break ;
-	i--;
-	if (flags == 0)
-		printf ("%s\n", &vars->cmd[i]);
-	else
-		printf("%s", &vars->cmd[i]);
+	new_env[++j] = 0;
+	vars->env = new_env;
 }
 
 void	ft_unset(t_vars *vars)
 {
-	int	i;
+	char	**new_env;
+	int		size;
+	int		i;
 
 	i = -1;
 	go_to_next(vars);
+	size = ft_arrsize(vars->env);
+	while (vars->env[++i])
+	{
+		if (ft_strncmp(vars->cmd, vars->env[i], ft_strlen(vars->cmd)) == 0)
+		{
+			size--;
+			break ;
+		}
+	}
+	new_env = ft_calloc(sizeof(char *), size);
+	create_new_env2(vars, new_env);
 }

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/09 12:23:43 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/22 10:15:30 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,6 @@ int	check_args(t_vars *vars)
 	return (args);
 }
 
-
-//major fuck avec. fait qui faut faire plus de controle d pour sortir
 void	go_to_next(t_vars *vars)
 {
 	while (vars->i_cmd < vars->cmd_len && vars->cmd[0])
@@ -68,4 +66,5 @@ void	go_to_next(t_vars *vars)
 		vars->i_cmd++;
 		vars->cmd++;
 	}
+	vars->i_cmd++;
 }
