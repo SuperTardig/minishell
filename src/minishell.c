@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/20 12:49:45 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/22 13:49:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ int	main(int argc, char **argv, char **envp)
 		{
 			signal_handling();
 			vars.cmd = readline("MiniShit > ");
+			add_history(vars.cmd);
 			if (vars.cmd == NULL)
 				return (0);
 			//vars.cmd_len = ft_strlen(vars.cmd); //to remove
-			before_tok(&vars);
 			//ft_strtok(&vars);
 			parsing(&vars);
 		}

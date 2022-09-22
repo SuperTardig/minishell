@@ -3,130 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/07 11:02:17 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/22 13:49:06 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-void	ft_pwd(t_vars *vars)
-{
-	char	*buf;
-
-	buf = ft_calloc(sizeof(char), 1000);
-	if (check_args(vars) == 0)
-	{
-		getcwd(buf, 1000);
-		if (buf[0] != '\0')
-			printf("%s\n", buf);
-		else
-		{
-			vars->last_status = errno;
-			perror("pwd: ");
-		}
-	}
-	free(buf);
-}
-
-void	change_pwd(char *old, char *new, t_vars *vars)
-{
-	int		i;
-
-	i = -1;
-	while (vars->env[++i])
-	{
-		if (ft_strnstr(vars->env[i], "PWD", 3) != NULL)
-			vars->env[i] = ft_strjoin(ft_substr(vars->env[i], 0, 4), new);
-		else if (ft_strnstr(vars->env[i], "OLDPWD", 6) != NULL)
-			vars->env[i] = ft_strjoin(ft_substr(vars->env[i], 0, 7), old);
-	}
-}
-
-static	char	*find_path(t_vars *vars)
-{
-	int	i;
-
-	i = -1;
-	if (check_args(vars) >= 1)
-	{
-		while (++i < vars->cmd_len)
-		{
-			if (vars->cmd[i] == '\0')
-			{
-				while (vars->cmd[i] == '\0' && i < vars->cmd_len)
-					i++;
-				return (&vars->cmd[i]);
-			}
-		}
-	}
-	else
-	{
-		while (vars->env[++i])
-		{
-			if (ft_strnstr(vars->env[i], "HOME", 4) != NULL)
-				return (&vars->env[i][5]);
-		}
-	}
-	return (NULL);
-}
-
-void	ft_cd(t_vars *vars)
-{
-	char	*old;
-	char	*new;
-	char	*path;
-
-	old = ft_calloc(sizeof(char), 1000);
-	new = ft_calloc(sizeof(char), 1000);
-	path = find_path(vars);
-	getcwd(old, 1000);
-	vars->last_status = chdir(path);
-	getcwd(new, 1000);
-	change_pwd(old, new, vars);
-	free(old);
-	free(new);
-	go_to_next(vars);
-	if (vars->last_status == -1)
-	{
-		ft_fprintf(2, "cd : %s", vars->cmd);
-		perror(" ");
-	}
-}
-
-//sert a imprimer quelque chose
-//va falloircheck pour les flags multiples et pour les variable bash
-void	ft_echo(t_vars *vars)
-{
-	int	i;
-	int	flags;
-
-	i = 0;
-	flags = 0;
-	while (i < 4)
-		i++;
-	vars->i_meta++;
-	if (vars->metas[vars->i_meta] == '-')
-	{
-		flags = 1;
-		i += 4;
-	}
-	while (i <= vars->cmd_len)
-		if (vars->cmd[i++])
-			break ;
-	i--;
-	if (flags == 0)
-		printf ("%s\n", &vars->cmd[i]);
-	else
-		printf("%s", &vars->cmd[i]);
-}
-
-void	ft_export(t_vars *vars)
-{
-	(void) vars;
-}
 
 void	ft_env(t_vars *vars)
 {
@@ -137,7 +21,62 @@ void	ft_env(t_vars *vars)
 		printf("%s\n", vars->env[i]);
 }
 
+void	ft_export(t_vars *vars)
+{
+	int		args;
+
+	args = check_args(vars);
+	if (args >= 1)
+	{
+		while (args >= 1)
+		{
+			go_to_next(vars);
+			if (ft_strchr(vars->cmd, '='))
+			{	
+				if (check_if_exist(vars) == 0)
+					create_new_env(vars);
+			}
+			args--;
+		}
+	}
+	else if (args == 0)
+		sort_env(vars);
+}
+
+void	create_new_env2(t_vars *vars, char **new_env)
+{
+	int	i;
+	int	j;
+
+	i = -1;
+	j = -1;
+	while (vars->env[++i])
+	{
+		if (ft_strncmp(vars->cmd, vars->env[i], ft_strlen(vars->cmd)) == 0)
+			i++;
+		new_env[++j] = vars->env[i];
+	}
+	new_env[++j] = 0;
+	vars->env = new_env;
+}
+
 void	ft_unset(t_vars *vars)
 {
-	(void) vars;
+	char	**new_env;
+	int		size;
+	int		i;
+
+	i = -1;
+	go_to_next(vars);
+	size = ft_arrsize(vars->env);
+	while (vars->env[++i])
+	{
+		if (ft_strncmp(vars->cmd, vars->env[i], ft_strlen(vars->cmd)) == 0)
+		{
+			size--;
+			break ;
+		}
+	}
+	new_env = ft_calloc(sizeof(char *), size);
+	create_new_env2(vars, new_env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/20 12:43:17 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/22 13:48:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,24 +40,13 @@ void	ft_strtok(t_vars *vars)
 	{
 		if (ft_strchr("$&| ()<>'\"", vars->cmd[i]))
 		{
+			vars->is_meta = 1;
 			vars->metas[j++] = vars->cmd[i];
 			vars->cmd[i] = '\0';
 		}
 		i++;
 	}
 	vars->metas[j] = '\0';
-}
-
-int	cmp(char *cmd, char *try)
-{
-	int	i;
-
-	i = 0;
-	while (cmd[i] && try[i] && cmd[i] == try[i])
-		i++;
-	if (cmd[i] || try[i])
-		return (0);
-	return (1);
 }
 
 static	void	find_path(t_vars *vars)
@@ -101,7 +90,7 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	else
+	else// cest ca qui fait chier le ctrl d
 		find_cmd(vars);
 }
 
@@ -118,4 +107,6 @@ void	parsing(t_vars *vars)
 			vars->i_cmd++;
 		vars->i_cmd++;
 	}
+	if (vars->is_meta == 1)
+		free(vars->metas);
 }

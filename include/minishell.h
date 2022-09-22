@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/20 10:13:24 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/22 13:48:10 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,9 @@ typedef struct s_vars{
 	int		i_cmd;
 	int		i_meta;
 	int		last_status;
-	t_parse	parse;
+	int		variables;
+	int		is_malloc;
+	int		is_meta;
 }	t_vars;
 
 //signal.c
@@ -64,13 +66,22 @@ void	ft_strtok(t_vars *vars);
 void	parsing(t_vars *vars);
 
 //built_in.c
+void	ft_env(t_vars *vars);
+void	ft_export(t_vars *vars);
+void	create_new_env2(t_vars *vars, char **new_env);
+void	ft_unset(t_vars *vars);
+
+//echo.c
 void	ft_echo(t_vars *vars);
+
+//export_utils.c
+int		check_if_exist(t_vars *vars);
+void	create_new_env(t_vars *vars);
+void	sort_env(t_vars *vars);
+
+//cd_pwd.c
 void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
-void	ft_export(t_vars *vars);
-void	find_cmd(t_vars *vars);
-void	ft_unset(t_vars *vars);
-void	ft_env(t_vars *vars);
 
 //exit.c
 int		check_arg(t_vars *vars);
@@ -78,6 +89,8 @@ void	set_status(t_vars *vars, unsigned char *status);
 void	ft_exit(t_vars *vars);
 
 //utils.c
+int		ft_strlen_until(char *str, char c);
+int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
 
@@ -87,7 +100,8 @@ char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
 void	mini_pipe(t_vars *vars, char *path);
 
-//inspector_steve.c (before strtok())
-void	before_tok(t_vars *vars);
+//variables.c
+char	*get_cmd2(t_vars *vars);
+void	variables(t_vars *vars);
 
 #endif

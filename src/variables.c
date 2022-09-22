@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   variables.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 10:53:16 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 11:00:36 by fleduc           ###   ########.fr       */
+/*   Created: 2022/09/07 13:23:26 by bperron           #+#    #+#             */
+/*   Updated: 2022/09/22 13:48:35 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*get_cmd(t_vars *vars)
+char	*get_cmd2(t_vars *vars)
 {
 	int		i;
 	char	*cmd;
@@ -37,7 +37,7 @@ void	variables(t_vars *vars)
 
 	i = 0;
 	cmd = get_cmd(vars);
-	if (get_env(cmd))
+	if (getenv(cmd))
 		printf("%s", cmd);
 	else
 		printf("variable does not exist\n");
