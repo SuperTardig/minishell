@@ -6,13 +6,13 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/22 12:48:46 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/30 13:04:27 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
+void	rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 {
 	char	*buffer;
 	int		i;
@@ -38,10 +38,12 @@ char	*rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 			dquote_pos = 0;
 		buffer[++j] = vars->cmd[i];
 	}
-	return (buffer);
+	vars->cmd = buffer;
+	vars->cmd[j + 1] = '\0';
+	free(buffer);
 }
 
-char	*search_quotes(t_vars *vars)
+void	search_quotes(t_vars *vars)
 {
 	int	i;
 	int	j;
@@ -66,12 +68,28 @@ char	*search_quotes(t_vars *vars)
 		else if (dquote_pos == 1 && vars->cmd[i] == '"')
 			dquote_pos = 0;
 	}
-	return (rm_spaces(vars, i - j, quote_pos, dquote_pos));
+	rm_spaces(vars, i - j, quote_pos, dquote_pos);
 }
 
-void	before_tok(t_vars *vars)
+void	del_spaces(t_vars *vars)
 {
-	vars->cmd = ft_strtrim(vars->cmd, " ");
+	vars->cmd_cp = ft_strtrim(vars->cmd, " ");
 	vars->cmd_len = ft_strlen(vars->cmd);
-	vars->cmd = search_quotes(vars);
+	search_quotes(vars);
+}
+
+char	*ft_copy(char *str, int len)
+{
+	char	*new;
+	int		i;
+
+	new = ft_calloc(len + 1, sizeof(char));
+	i = 0;
+	while (i < len)
+	{
+		new[i] = str[i];
+		++i;
+	}
+	new[i] = '\0';
+	return (new);
 }

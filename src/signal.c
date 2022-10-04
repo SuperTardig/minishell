@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 13:58:44 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/23 10:40:35 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,4 +30,3 @@ void	signal_handling(void)
 	sigaction(SIGQUIT, &sig, NULL);
 	signal(SIGINT, sighandlerc);
 }
-//

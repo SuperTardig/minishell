@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 11:10:17 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 15:49:07 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/09/23 11:18:37 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,18 +65,4 @@ void	check_redirs(t_vars *vars)
 			vars->parse.red = NULL;
 		++i;
 	}
-}
-
-void	check_cmd_len(t_vars *vars)
-{
-	if (check_basic_cmd(vars))
-	{
-		count_pipes(vars);
-		if (vars->parse.pipes == 0)
-		{
-			check_redirs(vars);
-		}
-	}
-	else
-		sep_cmd(vars);
 }

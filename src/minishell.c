@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 13:49:43 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/30 12:55:00 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	ft_readline(t_vars *vars)
+{
+	if (vars->cmd)
+	{
+		free(vars->cmd);
+		vars->cmd = NULL;
+	}
+	vars->cmd = readline("Minishell > ");
+	if (vars->cmd == NULL)
+		return (0);
+	if (vars->cmd && *(vars->cmd))
+		add_history(vars->cmd);
+	return (1);
+}
 
 int	main(int argc, char **argv, char **envp)
 {
@@ -23,12 +38,9 @@ int	main(int argc, char **argv, char **envp)
 		while (1)
 		{
 			signal_handling();
-			vars.cmd = readline("MiniShit > ");
-			add_history(vars.cmd);
-			if (vars.cmd == NULL)
+			vars.cmd = NULL;
+			if (!ft_readline(&vars))
 				return (0);
-			//vars.cmd_len = ft_strlen(vars.cmd); //to remove
-			//ft_strtok(&vars);
 			parsing(&vars);
 		}
 	}

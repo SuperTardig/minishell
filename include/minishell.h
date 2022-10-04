@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/22 13:48:10 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/30 12:40:15 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_vars{
 	int		variables;
 	int		is_malloc;
 	int		is_meta;
+	t_parse	parse;
 }	t_vars;
 
 //signal.c
@@ -103,5 +104,9 @@ void	mini_pipe(t_vars *vars, char *path);
 //variables.c
 char	*get_cmd2(t_vars *vars);
 void	variables(t_vars *vars);
+
+void	del_spaces(t_vars *vars);
+void	change_variables(t_vars *vars);
+char	*ft_copy(char *str, int len);
 
 #endif
