@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 09:58:48 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/30 11:21:36 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:21:07 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	str_len = ft_strlen(s);
 	if (start < str_len)
 		max = str_len - start;
-	if (start >= str_len)
+	else if (start >= str_len)
 		max = 0;
 	if (max > len)
 		max = len;
