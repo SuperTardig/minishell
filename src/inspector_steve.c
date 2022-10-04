@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/30 13:04:27 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:23:20 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	search_quotes(t_vars *vars)
 
 void	del_spaces(t_vars *vars)
 {
-	vars->cmd_cp = ft_strtrim(vars->cmd, " ");
+	vars->cmd = ft_strtrim(vars->cmd, " ");
 	vars->cmd_len = ft_strlen(vars->cmd);
 	search_quotes(vars);
 }

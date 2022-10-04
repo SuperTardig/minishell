@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 11:19:50 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:27:56 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,5 @@ void	parsing(t_vars *vars)
 {
 	del_spaces(vars);
 	vars->cmd_len = ft_strlen(vars->cmd);
-	change_variables(vars);
+	loop_var(vars, -1, 0, 0);
 }

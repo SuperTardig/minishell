@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   check_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 10:07:38 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:32:38 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void check_pipe(t_vars *vars)
+void	check_pipe(t_vars *vars)
 {
 	int	i;
-	int nb_pipe;
+	int	nb_pipe;
 
 	i = -1;
 	nb_pipe = 0;
@@ -28,7 +28,8 @@ void check_pipe(t_vars *vars)
 	i = 0;
 	while (nb_pipe-- >= 0)
 	{
-		vars->piped[i++] = ft_substr(vars->cmd, 0, ft_strlen_until(vars->cmd, '|'));
+		vars->piped[i++] = ft_substr(vars->cmd, 0,
+				ft_strlen_until(vars->cmd, '|'));
 		while (*vars->cmd != '|')
 			vars->cmd++;
 		vars->cmd++;
@@ -38,10 +39,10 @@ void check_pipe(t_vars *vars)
 	vars->piped[i] = NULL;
 }
 
-int find_var_len(t_vars *vars, int env_place)
+int	find_var_len(t_vars *vars, int env_place)
 {
-	char *hold;
-	
+	char	*hold;
+
 	hold = vars->env[env_place];
 	while (*hold != '=')
 		hold++;
@@ -56,7 +57,8 @@ void	change_var(t_vars *vars, int var_place, int env_place, int len)
 	int		j;
 	int		k;
 
-	new = ft_calloc(ft_strlen(vars->cmd) - ft_strlen_until(vars->env[env_place], '=') + find_var_len(vars, env_place) + 1, sizeof(char));
+	new = ft_calloc(ft_strlen(vars->cmd) - ft_strlen_until(vars->env[env_place],
+				'=') + find_var_len(vars, env_place) + 1, sizeof(char));
 	if (new == NULL)
 		return ;
 	i = -1;
@@ -80,12 +82,12 @@ void	change_var(t_vars *vars, int var_place, int env_place, int len)
 	loop_var(vars);
 }
 
-void    find_var(t_vars *vars, int i)
+void	find_var(t_vars *vars, int i)
 {
-	char    *var;
-	int     exist;
-	int     j;
-	
+	char	*var;
+	int		exist;
+	int		j;
+
 	exist = 0;
 	j = 0;
 	while (vars->cmd[i + j] && ((vars->cmd[i + j] >= 'a'
@@ -107,15 +109,8 @@ void    find_var(t_vars *vars, int i)
 		change_var(vars, i - 1, j, ft_strlen(var));
 }
 
-void    loop_var(t_vars *vars)
+void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 {
-	int d_quotes;
-	int quotes;
-	int i;
-	
-	i = -1;
-	d_quotes = 0;
-	quotes = 0;
 	while (vars->cmd[++i])
 	{
 		if (vars->cmd[i] == '"' && quotes == 0)

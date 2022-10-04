@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 11:20:57 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:28:33 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ void	change_variables(t_vars *vars);
 char	*ft_copy(char *str, int len);
 void	check_pipe(t_vars *vars);
 void    find_var(t_vars *vars, int i);
-void    loop_var(t_vars *vars);
+void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 //void	change_var(t_vars *vars, int var_place, int env_place, int len);
 
 #endif
