@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/28 14:48:47 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:28:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void	variables(t_vars *vars);
 
 void	check_pipe(t_vars *vars);
 void    find_var(t_vars *vars, int i);
-void    loop_var(t_vars *vars);
+void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 //void	change_var(t_vars *vars, int var_place, int env_place, int len);
 
 #endif

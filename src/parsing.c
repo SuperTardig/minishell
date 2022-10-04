@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/29 13:20:16 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/04 11:42:40 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,8 @@ void	exec_cmd(t_vars *vars)
 void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
-	loop_var(vars);
-	printf("%s\n", vars->cmd);
+	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
-	//ft_strtok(vars);
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
