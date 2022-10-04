@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 11:32:38 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 11:36:25 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ void	change_var(t_vars *vars, int var_place, int env_place, int len)
 	new[j] = '\0';
 	free(vars->cmd);
 	vars->cmd = new;
-	loop_var(vars);
+	loop_var(vars, -1, 0, 0);
 }
 
 void	find_var(t_vars *vars, int i)
