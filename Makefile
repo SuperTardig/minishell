@@ -6,7 +6,7 @@
 #    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/10/04 11:37:57 by bperron          ###   ########.fr        #
+#    Updated: 2022/10/06 11:34:58 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ RM = rm -rf
 
 NAME = minishell
 
-LIBFT =  @$(MAKE) -sC ./libft
+LIBFT = @$(MAKE) -sC ./libft
 LIBFTA = ./libft/libft.a
 
 HEADERS = include/minishell.h

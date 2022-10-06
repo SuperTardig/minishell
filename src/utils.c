@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 10:15:30 by bperron          ###   ########.fr       */
+/*   Updated: 2022/09/22 13:48:39 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,20 @@ void	go_to_next(t_vars *vars)
 		vars->cmd++;
 	}
 	vars->i_cmd++;
+}
+
+int	check_meta(t_vars *vars, char meta)
+{
+	int	num;
+	int	i;
+
+	num = 0;
+	i = 0;
+	while (vars->metas[i])
+	{
+		if (vars->metas[i] == meta)
+			num++;
+		++i;
+	}
+	return (num);
 }

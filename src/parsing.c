@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/06 10:02:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/06 11:34:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	meta_num(char *cmd)
 	num = 0;
 	while (cmd[++i])
 	{
-		if (ft_strchr(";&| ()<>-", (int) cmd[i]))
+		if (ft_strchr("$&| ()<>-'\"", (int) cmd[i]))
 			num++;
 	}
 	return (num);
