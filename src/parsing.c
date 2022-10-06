@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 13:48:45 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/06 11:34:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_strtok(t_vars *vars)
 	j = 0;
 	while (vars->cmd[i])
 	{
-		if (ft_strchr("$&| ()<>'\"", vars->cmd[i]))
+		if (ft_strchr("<>", vars->cmd[i]))
 		{
 			vars->is_meta = 1;
 			vars->metas[j++] = vars->cmd[i];
@@ -90,13 +90,16 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	else// cest ca qui fait chier le ctrl d
-		find_cmd(vars);
+//	else// cest ca qui fait chier le ctrl d
+	//	find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)
 {
-	ft_strtok(vars);
+	vars->last_var = -1;
+	loop_var(vars, -1, 0, 0);
+	check_pipe(vars);
+	split_args(vars);
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
