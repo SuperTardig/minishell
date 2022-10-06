@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 08:22:44 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/05 08:36:59 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	main(int argc, char **argv, char **envp)
 				return (0);
 			add_history(vars.cmd);
 			parsing(&vars);
-			free (vars.cmd);
 		}
 	}
 	else

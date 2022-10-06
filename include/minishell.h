@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 11:28:36 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/04 14:22:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_vars{
 	int		is_malloc;
 	int		is_meta;
 	int		last_var;
+	int		nb_pipe;
 }	t_vars;
 
 //signal.c
@@ -101,8 +102,9 @@ char	*get_cmd2(t_vars *vars);
 void	variables(t_vars *vars);
 
 void	check_pipe(t_vars *vars);
+void	split_args(t_vars *vars);
+
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);
-//void	change_var(t_vars *vars, int var_place, int env_place, int len);
 
 #endif
