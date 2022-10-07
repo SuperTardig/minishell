@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/06 11:35:13 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/07 15:42:26 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,7 @@ int		ft_strlen_until(char *str, char c);
 int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+void	free_arrarr(char **arr);
 
 //find_cmd.c
 char	*look_path(t_vars *vars, char *cmd);
@@ -109,6 +110,7 @@ void	variables(t_vars *vars);
 
 void	check_pipe(t_vars *vars);
 void	split_args(t_vars *vars);
+void	remove_quotes(t_vars *vars, int quotes, int i);
 
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);

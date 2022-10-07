@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/06 10:35:34 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/07 15:42:14 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,94 +38,30 @@ void	check_pipe(t_vars *vars)
 	vars->piped[i] = NULL;
 }
 
-int	count_args(t_vars *vars)
+void	remove_quotes(t_vars *vars, int quotes, int i)
 {
-	int	i;
-	int	j;
-	int	nb;
-	
+	int		j;
+	int		k;
+	char	**with_out;
+
+	while (vars->piped[i])
+		i++;
+	with_out = ft_calloc(sizeof(char *), i + 1);
 	i = -1;
-	nb = 1;
 	while (vars->piped[++i])
 	{
 		j = -1;
 		while (vars->piped[i][++j])
-		{
-			if (vars->piped[i][j] == '"')
-			{
-				while (vars->piped[i][++j] != '"')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == '\'')
-			{
-				while (vars->piped[i][++j] != '\'')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == ' ')
-				nb++;
-		}
+			if (vars->piped[i][j] == '"' || vars->piped[i][j] == '\'')
+				quotes++;
+		with_out[i] = ft_calloc(sizeof(char),
+				ft_strlen(vars->piped[i]) - quotes + 1);
+		j = -1;
+		k = -1;
+		while (vars->piped[i][++j])
+			if (vars->piped[i][j] != '"' && vars->piped[i][j] != '\'')
+				with_out[i][++k] = vars->piped[i][j];
 	}
-	return (nb);
-}
-
-int	find_size(t_vars *vars, int row)
-{
-	int	i;
-
-	i = -1;
-	while (vars->piped[row][++i])
-	{
-		if (vars->piped[row][i] == '"' || vars->piped[row][i] == '\'')
-			i--;
-		if (vars->piped[row][i] == ' ')
-			return (i);
-	}
-	return (i);
-}
-
-
-
-//faut trouver la taille de la string a mettre dedans
-//pas sur pour les quotes si jen creer ne autre si yas pas despaces je lai fait qui en creer pas
-//les guillemets marche pas
-void	split_args(t_vars *vars)
-{
-	char	**new_piped;
-	int		i;
-	int		j;
-	int		k;
-	int		l;
-	int		quotes;
-	
-	new_piped = ft_calloc(count_args(vars) + 2, sizeof(char *));
-	i = 0;
-	k = 0;
-	j = 0;
-	l = 0;
-	quotes = 0;
-	while (vars->piped[i][j] == ' ')
-		j++;
-	while (vars->piped[i])
-	{
-		if (vars->piped[i][j] == ' ' && (quotes % 2) != 1)
-		{
-			l = 0;
-			k++;
-			while (vars->piped[i][j] == ' ')
-				j++;
-		}
-		if (vars->piped[i][j] == '"' || vars->piped[i][j] == '\'')
-			quotes++;
-		if (!(new_piped[k]))
-			new_piped[k] = ft_calloc(find_size(vars, i) + 1, sizeof(char));
-		new_piped[k][l++] = vars->piped[i][j++];
-		if (!(vars->piped[i][j]))
-		{
-			i++;
-			j = 0;
-			l = 0;
-		}
-	}
-	for (int a = 0; new_piped[a]; a++)
-		printf("%s\n", new_piped[a]); 
+	free_arrarr(vars->piped);
+	vars->piped = with_out;
 }
