@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 13:56:41 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/12 10:51:01 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ typedef struct s_vars{
 	int		is_malloc;
 	int		is_meta;
 	int		last_var;
-	int		pipes_count;
+	int		nb_pipe;
 	t_parse	parse;
 }	t_vars;
 
@@ -97,6 +97,7 @@ int		ft_strlen_until(char *str, char c);
 int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+void	free_arrarr(char **arr);
 
 //find_cmd.c
 char	*look_path(t_vars *vars, char *cmd);
@@ -111,8 +112,10 @@ void	variables(t_vars *vars);
 void	del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 void	check_pipe(t_vars *vars);
+void	split_args(t_vars *vars);
+void	remove_quotes(t_vars *vars, int quotes, int i);
+
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);
-//void	change_var(t_vars *vars, int var_place, int env_place, int len);
 
 #endif

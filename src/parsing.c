@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 13:43:23 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/12 10:50:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_strtok(t_vars *vars)
 	j = 0;
 	while (vars->cmd[i])
 	{
-		if (ft_strchr("$&| ()<>'\"", vars->cmd[i]))
+		if (ft_strchr("<>", vars->cmd[i]))
 		{
 			vars->is_meta = 1;
 			vars->metas[j++] = vars->cmd[i];
@@ -100,7 +100,8 @@ void	parsing(t_vars *vars)
 	del_spaces(vars);
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
-	/*vars->i_cmd = 0;
+	split_args(vars);
+	vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
 	{
@@ -112,5 +113,4 @@ void	parsing(t_vars *vars)
 	}
 	if (vars->is_meta == 1)
 		free(vars->metas);
-	*/
 }
