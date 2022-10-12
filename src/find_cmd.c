@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/12 10:23:52 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:06:18 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ int	cmd_len(t_vars *vars, int i)
 	char	*cmd_path;
 	char	*cmd;
 
-	printf("%s\n", vars->cmd);
 	if (vars->cmd[vars->i_cmd] != '\0')
 	{
 		cmd = get_cmd(vars);

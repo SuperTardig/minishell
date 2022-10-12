@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/11 14:24:00 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:06:08 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_vars{
 	int		is_meta;
 	int		last_var;
 	int		nb_pipe;
+	t_parse	parse;
 }	t_vars;
 
 //signal.c
@@ -109,6 +110,8 @@ void	mini_pipe(t_vars *vars, char *path);
 char	*get_cmd2(t_vars *vars);
 void	variables(t_vars *vars);
 
+void	del_spaces(t_vars *vars);
+void	change_variables(t_vars *vars);
 void	check_pipe(t_vars *vars);
 void	split_args(t_vars *vars);
 void	remove_quotes(t_vars *vars, int quotes, int i);
