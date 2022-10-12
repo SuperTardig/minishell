@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 11:23:20 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/06 13:28:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,31 @@ void	rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 	free(buffer);
 }
 
-void	search_quotes(t_vars *vars)
+void	quotes_error(int quote, int dquote)
 {
-	int	i;
-	int	j;
-	int	quote_pos;
-	int	dquote_pos;
+	if (quote == 1 || dquote == 1)
+	{
+		printf("unclosed quotes or double quotes\n");
+		exit(1);
+	}
+}
 
-	i = -1;
+void	search_quotes(t_vars *vars, int quote_pos, int dquote_pos, int i)
+{
+	int	j;
+
 	j = 0;
-	quote_pos = 0;
-	dquote_pos = 0;
-	while (++i < vars->cmd_len)
+	while (vars->cmd[++i])
 	{
 		if (vars->cmd[i] == ' ' && quote_pos == 0 && dquote_pos == 0)
-			while (vars->cmd[i++] == ' ')
+		{
+			while (vars->cmd[i] == ' ')
+			{
+				++i;
 				++j;
-		else if (dquote_pos == 0 && quote_pos == 0 && vars->cmd[i] == '"')
+			}
+		}
+		if (dquote_pos == 0 && quote_pos == 0 && vars->cmd[i] == '"')
 			dquote_pos = 1;
 		else if (quote_pos == 0 && dquote_pos == 0 && vars->cmd[i] == '\'')
 			quote_pos = 1;
@@ -68,6 +76,7 @@ void	search_quotes(t_vars *vars)
 		else if (dquote_pos == 1 && vars->cmd[i] == '"')
 			dquote_pos = 0;
 	}
+	quotes_error(quote_pos, dquote_pos);
 	rm_spaces(vars, i - j, quote_pos, dquote_pos);
 }
 
@@ -75,21 +84,5 @@ void	del_spaces(t_vars *vars)
 {
 	vars->cmd = ft_strtrim(vars->cmd, " ");
 	vars->cmd_len = ft_strlen(vars->cmd);
-	search_quotes(vars);
-}
-
-char	*ft_copy(char *str, int len)
-{
-	char	*new;
-	int		i;
-
-	new = ft_calloc(len + 1, sizeof(char));
-	i = 0;
-	while (i < len)
-	{
-		new[i] = str[i];
-		++i;
-	}
-	new[i] = '\0';
-	return (new);
+	search_quotes(vars, 0, 0, -1);
 }

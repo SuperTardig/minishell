@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 12:48:45 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:56:41 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,9 @@ typedef struct s_vars{
 	int		variables;
 	int		is_malloc;
 	int		is_meta;
-	t_parse	parse;
 	int		last_var;
+	int		pipes_count;
+	t_parse	parse;
 }	t_vars;
 
 //signal.c
@@ -109,7 +110,6 @@ void	variables(t_vars *vars);
 
 void	del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
-char	*ft_copy(char *str, int len);
 void	check_pipe(t_vars *vars);
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);

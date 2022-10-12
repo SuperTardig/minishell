@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 12:48:41 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:43:23 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,16 +90,17 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-//	else// cest ca qui fait chier le ctrl d
-	//	find_cmd(vars);
+	else// cest ca qui fait chier le ctrl d
+		find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
+	del_spaces(vars);
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
-	vars->i_cmd = 0;
+	/*vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->i_cmd <= vars->cmd_len)
 	{
@@ -111,4 +112,5 @@ void	parsing(t_vars *vars)
 	}
 	if (vars->is_meta == 1)
 		free(vars->metas);
+	*/
 }

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/04 12:49:00 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/04 13:57:13 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	check_pipe(t_vars *vars)
 	while (vars->cmd[++i])
 		if (vars->cmd[i] == '|')
 			nb_pipe++;
+	vars->pipes_count = nb_pipe;
 	if (nb_pipe == 0)
 		return ;
 	vars->piped = ft_calloc(sizeof(char *), nb_pipe + 2);

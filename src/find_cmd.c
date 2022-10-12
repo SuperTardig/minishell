@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/22 13:48:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/04 13:05:06 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,6 @@ void	find_cmd(t_vars *vars)
 	char	*cmd_path;
 	char	*cmd;
 
-	printf("%s\n", vars->cmd);
 	if (vars->cmd[vars->i_cmd] != '\0')
 	{
 		cmd = get_cmd(vars);
