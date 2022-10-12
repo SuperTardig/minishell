@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/22 13:48:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:23:52 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	cmd_len(t_vars *vars, int i)
 	return (len);
 }
 
-char	**get_args(t_vars *vars, int len)
+/* char	**get_args(t_vars *vars, int len)
 {
 	int		nb_args;
 	char	**args;
@@ -90,10 +90,10 @@ char	**get_args(t_vars *vars, int len)
 		while (vars->cmd[i] == '\0' && vars->metas[++k] != '-')
 			++i;
 	}
-	return (args);
-}
+	 return (args);
+}*/
 
-void	mini_pipe(t_vars *vars, char *path)
+/* void	mini_pipe(t_vars *vars, char *path)
 {
 	int		pid;
 	int		len;
@@ -110,9 +110,9 @@ void	mini_pipe(t_vars *vars, char *path)
 			perror("Could not execute execve\n");
 	}
 	waitpid(pid, NULL, 0);
-}
+} */
 
-void	find_cmd(t_vars *vars)
+/* void	find_cmd(t_vars *vars)
 {
 	char	*cmd_path;
 	char	*cmd;
@@ -126,4 +126,4 @@ void	find_cmd(t_vars *vars)
 			return ;
 		mini_pipe(vars, cmd_path);
 	}
-}
+} */

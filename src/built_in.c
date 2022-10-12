@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 13:49:06 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:26:34 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ void	ft_export(t_vars *vars)
 {
 	int		args;
 
-	args = check_args(vars);
+	//args = check_args(vars);
+	args = 0;
 	if (args >= 1)
 	{
 		while (args >= 1)
 		{
-			go_to_next(vars);
+		//	go_to_next(vars);
 			if (ft_strchr(vars->cmd, '='))
 			{	
 				if (check_if_exist(vars) == 0)
@@ -67,7 +68,7 @@ void	ft_unset(t_vars *vars)
 	int		i;
 
 	i = -1;
-	go_to_next(vars);
+	//go_to_next(vars);
 	size = ft_arrsize(vars->env);
 	while (vars->env[++i])
 	{

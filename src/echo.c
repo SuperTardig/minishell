@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/22 11:16:23 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:24:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	check_flags(t_vars *vars)
 	flags = 0;
 	temp = vars->i_cmd;
 	hold = vars->cmd;
-	go_to_next(vars);
+//	go_to_next(vars);
 	while (vars->cmd[0] == '-')
 	{
 		i = 0;
@@ -36,14 +36,15 @@ int	check_flags(t_vars *vars)
 			}
 		}
 		flags = 1;
-		go_to_next(vars);
+	//	go_to_next(vars);
 	}
 	return (flags);
 }
 
 void	print(t_vars *vars)
 {
-	int	i;
+	(void) vars;
+	/* int	i;
 
 	i = 0;
 	while (vars->cmd_len - 1 > vars->i_cmd)
@@ -61,7 +62,7 @@ void	print(t_vars *vars)
 			vars->i_meta++;
 		}
 		go_to_next(vars);
-	}
+	} */
 }
 
 void	ft_echo(t_vars *vars)

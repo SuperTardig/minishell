@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/07 15:42:26 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/11 14:24:00 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,14 @@ typedef struct s_parse {
 
 typedef struct s_vars{
 	char	**env;
+	char	**new_env;
 	char	**piped;
 	char	*cmd;
 	char	*metas;
-	int		cmd_len;
+	int		row;
+	int		i_cmd;
 	int		cmd_len_each;
 	int		path_to_take;
-	int		i_cmd;
 	int		i_meta;
 	int		last_status;
 	int		variables;

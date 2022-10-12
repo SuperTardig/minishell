@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/06 11:34:54 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 10:54:23 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	ft_strtok(t_vars *vars)
 	int		i;
 	int		j;
 
-	vars->cmd_len = ft_strlen(vars->cmd);
 	vars->metas = ft_calloc(sizeof(char), meta_num(vars->cmd));
 	i = 0;
 	j = 0;
@@ -49,26 +48,26 @@ void	ft_strtok(t_vars *vars)
 	vars->metas[j] = '\0';
 }
 
-static	void	find_path(t_vars *vars)
+static	void	find_path(char *cmd, t_vars *vars)
 {
-	if (cmp(&vars->cmd[vars->i_cmd], "CD") == 1)
+	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
-	else if (cmp(&vars->cmd[vars->i_cmd], "echo") == 1
-		|| cmp(&vars->cmd[vars->i_cmd], "ECHO") == 1)
+	else if (cmp(cmd, "echo") == 1
+		|| cmp(cmd, "ECHO") == 1)
 		vars->path_to_take = 1;
-	else if (cmp(&vars->cmd[vars->i_cmd], "exit") == 1)
+	else if (cmp(cmd, "exit") == 1)
 		vars->path_to_take = 2;
-	else if (cmp(&vars->cmd[vars->i_cmd], "cd") == 1)
+	else if (cmp(cmd, "cd") == 1)
 		vars->path_to_take = 3;
-	else if (cmp(&vars->cmd[vars->i_cmd], "pwd") == 1
-		|| cmp(&vars->cmd[vars->i_cmd], "PWD") == 1)
+	else if (cmp(cmd, "pwd") == 1
+		|| cmp(cmd, "PWD") == 1)
 		vars->path_to_take = 4;
-	else if (cmp(&vars->cmd[vars->i_cmd], "export") == 1)
+	else if (cmp(cmd, "export") == 1)
 		vars->path_to_take = 5;
-	else if (cmp(&vars->cmd[vars->i_cmd], "env") == 1
-		|| cmp(&vars->cmd[vars->i_cmd], "ENV") == 1)
+	else if (cmp(cmd, "env") == 1
+		|| cmp(cmd, "ENV") == 1)
 		vars->path_to_take = 6;
-	else if (cmp(&vars->cmd[vars->i_cmd], "unset") == 1)
+	else if (cmp(cmd, "unset") == 1)
 		vars->path_to_take = 7;
 	else
 		vars->path_to_take = 8;
@@ -100,15 +99,17 @@ void	parsing(t_vars *vars)
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
+	vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
-	while (vars->i_cmd <= vars->cmd_len)
+	while (vars->piped[vars->row])
 	{
-		find_path(vars);
+		find_path(vars->piped[vars->row], vars);
 		exec_cmd(vars);
 		while (vars->cmd[vars->i_cmd])
 			vars->i_cmd++;
 		vars->i_cmd++;
+		vars->row++;
 	}
 	if (vars->is_meta == 1)
 		free(vars->metas);
