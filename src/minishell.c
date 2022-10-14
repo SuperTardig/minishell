@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 10:49:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/14 08:05:31 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,14 @@ int	main(int argc, char **argv, char **envp)
 	if (argc == 1)
 	{
 		vars.env = envp;
+		vars.last_status = 0;
 		signal_handling();
 		while (1)
 		{
-			signal_handling();
 			vars.cmd = NULL;
 			if (!ft_readline(&vars))
 				return (0);
 			parsing(&vars);
-			//printf("%s\n", vars.cmd);
 		}
 	}
 	else

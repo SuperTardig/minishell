@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 10:51:41 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/13 10:57:29 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_pwd(t_vars *vars)
 {
 	char	*buf;
 
-	buf = ft_calloc(sizeof(char), 1000);
  	if (ft_arrsize(vars->piped) == 1)
 	{
+		buf = ft_calloc(sizeof(char), 1000);
 		getcwd(buf, 1000);
 		if (buf[0] != '\0')
 			printf("%s\n", buf);
@@ -34,7 +34,7 @@ void	ft_pwd(t_vars *vars)
 		vars->last_status = 7;
 		errno = 7;
 		ft_fprintf(2, "pwd: too many arguments\n");
-	} 
+	}
 }
 
 void	change_pwd(char *old, char *new, t_vars *vars)
@@ -56,9 +56,11 @@ static	char	*find_path(t_vars *vars)
 	int	i;
 
 	i = -1;
-	vars->row++;
 	if (ft_arrsize(vars->piped) > 1)
+	{
+		vars->row++;
 		return (vars->piped[vars->row]);
+	}
 	else
 	{
 		while (vars->env[++i])
@@ -85,7 +87,7 @@ void	ft_cd(t_vars *vars)
 	free(new);
 	if (vars->last_status == -1)
 	{
-	//	ft_fprintf(2, "cd: %s: ", vars->cmd);
+		ft_fprintf(2, "cd: %s: ", vars->piped[vars->row]);
 		perror("");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/14 13:35:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,8 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	else// cest ca qui fait chier le ctrl d
-		find_cmd(vars);
+/* 	else// cest ca qui fait chier le ctrl d
+		find_cmd(vars); */
 }
 
 void	parsing(t_vars *vars)
@@ -107,9 +107,6 @@ void	parsing(t_vars *vars)
 	{
 		find_path(vars->piped[vars->row], vars);
 		exec_cmd(vars);
-		while (vars->cmd[vars->i_cmd])
-			vars->i_cmd++;
-		vars->i_cmd++;
 		vars->row++;
 	}
 	if (vars->is_meta == 1)
