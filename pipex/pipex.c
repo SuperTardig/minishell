@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../include/minishell.h"
 
 char	*look_path(char *envp[], char *cmd)
 {
@@ -83,17 +83,14 @@ int	do_child(int count)
 	return (0);
 }
 
-int	main(int argc, char *argv[], char *envp[])
+void	main(t_vars *vars)
 {
 	char	*cmd_path;
 
-	if (argc > 5)
-	{
-		cmd_path = look_path(envp, "ls");
-		if (cmd_path == NULL)
-			return (1);
-		if (do_child(argc) == 1)
-			return (1);
-	}
-	return (0);
+	cmd_path = look_path(vars->env, vars->piped[0]);
+	if (cmd_path != NULL)
+		if (do_child(argc))
+			printf("pipe execution failed");
+	else
+		printf("pipe execution failed");
 }
