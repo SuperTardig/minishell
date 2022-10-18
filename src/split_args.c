@@ -6,13 +6,13 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 13:46:22 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/18 13:41:58 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	count_args(t_vars *vars, int nb)
+int	count_args(t_vars *vars, int nb) // sa fuck ici mais je pense que cest le nouveau check pipe
 {
 	int	i;
 	int	j;
@@ -40,14 +40,14 @@ int	count_args(t_vars *vars, int nb)
 	return (nb);
 }
 
-int	find_size(t_vars *vars, int row)
+int	find_size(t_vars *vars, int row, int start)
 {
 	int	i;
 	int	quotes;
 	int	singles;
 	int	doubles;
 
-	i = -1;
+	i = start;
 	quotes = 0;
 	singles = 0;
 	doubles = 0;
@@ -63,10 +63,10 @@ int	find_size(t_vars *vars, int row)
 			quotes++;
 			singles++;
 		}
-		if (vars->piped[row][i] == ' ' && (quotes % 2) != 0)
-			return (i);
+		if (vars->piped[row][i] == ' ' && quotes % 2 == 0)
+			return (i - start);
 	}
-	return (i);
+	return (i - start);
 }
 
 void	reset_counters(int *i, int *j, int *l)
@@ -76,7 +76,7 @@ void	reset_counters(int *i, int *j, int *l)
 	*l = 0;
 }
 
-void	splitter(t_vars *vars, char **new_piped, int i, int j)
+void	splitter(t_vars *vars, char **new_piped, int i, int j) 
 {
 	int	k;
 	int	l;
@@ -89,6 +89,13 @@ void	splitter(t_vars *vars, char **new_piped, int i, int j)
 	dquotes = 0;
 	while (vars->piped[i])
 	{
+		if (!(new_piped[k]))
+			new_piped[k] = ft_calloc(find_size(vars, i, j) + 1, sizeof(char)); 
+		if (vars->piped[i][j] == '"' && quotes % 2 == 0)
+			dquotes++;
+		if (vars->piped[i][j] == '\'' && dquotes % 2 == 0)
+			quotes++;
+		new_piped[k][l++] = vars->piped[i][j++];
 		if (vars->piped[i][j] == ' ' && quotes % 2 == 0 && dquotes % 2 == 0)
 		{
 			l = 0;
@@ -96,17 +103,10 @@ void	splitter(t_vars *vars, char **new_piped, int i, int j)
 			while (vars->piped[i][j] == ' ')
 				j++;
 		}
-		if (vars->piped[i][j] == '"' && quotes % 2 == 0)
-			dquotes++;
-		if (vars->piped[i][j] == '\'' && dquotes % 2 == 0)
-			quotes++;
-		if (!(new_piped[k]))
-		{
-			new_piped[k] = ft_calloc(find_size(vars, i) + 1, sizeof(char)); // peut etre encore ici
-		}
-		new_piped[k][l++] = vars->piped[i][j++];
 		if (!(vars->piped[i][j]))
+		{
 			reset_counters(&i, &j, &l);
+		}
 	}
 }
 
@@ -123,5 +123,4 @@ void	split_args(t_vars *vars)
 	free_arrarr(vars->piped);
 	vars->piped = new_piped;
 	remove_quotes(vars, 0);
-	printf("ok\n");
 }

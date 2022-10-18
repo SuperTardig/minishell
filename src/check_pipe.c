@@ -6,23 +6,65 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 13:33:28 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/18 11:38:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	find_nb_pipe(t_vars *vars)
+{
+	int	i;
+	
+	vars->nb_pipe = 0;
+	i = -1;
+	while (vars->cmd[++i])
+	{
+		if (vars->cmd[i] == '|')
+			vars->nb_pipe++;
+		else if (vars->cmd[i] == '\'')
+		{
+			while (vars->cmd[++i] != '\'')
+				(void) i;
+			i++;
+		}
+		else if (vars->cmd[i] == '"')
+		{
+			while (vars->cmd[++i] != '"')
+				(void) i;
+			i++;
+		}
+	} 
+	return (i);
+}
+
+int	ft_strlen_until_pipe(t_vars *vars)
+{
+	int	singles;
+	int	doubles;
+	int	i;
+
+	singles = 0;
+	doubles = 0;
+	i = -1;
+	while (vars->cmd[++i])
+	{
+		if (vars->cmd[i] == '"')
+			doubles++;
+		if (vars->cmd[i] == '\'')
+			singles++;
+		if (vars->cmd[i] == '|' && singles % 2 == 0 && doubles % 2 == 0)
+			return (i);
+	}
+	return (i);
+}
 
 void	check_pipe(t_vars *vars)
 {
 	int	i;
 	int	nb_pipe;
 
-	i = -1;
-	vars->nb_pipe = 0;
-	while (vars->cmd[++i])
-		if (vars->cmd[i] == '|')
-			vars->nb_pipe++;
-	vars->piped = ft_calloc(sizeof(char *), vars->nb_pipe + 2);
+	vars->piped = ft_calloc(sizeof(char *), find_nb_pipe(vars) + 2);
 	i = 0;
 	nb_pipe = vars->nb_pipe;
 	while (nb_pipe-- >= 0)
