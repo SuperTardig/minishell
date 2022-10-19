@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   general_steve.c                                    :+:      :+:    :+:   */
+/*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 15:48:08 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/07 16:04:33 by fleduc           ###   ########.fr       */
+/*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
+/*   Updated: 2022/10/11 08:08:14 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	sep_cmd(t_vars *vars)
+void	free_arrarr(char **arr)
 {
 	int	i;
-	int	j;
-	int	seps;
 
-	i = 0;
-	j = 0;
-	seps = 0;
-	while (vars->cmd[i] == '\0' && vars->metas[j] == ' ')
-	{
-		++i;
-		++j;
-	}
+	i = -1;
+	while (arr[++i])
+		free(arr[i]);
+	free(arr[i]);
+	free(arr);
 }

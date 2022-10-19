@@ -6,126 +6,151 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/06 10:35:34 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 11:44:28 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	check_pipe(t_vars *vars)
+void	find_nb_pipe(t_vars *vars, int *nb)
 {
 	int	i;
-	int	nb_pipe;
 
-	i = -1;
 	vars->nb_pipe = 0;
-	while (vars->cmd[++i])
-		if (vars->cmd[i] == '|')
-			vars->nb_pipe++;
-	vars->piped = ft_calloc(sizeof(char *), vars->nb_pipe + 2);
-	i = 0;
-	nb_pipe = vars->nb_pipe;
-	while (nb_pipe-- >= 0)
-	{
-		vars->piped[i++] = ft_substr(vars->cmd, 0,
-				ft_strlen_until(vars->cmd, '|'));
-		while (*vars->cmd != '|' && *vars->cmd)
-			vars->cmd++;
-		vars->cmd++;
-		while (*vars->cmd == ' ' && *vars->cmd)
-			vars->cmd++;
-	}
-	vars->piped[i] = NULL;
-}
-
-int	count_args(t_vars *vars)
-{
-	int	i;
-	int	j;
-	int	nb;
-	
 	i = -1;
-	nb = 1;
-	while (vars->piped[++i])
+	while (vars->cmd[++i])
 	{
-		j = -1;
-		while (vars->piped[i][++j])
+		if (vars->cmd[i] == '|')
 		{
-			if (vars->piped[i][j] == '"')
-			{
-				while (vars->piped[i][++j] != '"')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == '\'')
-			{
-				while (vars->piped[i][++j] != '\'')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == ' ')
-				nb++;
+			vars->nb_pipe++;
+			*nb += 2;
+		}
+		else if (vars->cmd[i] == '\'')
+		{
+			while (vars->cmd[++i] != '\'')
+				(void) i;
+			i++;
+		}
+		else if (vars->cmd[i] == '"')
+		{
+			while (vars->cmd[++i] != '"')
+				(void) i;
+			i++;
 		}
 	}
-	return (nb);
 }
 
-int	find_size(t_vars *vars, int row)
+int	ft_strlen_until_pipe(t_vars *vars)
 {
+	int	singles;
+	int	doubles;
 	int	i;
 
+	singles = 0;
+	doubles = 0;
 	i = -1;
-	while (vars->piped[row][++i])
+	while (vars->cmd[++i])
 	{
-		if (vars->piped[row][i] == '"' || vars->piped[row][i] == '\'')
-			i--;
-		if (vars->piped[row][i] == ' ')
+		if (vars->cmd[i] == '"')
+			doubles++;
+		if (vars->cmd[i] == '\'')
+			singles++;
+		if (vars->cmd[i] == '|' && singles % 2 == 0 && doubles % 2 == 0)
 			return (i);
 	}
 	return (i);
 }
 
-
-
-//faut trouver la taille de la string a mettre dedans
-//pas sur pour les quotes si jen creer ne autre si yas pas despaces je lai fait qui en creer pas
-//les guillemets marche pas
-void	split_args(t_vars *vars)
+void	check_pipe(t_vars *vars)
 {
-	char	**new_piped;
-	int		i;
-	int		j;
-	int		k;
-	int		l;
-	int		quotes;
-	
-	new_piped = ft_calloc(count_args(vars) + 2, sizeof(char *));
+	int	i;
+	int	j;
+	int	k;
+	int	nb_pipe;
+
+	nb_pipe = 1;
+	find_nb_pipe(vars, &nb_pipe);
+	printf("%d\n", nb_pipe);
+	vars->piped = ft_calloc(sizeof(char *), nb_pipe + 1);
 	i = 0;
-	k = 0;
-	j = 0;
-	l = 0;
-	quotes = 0;
-	while (vars->piped[i][j] == ' ')
-		j++;
-	while (vars->piped[i])
+	while (nb_pipe-- >= 1)
 	{
-		if (vars->piped[i][j] == ' ' && (quotes % 2) != 1)
+		k = ft_strlen_until_pipe(vars);
+		j = 0;
+		vars->piped[i++] = ft_substr(vars->cmd, 0,
+				ft_strlen_until_pipe(vars));
+		if (nb_pipe >= 1)
 		{
-			l = 0;
-			k++;
-			while (vars->piped[i][j] == ' ')
-				j++;
+			vars->piped[i] = ft_calloc(sizeof(char), 2);
+			vars->piped[i++][0] = '|';
+			nb_pipe--;
 		}
-		if (vars->piped[i][j] == '"' || vars->piped[i][j] == '\'')
-			quotes++;
-		if (!(new_piped[k]))
-			new_piped[k] = ft_calloc(find_size(vars, i) + 1, sizeof(char));
-		new_piped[k][l++] = vars->piped[i][j++];
-		if (!(vars->piped[i][j]))
+		while (j++ <= k)
+			vars->cmd++;
+		while (*vars->cmd == ' ' && *vars->cmd)
+			vars->cmd++;
+	}
+}
+
+int	find_nb_quotes(char *cmd)
+{
+	int	j;
+	int	quotes;
+	int	single;
+	int	doubles;
+
+	j = -1;
+	single = 0;
+	doubles = 0;
+	quotes = 0;
+	while (cmd[++j])
+	{
+		if (cmd[j] == '"' && single % 2 == 0)
 		{
-			i++;
-			j = 0;
-			l = 0;
+			doubles++;
+			quotes++;
+		}
+		if (cmd[j] == '\'' && doubles % 2 == 0)
+		{
+			single++;
+			quotes++;
 		}
 	}
-	for (int a = 0; new_piped[a]; a++)
-		printf("%s\n", new_piped[a]); 
+	return (quotes);
+}
+
+void	remove_quotes(t_vars *vars, int i)
+{
+	int		single;
+	int		doubles;
+	int		j;
+	int		k;
+	char	**with_out;
+
+	while (vars->piped[i])
+		i++;
+	with_out = ft_calloc(sizeof(char *), i + 1);
+	i = -1;
+	single = 0;
+	doubles = 0;
+	while (vars->piped[++i])
+	{	
+		with_out[i] = ft_calloc(sizeof(char),
+				ft_strlen(vars->piped[i]) - find_nb_quotes(vars->piped[i]) + 1);
+		j = -1;
+		k = -1;
+		while (vars->piped[i][++j])
+		{	
+			if (vars->piped[i][j] == '"' && single % 2 == 0)
+				doubles++;
+			else if (vars->piped[i][j] == '\'' && doubles % 2 == 0)
+				single++;
+			if ((vars->piped[i][j] == '"' && single % 2 == 1) || (vars->piped[i][j] == '\'' && doubles % 2 == 1))
+				with_out[i][++k] = vars->piped[i][j];
+			else if (vars->piped[i][j] != '"' && vars->piped[i][j] != '\'')
+				with_out[i][++k] = vars->piped[i][j];
+		}
+	}
+	free_arrarr(vars->piped);
+	vars->piped = with_out;
 }

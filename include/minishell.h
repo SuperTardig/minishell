@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/06 11:35:13 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 11:30:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,24 @@
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
-typedef struct s_parse {
-	int		pipes;
-	char	*red;
-	char	**cmd_sep;
-}	t_parse;
-
 typedef struct s_vars{
-	char	**env;
-	char	**piped;
-	char	*cmd;
-	char	*metas;
-	int		cmd_len;
-	int		cmd_len_each;
-	int		path_to_take;
-	int		i_cmd;
-	int		i_meta;
-	int		last_status;
-	int		variables;
-	int		is_malloc;
-	int		is_meta;
-	int		last_var;
-	int		nb_pipe;
+	char			**env;
+	char			**new_env;
+	char			**piped;
+	char			*cmd;
+	char			*metas;
+	int				last_status;
+	int				row;
+	int				i_cmd;
+	int				cmd_len_each;
+	int				path_to_take;
+	int				i_meta;
+	int				variables;
+	int				is_malloc;
+	int				is_meta;
+	int				last_var;
+	int				nb_pipe;
+	int				fd_pipe[2];
 }	t_vars;
 
 //signal.c
@@ -87,7 +83,7 @@ void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
 
 //exit.c
-int		check_arg(t_vars *vars);
+int		check_arg(char *arg);
 void	set_status(t_vars *vars, unsigned char *status);
 void	ft_exit(t_vars *vars);
 
@@ -96,6 +92,7 @@ int		ft_strlen_until(char *str, char c);
 int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+void	free_arrarr(char **arr);
 
 //find_cmd.c
 char	*look_path(t_vars *vars, char *cmd);
@@ -107,8 +104,11 @@ void	mini_pipe(t_vars *vars, char *path);
 char	*get_cmd2(t_vars *vars);
 void	variables(t_vars *vars);
 
+void	del_spaces(t_vars *vars);
+void	change_variables(t_vars *vars);
 void	check_pipe(t_vars *vars);
 void	split_args(t_vars *vars);
+void	remove_quotes(t_vars *vars, int i);
 
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);

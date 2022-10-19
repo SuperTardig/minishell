@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/09/21 09:30:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:50:17 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	ft_pwd(t_vars *vars)
 {
 	char	*buf;
 
-	buf = ft_calloc(sizeof(char), 1000);
-	if (check_args(vars) == 0)
+	if (ft_arrsize(vars->piped) == 1)
 	{
+		buf = ft_calloc(sizeof(char), 1000);
 		getcwd(buf, 1000);
 		if (buf[0] != '\0')
 			printf("%s\n", buf);
@@ -56,17 +56,10 @@ static	char	*find_path(t_vars *vars)
 	int	i;
 
 	i = -1;
-	if (check_args(vars) >= 1)
+	if (ft_arrsize(vars->piped) > 1)
 	{
-		while (++i < vars->cmd_len)
-		{
-			if (vars->cmd[i] == '\0')
-			{
-				while (vars->cmd[i] == '\0' && i < vars->cmd_len)
-					i++;
-				return (&vars->cmd[i]);
-			}
-		}
+		vars->row++;
+		return (vars->piped[vars->row]);
 	}
 	else
 	{
@@ -83,21 +76,17 @@ void	ft_cd(t_vars *vars)
 {
 	char	*old;
 	char	*new;
-	char	*path;
 
 	old = ft_calloc(sizeof(char), 1000);
 	new = ft_calloc(sizeof(char), 1000);
-	path = find_path(vars);
 	getcwd(old, 1000);
-	vars->last_status = chdir(path);
-	getcwd(new, 1000);
-	change_pwd(old, new, vars);
+	vars->last_status = chdir(find_path(vars));
+	change_pwd(old, getcwd(new, 1000), vars);
 	free(old);
 	free(new);
-	go_to_next(vars);
 	if (vars->last_status == -1)
 	{
-		ft_fprintf(2, "cd: %s: ", vars->cmd);
+		ft_fprintf(2, "cd: %s: ", vars->piped[vars->row]);
 		perror("");
 	}
 }

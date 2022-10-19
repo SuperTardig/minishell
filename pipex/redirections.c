@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "../include/minishell.h"
+
 int	open_file(t_vars *vars)
 {
 	int	fd;
