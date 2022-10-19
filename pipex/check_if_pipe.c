@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/19 11:45:39 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/19 11:55:22 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ void	exec_pipe(t_vars *vars, int c_pipes)
 		else
 			pipe_cmd(vars);
 		//i_do_piping(vars);
+		
 		while (vars->piped[i] != '|' && vars->piped[i])
 			++i;
 		--c_pipes;
