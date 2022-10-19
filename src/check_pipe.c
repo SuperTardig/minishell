@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 11:44:28 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 13:35:12 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	check_pipe(t_vars *vars)
 
 	nb_pipe = 1;
 	find_nb_pipe(vars, &nb_pipe);
-	printf("%d\n", nb_pipe);
 	vars->piped = ft_calloc(sizeof(char *), nb_pipe + 1);
 	i = 0;
 	while (nb_pipe-- >= 1)

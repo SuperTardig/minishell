@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/19 11:30:17 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:08:00 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void	free_arrarr(char **arr);
 char	*look_path(t_vars *vars, char *cmd);
 char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
-void	mini_pipe(t_vars *vars, char *path);
 
 //variables.c
 char	*get_cmd2(t_vars *vars);
@@ -110,7 +109,12 @@ void	check_pipe(t_vars *vars);
 void	split_args(t_vars *vars);
 void	remove_quotes(t_vars *vars, int i);
 
-void    find_var(t_vars *vars, int i);
-void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+void	find_var(t_vars *vars, int i);
+void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+char	*look_path(t_vars *vars, char *cmd);
+void	its_piping_time(t_vars *vars, char *path, int start);
+void	check_if_pipes(t_vars *vars);
+void	exec_cmd(t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars);
 
 #endif

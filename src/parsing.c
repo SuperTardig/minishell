@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 11:56:39 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/19 13:38:20 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_strtok(t_vars *vars)
 	vars->metas[j] = '\0';
 }
 
-void	find_path(char *cmd, t_vars *vars)
+void	find_the_cmd(char *cmd, t_vars *vars)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
@@ -89,8 +89,8 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	//else
-	//	find_cmd(vars);
+	else
+		find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)
@@ -100,7 +100,11 @@ void	parsing(t_vars *vars)
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
-	printf("%s\n", vars->piped[1]);
+	int	i;
+	i = -1;
+	while (vars->piped[++i])
+		printf("%s\n", vars->piped[i]);
+	//check_if_pipes(vars);
 	/*vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
