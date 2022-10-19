@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/14 12:35:45 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 11:30:17 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,6 @@
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
-typedef struct s_parse {
-	int		pipes;
-	char	*red;
-	char	**cmd_sep;
-}	t_parse;
-
 typedef struct s_vars{
 	char			**env;
 	char			**new_env;
@@ -57,7 +51,7 @@ typedef struct s_vars{
 	int				is_meta;
 	int				last_var;
 	int				nb_pipe;
-	t_parse			parse;
+	int				fd_pipe[2];
 }	t_vars;
 
 //signal.c

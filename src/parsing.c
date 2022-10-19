@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 10:21:24 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/19 10:53:44 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void	find_path(char *cmd, t_vars *vars)
 		vars->path_to_take = 7;
 	else
 		vars->path_to_take = 8;
-}*/
+}
 
 void	exec_cmd(t_vars *vars)
 {
@@ -97,10 +97,10 @@ void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
 	del_spaces(vars);
-	printf("salut %s\n", vars->cmd);
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
+	printf("%s\n", vars->piped[1]);
 	/*vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;

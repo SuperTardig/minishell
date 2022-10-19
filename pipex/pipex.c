@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/09 12:43:08 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:50:56 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ char	*look_path(char *envp[], char *cmd)
 
 int	do_child2(int count)
 {
+	int	fd[2];
 	int	pids;
 
 	while (--count)
@@ -57,7 +58,7 @@ int	do_child2(int count)
 	return (0);
 }
 
-int	do_child(int count)
+int	do_child(t_vars *vars, char *cmd_path)
 {
 	int	fd[2];
 	int	pid1;
@@ -72,25 +73,21 @@ int	do_child(int count)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		close(fd[1]);
-		execve();
+		execve(cmd_path, vars->piped[0], vars->env);
 	}
-	if (do_child2(count) == 1)
-		return (1);
 	close(fd[0]);
 	close(fd[1]);
 	waitpid(pid1, NULL, 0);
-	waitpid(pid2, NULL, 0);
 	return (0);
 }
 
-void	main(t_vars *vars)
+void	i_do_piping(t_vars *vars)
 {
 	char	*cmd_path;
 
 	cmd_path = look_path(vars->env, vars->piped[0]);
-	if (cmd_path != NULL)
-		if (do_child(argc))
-			printf("pipe execution failed");
-	else
+	if (cmd_path == NULL)
+		printf("pipe execution failed");
+	if (!do_child(vars, cmd_path))
 		printf("pipe execution failed");
 }
