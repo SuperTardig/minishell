@@ -48,7 +48,7 @@ void	ft_strtok(t_vars *vars)
 	vars->metas[j] = '\0';
 }
 
-static	void	find_path(char *cmd, t_vars *vars)
+void	find_path(char *cmd, t_vars *vars)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
