@@ -6,13 +6,13 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 10:41:00 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:52:20 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	count_args(t_vars *vars, int nb) // sa fuck ici mais je pense que cest le nouveau check pipe
+int	count_args(t_vars *vars, int nb)
 {
 	int	i;
 	int	j;
@@ -77,7 +77,7 @@ void	reset_counters(int *i, int *j, int *l)
 	*l = 0;
 }
 
-void	splitter(t_vars *vars, char **new_piped, int i, int j) 
+void	splitter(t_vars *vars, char **new_piped, int i, int j)
 {
 	int	k;
 	int	l;
@@ -91,7 +91,8 @@ void	splitter(t_vars *vars, char **new_piped, int i, int j)
 	while (vars->piped[i])
 	{
 		if (!(new_piped[k]))
-			new_piped[k] = ft_calloc(find_size(vars, i, j) + 100, sizeof(char)); 
+			new_piped[k] = ft_calloc(find_size(vars, i, j) + 100,
+					sizeof(char));
 		if (vars->piped[i][j] == '"' && quotes % 2 == 0)
 			dquotes++;
 		if (vars->piped[i][j] == '\'' && dquotes % 2 == 0)

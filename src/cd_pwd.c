@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/13 10:57:29 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:50:17 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_pwd(t_vars *vars)
 {
 	char	*buf;
 
- 	if (ft_arrsize(vars->piped) == 1)
+	if (ft_arrsize(vars->piped) == 1)
 	{
 		buf = ft_calloc(sizeof(char), 1000);
 		getcwd(buf, 1000);
@@ -68,7 +68,6 @@ static	char	*find_path(t_vars *vars)
 			if (ft_strnstr(vars->env[i], "HOME", 4) != NULL)
 				return (&vars->env[i][5]);
 		}
-		
 	}
 	return (NULL);
 }

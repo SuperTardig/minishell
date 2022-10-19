@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 10:44:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:51:05 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_flags(t_vars *vars)
 		i = 0;
 		while (vars->piped[vars->row])
 		{
-			if(vars->piped[vars->row][0] == '-')
+			if (vars->piped[vars->row][0] == '-')
 			{
 				while (vars->piped[vars->row][++i])
 				{
@@ -53,7 +53,7 @@ void	print(t_vars *vars)
 
 	if (ft_arrsize(vars->piped) > 1)
 	{
-		arg = ft_arrsize(vars->piped)  - vars->row - 2;
+		arg = ft_arrsize(vars->piped) - vars->row - 2;
 		while (arg-- > -1)
 			if (vars->piped[vars->row] != NULL)
 				printf("%s ", vars->piped[vars->row++]);

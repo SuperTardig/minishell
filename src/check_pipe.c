@@ -6,22 +6,25 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 10:41:16 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 11:44:28 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	find_nb_pipe(t_vars *vars)
+void	find_nb_pipe(t_vars *vars, int *nb)
 {
 	int	i;
-	
+
 	vars->nb_pipe = 0;
 	i = -1;
 	while (vars->cmd[++i])
 	{
 		if (vars->cmd[i] == '|')
+		{
 			vars->nb_pipe++;
+			*nb += 2;
+		}
 		else if (vars->cmd[i] == '\'')
 		{
 			while (vars->cmd[++i] != '\'')
@@ -34,8 +37,7 @@ int	find_nb_pipe(t_vars *vars)
 				(void) i;
 			i++;
 		}
-	} 
-	return (vars->nb_pipe);
+	}
 }
 
 int	ft_strlen_until_pipe(t_vars *vars)
@@ -66,22 +68,28 @@ void	check_pipe(t_vars *vars)
 	int	k;
 	int	nb_pipe;
 
-	vars->piped = ft_calloc(sizeof(char *), find_nb_pipe(vars) + 2);
+	nb_pipe = 1;
+	find_nb_pipe(vars, &nb_pipe);
+	printf("%d\n", nb_pipe);
+	vars->piped = ft_calloc(sizeof(char *), nb_pipe + 1);
 	i = 0;
-	nb_pipe = vars->nb_pipe;
-	while (nb_pipe-- >= 0)
+	while (nb_pipe-- >= 1)
 	{
 		k = ft_strlen_until_pipe(vars);
 		j = 0;
 		vars->piped[i++] = ft_substr(vars->cmd, 0,
-				ft_strlen_until_pipe(vars) + 1);
+				ft_strlen_until_pipe(vars));
+		if (nb_pipe >= 1)
+		{
+			vars->piped[i] = ft_calloc(sizeof(char), 2);
+			vars->piped[i++][0] = '|';
+			nb_pipe--;
+		}
 		while (j++ <= k)
 			vars->cmd++;
-		vars->cmd++;
 		while (*vars->cmd == ' ' && *vars->cmd)
 			vars->cmd++;
 	}
-	vars->piped[i] = NULL;
 }
 
 int	find_nb_quotes(char *cmd)
@@ -105,7 +113,7 @@ int	find_nb_quotes(char *cmd)
 		if (cmd[j] == '\'' && doubles % 2 == 0)
 		{
 			single++;
-			quotes++;	
+			quotes++;
 		}
 	}
 	return (quotes);
