@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/13 11:37:10 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/19 10:49:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,8 @@ void	create_new_env2(t_vars *vars, char **new_env)
 	j = -1;
 	while (vars->env[++i])
 	{
-		if (ft_strncmp(vars->piped[vars->row], vars->env[i], ft_strlen(vars->piped[vars->row])) == 0)
+		if (ft_strncmp(vars->piped[vars->row], vars->env[i],
+				ft_strlen(vars->piped[vars->row])) == 0)
 			i++;
 		new_env[++j] = vars->env[i];
 	}
@@ -81,7 +82,8 @@ void	ft_unset(t_vars *vars)
 		vars->row++;
 		while (vars->env[++i])
 		{
-			if (ft_strncmp(vars->piped[vars->row], vars->env[i], ft_strlen(vars->piped[vars->row])) == 0)
+			if (ft_strncmp(vars->piped[vars->row], vars->env[i],
+					ft_strlen(vars->piped[vars->row])) == 0)
 			{
 				size--;
 				break ;
