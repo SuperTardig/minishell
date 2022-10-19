@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 13:51:31 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/19 10:21:24 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_strtok(t_vars *vars)
 	vars->metas[j] = '\0';
 }
 
-/*static	void	find_path(char *cmd, t_vars *vars)
+void	find_path(char *cmd, t_vars *vars)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
@@ -108,9 +108,6 @@ void	parsing(t_vars *vars)
 	{
 		find_path(vars->piped[vars->row], vars);
 		exec_cmd(vars);
-		while (vars->cmd[vars->i_cmd])
-			vars->i_cmd++;
-		vars->i_cmd++;
 		vars->row++;
 	}
 	if (vars->is_meta == 1)

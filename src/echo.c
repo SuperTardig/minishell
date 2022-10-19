@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 10:24:54 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/14 10:44:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,55 +14,51 @@
 
 int	check_flags(t_vars *vars)
 {
-	char	*hold;
-	int		temp;
 	int		flags;
+	int		hold;
 	int		i;
 
 	flags = 0;
-	temp = vars->i_cmd;
-	hold = vars->cmd;
-//	go_to_next(vars);
-	while (vars->cmd[0] == '-')
+	hold = vars->row;
+	if (ft_arrsize(vars->piped) > 1)
 	{
+		hold = ++vars->row;
 		i = 0;
-		while (vars->cmd[++i])
+		while (vars->piped[vars->row])
 		{
-			if (vars->cmd[i] != 'n' && vars->cmd[i] != 'e')
+			if(vars->piped[vars->row][0] == '-')
 			{
-				vars->i_cmd = temp;
-				vars->cmd = hold;
-				return (flags);
+				while (vars->piped[vars->row][++i])
+				{
+					if (vars->piped[vars->row][i] != 'n')
+					{
+						vars->row++;
+						return (flags);
+					}
+				}
+				flags = 1;
+				hold++;
 			}
+			vars->row++;
 		}
-		flags = 1;
-	//	go_to_next(vars);
+		vars->row++;
 	}
+	vars->row = hold;
 	return (flags);
 }
 
 void	print(t_vars *vars)
 {
-	(void) vars;
-	/* int	i;
+	int	arg;
 
-	i = 0;
-	while (vars->cmd_len - 1 > vars->i_cmd)
+	if (ft_arrsize(vars->piped) > 1)
 	{
-		printf("%s", vars->cmd);
-		while (vars->cmd[i++])
-			vars->i_cmd++;
-		while (!(vars->cmd[i++]) && vars->i_cmd < vars->cmd_len - 1)
-		{
-			if (vars->metas[vars->i_meta] != ' ')
-				break ;
-			else
-				printf(" ");
-			vars->i_cmd++;
-			vars->i_meta++;
-		}
-		go_to_next(vars);
-	} */
+		arg = ft_arrsize(vars->piped)  - vars->row - 2;
+		while (arg-- > -1)
+			if (vars->piped[vars->row] != NULL)
+				printf("%s ", vars->piped[vars->row++]);
+		printf("%s", vars->piped[vars->row]);
+	}
 }
 
 void	ft_echo(t_vars *vars)

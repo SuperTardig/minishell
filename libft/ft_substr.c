@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 09:58:48 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/04 11:21:07 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/12 14:31:09 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 		max = 0;
 	if (max > len)
 		max = len;
-	new_s = (char *)ft_calloc(max + 1, sizeof(char));
+	new_s = (char *)ft_calloc(max + 2, sizeof(char));
 	if (new_s == NULL)
 		return (NULL);
 	ft_strlcpy(new_s, s + start, max + 1);

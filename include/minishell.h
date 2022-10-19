@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:08 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/14 12:35:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,23 +41,23 @@ typedef struct s_parse {
 }	t_parse;
 
 typedef struct s_vars{
-	char	**env;
-	char	**new_env;
-	char	**piped;
-	char	*cmd;
-	char	*metas;
-	int		row;
-	int		i_cmd;
-	int		cmd_len_each;
-	int		path_to_take;
-	int		i_meta;
-	int		last_status;
-	int		variables;
-	int		is_malloc;
-	int		is_meta;
-	int		last_var;
-	int		nb_pipe;
-	t_parse	parse;
+	char			**env;
+	char			**new_env;
+	char			**piped;
+	char			*cmd;
+	char			*metas;
+	int				last_status;
+	int				row;
+	int				i_cmd;
+	int				cmd_len_each;
+	int				path_to_take;
+	int				i_meta;
+	int				variables;
+	int				is_malloc;
+	int				is_meta;
+	int				last_var;
+	int				nb_pipe;
+	t_parse			parse;
 }	t_vars;
 
 //signal.c
@@ -89,7 +89,7 @@ void	ft_pwd(t_vars *vars);
 void	ft_cd(t_vars *vars);
 
 //exit.c
-int		check_arg(t_vars *vars);
+int		check_arg(char *arg);
 void	set_status(t_vars *vars, unsigned char *status);
 void	ft_exit(t_vars *vars);
 
@@ -114,7 +114,7 @@ void	del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 void	check_pipe(t_vars *vars);
 void	split_args(t_vars *vars);
-void	remove_quotes(t_vars *vars, int quotes, int i);
+void	remove_quotes(t_vars *vars, int i);
 
 void    find_var(t_vars *vars, int i);
 void    loop_var(t_vars *vars, int i, int d_quotes, int quotes);

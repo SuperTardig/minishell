@@ -6,20 +6,20 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 10:26:40 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/14 08:12:29 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	check_arg(t_vars *vars)
+int	check_arg(char *arg)
 {
 	int	i;
 
 	i = 0;
-	while (vars->cmd[i])
+	while (arg[i])
 	{
-		if (ft_isdigit(vars->cmd[i]) == 0)
+		if (ft_isdigit(arg[i]) == 0)
 			return (255);
 		i++;
 	}
@@ -31,8 +31,8 @@ int	check_arg(t_vars *vars)
 
 void	set_status(t_vars *vars, unsigned char *status)
 {
-	//go_to_next(vars);
-	if (check_arg(vars) > 19)
+	vars->row++;
+	if (check_arg(vars->piped[vars->row]) > 19)
 	{
 		errno = 22;
 		ft_fprintf(2, "MiniShit: exit: %s: ", vars->cmd);
@@ -40,7 +40,7 @@ void	set_status(t_vars *vars, unsigned char *status)
 		*status = 255;
 	}
 	else
-		*status = atoll(vars->cmd);
+		*status = atoll(vars->piped[vars->row]);
 }
 
 void	ft_exit(t_vars *vars)
@@ -50,11 +50,10 @@ void	ft_exit(t_vars *vars)
 
 	status = 0;
 	printf("exit\n");
-//	args = check_args(vars);
-args =0;
-	if (args == 1)
+	args = ft_arrsize(vars->piped);
+	if (args == 2)
 		set_status(vars, &status);
-	else if (args == 0)
+	else if (args == 1)
 		status = vars->last_status;
 	else
 	{
@@ -63,6 +62,5 @@ args =0;
 		perror("MiniShit: exit");
 		return ;
 	}
-//	free(vars->metas);
 	exit (status);
 }
