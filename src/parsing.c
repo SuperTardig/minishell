@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/12 13:51:31 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	ft_strtok(t_vars *vars)
 	vars->metas[j] = '\0';
 }
 
-static	void	find_path(char *cmd, t_vars *vars)
+/*static	void	find_path(char *cmd, t_vars *vars)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
@@ -71,7 +71,7 @@ static	void	find_path(char *cmd, t_vars *vars)
 		vars->path_to_take = 7;
 	else
 		vars->path_to_take = 8;
-}
+}*/
 
 void	exec_cmd(t_vars *vars)
 {
@@ -89,18 +89,19 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 7)
 		ft_unset(vars);
-	else// cest ca qui fait chier le ctrl d
-		find_cmd(vars);
+	//else
+	//	find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
 	del_spaces(vars);
+	printf("salut %s\n", vars->cmd);
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
-	vars->row = 0;
+	/*vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->piped[vars->row])
@@ -113,5 +114,5 @@ void	parsing(t_vars *vars)
 		vars->row++;
 	}
 	if (vars->is_meta == 1)
-		free(vars->metas);
+		free(vars->metas);*/
 }
