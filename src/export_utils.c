@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/13 11:31:31 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/20 13:15:50 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ int	check_if_exist(t_vars *vars)
 		{
 			if (ft_strncmp(vars->piped[vars->row], vars->env[i], size) == 0)
 			{
-				vars->env[i] = ft_substr(vars->piped[vars->row], 0, ft_strlen(vars->piped[vars->row]));
+				vars->env[i] = ft_substr(vars->piped[vars->row], 0,
+						ft_strlen(vars->piped[vars->row]));
 				return (1);
 			}
 		}
@@ -47,7 +48,8 @@ void	create_new_env(t_vars *vars)
 	new_env = ft_calloc(i + 3, sizeof(char *));
 	while (++j < i - 1)
 		new_env[j] = vars->env[j];
-	new_env[j] = ft_substr(vars->piped[vars->row], 0, ft_strlen(vars->piped[vars->row]));
+	new_env[j] = ft_substr(vars->piped[vars->row], 0,
+			ft_strlen(vars->piped[vars->row]));
 	new_env[j + 1] = vars->env[j];
 	new_env[j + 2] = NULL;
 	vars->env = new_env;

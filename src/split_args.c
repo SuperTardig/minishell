@@ -6,39 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 10:52:20 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/21 11:21:33 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	count_args(t_vars *vars, int nb)
-{
-	int	i;
-	int	j;
-
-	i = -1;
-	while (vars->piped[++i])
-	{
-		j = -1;
-		while (vars->piped[i][++j])
-		{
-			if (vars->piped[i][j] == '"')
-			{
-				while (vars->piped[i][++j] != '"')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == '\'')
-			{
-				while (vars->piped[i][++j] != '\'')
-					(void) j;
-			}
-			else if (vars->piped[i][j] == ' ')
-				nb++;
-		}
-	}
-	return (nb);
-}
 
 int	find_size(t_vars *vars, int row, int start)
 {
@@ -54,15 +26,9 @@ int	find_size(t_vars *vars, int row, int start)
 	while (vars->piped[row][i])
 	{
 		if (vars->piped[row][i] == '"' && singles % 2 == 0)
-		{
-			quotes++;
-			doubles++;
-		}
+			do_plus_plus(&quotes, &doubles);
 		if (vars->piped[row][i] == '\'' && doubles % 2 == 0)
-		{
-			quotes++;
-			singles++;
-		}
+			do_plus_plus(&quotes, &singles);
 		if (vars->piped[row][i] == ' ' && quotes % 2 == 0)
 			return (i - start);
 		i++;
@@ -70,44 +36,43 @@ int	find_size(t_vars *vars, int row, int start)
 	return (i - start);
 }
 
-void	reset_counters(int *i, int *j, int *l)
+void	splitter2(t_vars *vars, int i, int *j, char **new_piped)
 {
-	*i += 1;
-	*j = 0;
-	*l = 0;
+	vars->split.ok = 0;
+	if (!(new_piped[vars->split.k]))
+			new_piped[vars->split.k] = ft_calloc(find_size(vars, i, *j) + 1,
+				sizeof(char));
+	if (vars->piped[i][*j] == '"' && vars->singles % 2 == 0)
+		vars->doubles++;
+	if (vars->piped[i][*j] == '\'' && vars->doubles % 2 == 0)
+		vars->singles++;
 }
 
 void	splitter(t_vars *vars, char **new_piped, int i, int j)
 {
-	int	k;
-	int	l;
-	int	quotes;
-	int	dquotes;
-
-	l = 0;
-	k = 0;
-	quotes = 0;
-	dquotes = 0;
+	vars->split.k = 0;
+	vars->split.l = 0;
+	vars->singles = 0;
+	vars->doubles = 0;
 	while (vars->piped[i])
 	{
-		if (!(new_piped[k]))
-			new_piped[k] = ft_calloc(find_size(vars, i, j) + 100,
-					sizeof(char));
-		if (vars->piped[i][j] == '"' && quotes % 2 == 0)
-			dquotes++;
-		if (vars->piped[i][j] == '\'' && dquotes % 2 == 0)
-			quotes++;
-		new_piped[k][l++] = vars->piped[i][j++];
-		if (vars->piped[i][j] == ' ' && quotes % 2 == 0 && dquotes % 2 == 0)
+		splitter2(vars, i, &j, new_piped);
+		new_piped[vars->split.k][vars->split.l++] = vars->piped[i][j++];
+		if (vars->piped[i][j] == ' '
+				&& vars->singles % 2 == 0 && vars->doubles % 2 == 0)
 		{
-			l = 0;
-			k++;
+			vars->split.l = 0;
+			vars->split.k++;
+			vars->split.ok = 1;
 			while (vars->piped[i][j] == ' ')
 				j++;
 		}
 		if (!(vars->piped[i][j]))
 		{
-			reset_counters(&i, &j, &l);
+			if (vars->split.ok == 0)
+				reset_counters(&i, &j, &vars->split.l, &vars->split.k);
+			else
+				reset_counters2(&i, &j, &vars->split.l);
 		}
 	}
 }
@@ -117,12 +82,14 @@ void	split_args(t_vars *vars)
 	char	**new_piped;
 	int		j;
 
-	new_piped = ft_calloc(count_args(vars, 1) + 1, sizeof(char *));
+	printf("%d\n", count_args(vars, 1 + vars->nb_pipe));
+	new_piped = ft_calloc(count_args(vars, 1
+				+ vars->nb_pipe), sizeof(char *));
 	j = 0;
 	while (vars->piped[0][j] == ' ')
 		j++;
 	splitter(vars, new_piped, 0, j);
 	free_arrarr(vars->piped);
 	vars->piped = new_piped;
-	remove_quotes(vars, 0);
+	remove_quotes(vars, 0, 0, 0);
 }
