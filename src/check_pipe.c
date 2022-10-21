@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 13:35:12 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:02:16 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,24 @@
 void	find_nb_pipe(t_vars *vars, int *nb)
 {
 	int	i;
+	int	singles;
+	int	doubles;
 
 	vars->nb_pipe = 0;
 	i = -1;
+	singles = 0;
+	doubles = 0;
 	while (vars->cmd[++i])
 	{
-		if (vars->cmd[i] == '|')
+		if (vars->cmd[i] == '|' && (singles % 2 != 1 && doubles % 2 != 1))
 		{
 			vars->nb_pipe++;
 			*nb += 2;
 		}
 		else if (vars->cmd[i] == '\'')
-		{
-			while (vars->cmd[++i] != '\'')
-				(void) i;
-			i++;
-		}
+			singles++;
 		else if (vars->cmd[i] == '"')
-		{
-			while (vars->cmd[++i] != '"')
-				(void) i;
-			i++;
-		}
+			doubles++;
 	}
 }
 
@@ -61,6 +57,14 @@ int	ft_strlen_until_pipe(t_vars *vars)
 	return (i);
 }
 
+void	put_pipe(t_vars *vars, int *i, int *nb_pipe)
+{
+	vars->piped[*i] = ft_calloc(sizeof(char), 2);
+	vars->piped[*i][0] = '|';
+	*i += 1;
+	*nb_pipe -= 1;
+}
+
 void	check_pipe(t_vars *vars)
 {
 	int	i;
@@ -79,77 +83,10 @@ void	check_pipe(t_vars *vars)
 		vars->piped[i++] = ft_substr(vars->cmd, 0,
 				ft_strlen_until_pipe(vars));
 		if (nb_pipe >= 1)
-		{
-			vars->piped[i] = ft_calloc(sizeof(char), 2);
-			vars->piped[i++][0] = '|';
-			nb_pipe--;
-		}
+			put_pipe(vars, &i, &nb_pipe);
 		while (j++ <= k)
 			vars->cmd++;
 		while (*vars->cmd == ' ' && *vars->cmd)
 			vars->cmd++;
 	}
-}
-
-int	find_nb_quotes(char *cmd)
-{
-	int	j;
-	int	quotes;
-	int	single;
-	int	doubles;
-
-	j = -1;
-	single = 0;
-	doubles = 0;
-	quotes = 0;
-	while (cmd[++j])
-	{
-		if (cmd[j] == '"' && single % 2 == 0)
-		{
-			doubles++;
-			quotes++;
-		}
-		if (cmd[j] == '\'' && doubles % 2 == 0)
-		{
-			single++;
-			quotes++;
-		}
-	}
-	return (quotes);
-}
-
-void	remove_quotes(t_vars *vars, int i)
-{
-	int		single;
-	int		doubles;
-	int		j;
-	int		k;
-	char	**with_out;
-
-	while (vars->piped[i])
-		i++;
-	with_out = ft_calloc(sizeof(char *), i + 1);
-	i = -1;
-	single = 0;
-	doubles = 0;
-	while (vars->piped[++i])
-	{	
-		with_out[i] = ft_calloc(sizeof(char),
-				ft_strlen(vars->piped[i]) - find_nb_quotes(vars->piped[i]) + 1);
-		j = -1;
-		k = -1;
-		while (vars->piped[i][++j])
-		{	
-			if (vars->piped[i][j] == '"' && single % 2 == 0)
-				doubles++;
-			else if (vars->piped[i][j] == '\'' && doubles % 2 == 0)
-				single++;
-			if ((vars->piped[i][j] == '"' && single % 2 == 1) || (vars->piped[i][j] == '\'' && doubles % 2 == 1))
-				with_out[i][++k] = vars->piped[i][j];
-			else if (vars->piped[i][j] != '"' && vars->piped[i][j] != '\'')
-				with_out[i][++k] = vars->piped[i][j];
-		}
-	}
-	free_arrarr(vars->piped);
-	vars->piped = with_out;
 }

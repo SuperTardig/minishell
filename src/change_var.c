@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 11:44:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/20 10:11:32 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,15 +97,11 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 {
 	while (vars->cmd[++i])
 	{
-		if (vars->cmd[i] == '"' && quotes == 0)
-			d_quotes = 1;
-		else if (vars->cmd[i] == '\'' && d_quotes == 0)
-			quotes = 1;
-		else if (vars->cmd[i] == '"' && d_quotes == 1)
-			d_quotes = 0;
-		else if (vars->cmd[i] == '\'' && quotes == 1)
-			quotes = 0;
-		if (vars->cmd[i] == '$' && quotes != 1
+		if (vars->cmd[i] == '"' && quotes % 2 == 0)
+			d_quotes++;
+		else if (vars->cmd[i] == '\'' && d_quotes % 2 == 0)
+			quotes++;
+		if (vars->cmd[i] == '$' && quotes % 2 != 1
 			&& ((vars->cmd[i + 1] >= 'a' && vars->cmd[i + 1] <= 'z')
 				|| (vars->cmd[i + 1] >= 'A' && vars->cmd[i + 1] <= 'Z')
 				|| vars->cmd[i + 1] == '_') && i > vars->last_var)

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/19 13:08:00 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:01:40 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,12 @@
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
 
+typedef struct s_spilt{
+	int	ok;
+	int	k;
+	int	l;
+}	t_split;
+
 typedef struct s_vars{
 	char			**env;
 	char			**new_env;
@@ -42,6 +48,8 @@ typedef struct s_vars{
 	char			*metas;
 	int				last_status;
 	int				row;
+	int				singles;
+	int				doubles;
 	int				i_cmd;
 	int				cmd_len_each;
 	int				path_to_take;
@@ -52,6 +60,7 @@ typedef struct s_vars{
 	int				last_var;
 	int				nb_pipe;
 	int				fd_pipe[2];
+	t_split			split;
 }	t_vars;
 
 //signal.c
@@ -102,13 +111,16 @@ void	find_cmd(t_vars *vars);
 //variables.c
 char	*get_cmd2(t_vars *vars);
 void	variables(t_vars *vars);
-
 void	del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
-void	check_pipe(t_vars *vars);
-void	split_args(t_vars *vars);
-void	remove_quotes(t_vars *vars, int i);
 
+//check_pipe.c
+void	check_pipe(t_vars *vars);
+
+//split_args.c
+void	split_args(t_vars *vars);
+
+<<<<<<< HEAD
 void	find_var(t_vars *vars, int i);
 void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 char	*look_path(t_vars *vars, char *cmd);
@@ -116,5 +128,19 @@ void	its_piping_time(t_vars *vars, char *path, int start);
 void	check_if_pipes(t_vars *vars);
 void	exec_cmd(t_vars *vars);
 void	find_the_cmd(char *cmd, t_vars *vars);
+=======
+//split_args_utils.c
+int		count_args(t_vars *vars, int nb);
+void	reset_counters(int *i, int *j, int *l, int *k);
+void	reset_counters2(int *i, int *j, int *l);
+void	do_plus_plus(int *i, int *j);
+
+//remove_quotes.c
+void	remove_quotes(t_vars *vars, int i, int single, int doubles);
+
+//change_var.c
+void	find_var(t_vars *vars, int i);
+void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+>>>>>>> 59be953cbf7e6664ef0f48ec0334918e7fba9afa
 
 #endif
