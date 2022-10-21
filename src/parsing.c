@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/21 14:02:14 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:25:40 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,15 +100,16 @@ void	parsing(t_vars *vars)
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
-	vars->row = 0;
+	check_if_pipes(vars);
+	/*vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
 	while (vars->piped[vars->row])
 	{
-		find_path(vars->piped[vars->row], vars);
+		find_the_cmd(vars->piped[vars->row], vars);
 		exec_cmd(vars);
 		vars->row++;
 	}
 	if (vars->is_meta == 1)
-		free(vars->metas);
+		free(vars->metas);*/
 }

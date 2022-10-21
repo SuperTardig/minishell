@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/19 12:59:29 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:44:10 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char	**get_args(t_vars *vars, int start)
 	int		k;
 
 	i = start;
-	while (ft_strcmp(vars->piped[i], "|") == 0 && vars->piped[i])
+	while (vars->piped[i] && ft_strcmp(vars->piped[i], "|") != 0)
 		++i;
 	i -= start;
 	args = ft_calloc(i + 1, sizeof(char *));
@@ -82,8 +82,8 @@ void	its_piping_time(t_vars *vars, char *path, int start)
 	int		pid;
 	char	**args;
 
-	i = -1;
 	args = get_args(vars, start);
+	i = -1;
 	pid = fork();
 	if (pid < 0)
 		return ;
@@ -104,6 +104,9 @@ void	find_cmd(t_vars *vars)
 
 	cmd_path = look_path(vars, vars->piped[0]);
 	if (cmd_path == NULL)
+	{
+		printf("command does not exist\n");
 		return ;
+	}
 	its_piping_time(vars, cmd_path, 0);
 }

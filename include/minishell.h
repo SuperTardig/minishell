@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/21 14:01:40 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/21 14:03:54 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,15 +120,6 @@ void	check_pipe(t_vars *vars);
 //split_args.c
 void	split_args(t_vars *vars);
 
-<<<<<<< HEAD
-void	find_var(t_vars *vars, int i);
-void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
-char	*look_path(t_vars *vars, char *cmd);
-void	its_piping_time(t_vars *vars, char *path, int start);
-void	check_if_pipes(t_vars *vars);
-void	exec_cmd(t_vars *vars);
-void	find_the_cmd(char *cmd, t_vars *vars);
-=======
 //split_args_utils.c
 int		count_args(t_vars *vars, int nb);
 void	reset_counters(int *i, int *j, int *l, int *k);
@@ -141,6 +132,10 @@ void	remove_quotes(t_vars *vars, int i, int single, int doubles);
 //change_var.c
 void	find_var(t_vars *vars, int i);
 void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
->>>>>>> 59be953cbf7e6664ef0f48ec0334918e7fba9afa
+
+void	its_piping_time(t_vars *vars, char *path, int start);
+void	check_if_pipes(t_vars *vars);
+void	exec_cmd(t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars);
 
 #endif
