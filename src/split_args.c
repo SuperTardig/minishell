@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/21 11:21:33 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/21 12:42:42 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,6 @@ void	split_args(t_vars *vars)
 	char	**new_piped;
 	int		j;
 
-	printf("%d\n", count_args(vars, 1 + vars->nb_pipe));
 	new_piped = ft_calloc(count_args(vars, 1
 				+ vars->nb_pipe), sizeof(char *));
 	j = 0;

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/21 09:38:59 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/24 09:24:52 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,10 @@ int		ft_strlen_until(char *str, char c);
 int		cmp(char *cmp, char *try);
 int		check_args(t_vars *vars);
 void	go_to_next(t_vars *vars);
+
+//utils2.c
 void	free_arrarr(char **arr);
+int		find_var_len(t_vars *vars, int env_place);
 
 //find_cmd.c
 char	*look_path(t_vars *vars, char *cmd);
