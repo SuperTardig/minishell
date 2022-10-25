@@ -59,7 +59,7 @@ void	exec_pipe(t_vars *vars, int c_pipes)
 	i = 0;
 	while (c_pipes >= 0)
 	{
-		find_the_cmd(vars->piped[i], vars);
+		find_the_cmd(vars->piped[i], vars, i);
 		if (vars->path_to_take != 8)
 			pipe_builtin(vars, c_pipes);
 		else
@@ -77,7 +77,7 @@ void	check_if_pipes(t_vars *vars)
 	c_pipes = vars->nb_pipe;
 	if (vars->nb_pipe == 0)
 	{
-		find_the_cmd(vars->piped[0], vars);
+		find_the_cmd(vars->piped[0], vars, 0);
 		exec_cmd(vars);
 	}
 	else

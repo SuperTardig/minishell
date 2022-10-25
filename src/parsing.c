@@ -6,13 +6,13 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/24 09:38:35 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/25 12:45:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	meta_num(char *cmd)
+/*int	meta_num(char *cmd)
 {
 	int	i;
 	int	num;
@@ -46,31 +46,43 @@ void	ft_strtok(t_vars *vars)
 		i++;
 	}
 	vars->metas[j] = '\0';
+}*/
+
+void	rm_exec(t_vars *vars, int index)
+{
+	char	*tmp;
+
+	tmp = vars->piped[index];
+	free(vars->piped[index]);
+	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
+	ft_substr(tmp, 2, ft_strlen(tmp) - 2);
+	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp));
 }
 
-void	find_the_cmd(char *cmd, t_vars *vars)
+void	find_the_cmd(char *cmd, t_vars *vars, int index)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
-	else if (cmp(cmd, "echo") == 1
-		|| cmp(cmd, "ECHO") == 1)
+	else if (cmp(cmd, "echo") == 1 || cmp(cmd, "ECHO") == 1)
 		vars->path_to_take = 1;
 	else if (cmp(cmd, "exit") == 1)
 		vars->path_to_take = 2;
 	else if (cmp(cmd, "cd") == 1)
 		vars->path_to_take = 3;
-	else if (cmp(cmd, "pwd") == 1
-		|| cmp(cmd, "PWD") == 1)
+	else if (cmp(cmd, "pwd") == 1 || cmp(cmd, "PWD") == 1)
 		vars->path_to_take = 4;
 	else if (cmp(cmd, "export") == 1)
 		vars->path_to_take = 5;
-	else if (cmp(cmd, "env") == 1
-		|| cmp(cmd, "ENV") == 1)
+	else if (cmp(cmd, "env") == 1 || cmp(cmd, "ENV") == 1)
 		vars->path_to_take = 6;
 	else if (cmp(cmd, "unset") == 1)
 		vars->path_to_take = 7;
 	else
+	{
+		if (cmd[0] == '.' && cmd[1] == '/')
+			rm_exec(vars, index);
 		vars->path_to_take = 8;
+	}
 }
 
 void	exec_cmd(t_vars *vars)

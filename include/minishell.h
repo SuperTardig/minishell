@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/24 10:11:43 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/25 12:44:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,6 +140,7 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 void	its_piping_time(t_vars *vars, char *path, int start);
 void	check_if_pipes(t_vars *vars);
 void	exec_cmd(t_vars *vars);
-void	find_the_cmd(char *cmd, t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars, int index);
+void	rm_exec(t_vars *vars, int index);
 
 #endif
