@@ -6,22 +6,13 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/20 10:11:32 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/24 09:24:14 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	find_var_len(t_vars *vars, int env_place)
-{
-	char	*hold;
 
-	hold = vars->env[env_place];
-	while (*hold != '=')
-		hold++;
-	hold++;
-	return (ft_strlen(hold));
-}
 
 int	put_new_var(t_vars *vars, char *new, int var_place, int env_place)
 {
@@ -93,6 +84,32 @@ void	find_var(t_vars *vars, int i)
 		change_var(vars, i - 1, j, ft_strlen(var));
 }
 
+void	status(t_vars *vars)
+{
+	char	*nb;
+	char	*new;
+	int		i;
+	int		j;
+	int		k;
+
+	nb = ft_itoa(vars->last_status);
+	new = ft_calloc(ft_strlen(vars->cmd) - 2 + ft_strlen(nb) + 1, sizeof(char));
+	i = -1;
+	j = -1;
+	k = -1;
+	while (vars->cmd[++i] != '$' && vars->cmd[i + 1] != '?')
+		new[++j] = vars->cmd[i];
+	i += 1;
+	while (nb[++k])
+		new[++j] = nb[k];
+	while (vars->cmd[++i])
+		new[++j] = vars->cmd[i];
+	free(vars->cmd);
+	free(nb);
+	vars->cmd = new;
+	loop_var(vars, -1, 0, 0);
+}
+
 void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 {
 	while (vars->cmd[++i])
@@ -107,6 +124,12 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 				|| vars->cmd[i + 1] == '_') && i > vars->last_var)
 		{
 			find_var(vars, i + 1);
+			break ;
+		}
+		else if (vars->cmd[i] == '$' && quotes % 2 != 1 && vars->cmd[i + 1] == '?'
+			&& i > vars->last_var)
+		{
+			status(vars);
 			break ;
 		}
 	}

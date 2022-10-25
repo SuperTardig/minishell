@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/11 08:08:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/24 09:24:28 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,15 @@ void	free_arrarr(char **arr)
 		free(arr[i]);
 	free(arr[i]);
 	free(arr);
+}
+
+int	find_var_len(t_vars *vars, int env_place)
+{
+	char	*hold;
+
+	hold = vars->env[env_place];
+	while (*hold != '=')
+		hold++;
+	hold++;
+	return (ft_strlen(hold));
 }
