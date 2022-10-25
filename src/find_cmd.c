@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/12 13:06:18 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/24 10:16:38 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,79 +50,63 @@ char	*get_cmd(t_vars *vars)
 	return (cmd);
 }
 
-int	cmd_len(t_vars *vars, int i)
+char	**get_args(t_vars *vars, int start)
 {
-	int	len;
-
-	len = 0;
-	if (vars->cmd[i] == '\0' && vars->cmd[i + 1] != '\0')
-	{
-		++len;
-		++i;
-	}
-	while (vars->cmd[i] != '\0')
-	{
-		++len;
-		++i;
-	}
-	return (len);
-}
-
-/* char	**get_args(t_vars *vars, int len)
-{
-	int		nb_args;
 	char	**args;
 	int		i;
 	int		j;
 	int		k;
 
-	nb_args = check_args(vars);
-	args = ft_calloc(nb_args + 1, sizeof(char *));
-	i = 0;
-	k = -1;
-	while (i < vars->cmd_len)
+	i = start;
+	while (vars->piped[i] && ft_strcmp(vars->piped[i], "|") != 0)
+		++i;
+	i -= start;
+	args = ft_calloc(i + 1, sizeof(char *));
+	j = -1;
+	while (++j < i)
+		args[j] = ft_calloc
+			(ft_strlen(vars->piped[start + j]) + 1, sizeof(char));
+	j = -1;
+	while (++j < i)
 	{
-		j = -1;
-		len = cmd_len(vars, i);
-		args[++j] = ft_calloc(len + 1, sizeof(char));
-		args[j] = ft_substr(vars->cmd, i, len);
-		i += len;
-		while (vars->cmd[i] == '\0' && vars->metas[++k] != '-')
-			++i;
+		k = -1;
+		while (++k < (int)ft_strlen(vars->piped[start + j]))
+			args[j][k] = vars->piped[start + j][k];
 	}
-	 return (args);
-}*/
+	return (args);
+}
 
-/* void	mini_pipe(t_vars *vars, char *path)
+void	its_piping_time(t_vars *vars, char *path, int start)
 {
+	int		i;
 	int		pid;
-	int		len;
 	char	**args;
 
-	len = 0;
-	args = get_args(vars, len);
+	args = get_args(vars, start);
+	i = -1;
 	pid = fork();
 	if (pid < 0)
 		return ;
 	if (pid == 0)
 	{
-		if (execve(path, args, vars->env) == -1)
-			perror("Could not execute execve\n");
+		execve(path, args, vars->env);
+		perror("Could not execute execve\n");
 	}
+	while (args[++i])
+		free(args[i]);
+	free(args);
 	waitpid(pid, NULL, 0);
-} */
+}
 
-/* void	find_cmd(t_vars *vars)
+void	find_cmd(t_vars *vars)
 {
 	char	*cmd_path;
-	char	*cmd;
 
-	if (vars->cmd[vars->i_cmd] != '\0')
+	cmd_path = look_path(vars, vars->piped[0]);
+	if (cmd_path == NULL)
 	{
-		cmd = get_cmd(vars);
-		cmd_path = look_path(vars, cmd);
-		if (cmd_path == NULL)
-			return ;
-		mini_pipe(vars, cmd_path);
+		printf("command does not exist\n");
+		return ;
 	}
-} */
+	its_piping_time(vars, cmd_path, 0);
+}

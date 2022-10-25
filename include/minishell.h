@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/24 09:24:52 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/24 10:11:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <stdio.h>
 # include "../readline/readline.h"
+# include "../readline/rlconf.h"
 # include "../readline/history.h" 
 # include <unistd.h>
 # include <stdlib.h>
@@ -110,7 +111,6 @@ int		find_var_len(t_vars *vars, int env_place);
 char	*look_path(t_vars *vars, char *cmd);
 char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
-void	mini_pipe(t_vars *vars, char *path);
 
 //variables.c
 char	*get_cmd2(t_vars *vars);
@@ -136,5 +136,10 @@ void	remove_quotes(t_vars *vars, int i, int single, int doubles);
 //change_var.c
 void	find_var(t_vars *vars, int i);
 void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+
+void	its_piping_time(t_vars *vars, char *path, int start);
+void	check_if_pipes(t_vars *vars);
+void	exec_cmd(t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars);
 
 #endif
