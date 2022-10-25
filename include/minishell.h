@@ -139,6 +139,7 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 void	its_piping_time(t_vars *vars, char *path, int start);
 void	check_if_pipes(t_vars *vars);
 void	exec_cmd(t_vars *vars);
-void	find_the_cmd(char *cmd, t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars, int index);
+void	rm_exec(t_vars *vars, int index);
 
 #endif
