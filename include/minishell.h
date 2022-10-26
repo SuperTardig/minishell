@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/21 14:03:54 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/26 15:57:11 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ typedef struct s_vars{
 	char			**new_env;
 	char			**piped;
 	char			*cmd;
+	char			*path;
 	char			*metas;
+	int				index;
 	int				last_status;
 	int				row;
 	int				singles;
@@ -109,8 +111,6 @@ char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
 
 //variables.c
-char	*get_cmd2(t_vars *vars);
-void	variables(t_vars *vars);
 void	del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 
@@ -136,6 +136,10 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 void	its_piping_time(t_vars *vars, char *path, int start);
 void	check_if_pipes(t_vars *vars);
 void	exec_cmd(t_vars *vars);
-void	find_the_cmd(char *cmd, t_vars *vars);
+void	find_the_cmd(char *cmd, t_vars *vars, int index);
+void	rm_exec(t_vars *vars, int index);
+char	*ft_exec(t_vars *vars, int index);
+char	**get_args(t_vars *vars, int start);
+void	piper(t_vars *vars, int fd_in);
 
 #endif
