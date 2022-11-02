@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/26 11:37:04 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:07:19 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,8 +124,8 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 			find_var(vars, i + 1);
 			break ;
 		}
-		else if (vars->cmd[i] == '$' && quotes % 2 != 1 && vars->cmd[i + 1] == '?'
-			&& i > vars->last_var)
+		else if (vars->cmd[i] == '$' && quotes % 2 != 1
+			&& vars->cmd[i + 1] == '?' && i > vars->last_var)
 		{
 			status(vars);
 			break ;

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 13:59:28 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:11:27 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	piper(t_vars *vars, pid_t pid2)
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
 		vars->args = get_args(vars, vars->index);
-		redirections(vars);
+		//redirections(vars);
 		vars->path = look_path(vars, vars->piped[vars->index]);
 		if (cmd_not_found(vars))
 			continue ;
