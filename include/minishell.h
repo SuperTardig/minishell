@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/01 14:46:11 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:20:49 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,5 +142,7 @@ void	rm_exec(t_vars *vars, int index);
 char	*ft_exec(t_vars *vars, int index);
 char	**get_args(t_vars *vars, int start);
 void	piper(t_vars *vars, pid_t pid2);
+void	free_pipe_args(t_vars *vars);
+int		cmd_not_found(t_vars *vars);
 
 #endif

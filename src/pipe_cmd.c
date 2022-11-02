@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/01 14:45:31 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/02 13:59:28 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	do_execve(t_vars *vars, pid_t pid)
 	while (vars->piped[vars->index]
 		&& ft_strcmp(vars->piped[vars->index], "|") == 0)
 			++(vars->index);
-	wait(&pid);
+	waitpid(pid, &vars->last_status, 0);
 }
 
 void	do_pipe(t_vars *vars)
@@ -67,19 +67,6 @@ void	do_pipe(t_vars *vars)
 	}
 }
 
-void	free_args(t_vars *vars)
-{
-	int	i;
-
-	i = -1;
-	while (vars->args[++i])
-		free(vars->args[i]);
-	free(vars->args);
-	free(vars->path);
-	vars->args = NULL;
-	vars->path = NULL;
-}
-
 void	piper(t_vars *vars, pid_t pid2)
 {
 	pid_t	pid;
@@ -87,14 +74,17 @@ void	piper(t_vars *vars, pid_t pid2)
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
 		vars->args = get_args(vars, vars->index);
+		redirections(vars);
 		vars->path = look_path(vars, vars->piped[vars->index]);
+		if (cmd_not_found(vars))
+			continue ;
 		if (vars->nb_pipe != 0)
 			do_pipe(vars);
 		pid = do_fork();
 		if (vars->nb_pipe != 0)
 			dumpling(vars, pid);
 		do_execve(vars, pid);
-		free_args(vars);
+		free_pipe_args(vars);
 		--(vars->nb_pipe);
 	}
 }

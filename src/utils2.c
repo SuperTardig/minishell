@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/11 08:08:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 13:30:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,4 +21,23 @@ void	free_arrarr(char **arr)
 		free(arr[i]);
 	free(arr[i]);
 	free(arr);
+}
+
+int	cmd_not_found(t_vars *vars)
+{
+	if (vars->path == NULL)
+	{
+		free_pipe_args(vars);
+		printf("command not found: %s\n", vars->piped[vars->index]);
+		vars->last_status = 1;
+		while (vars->piped[vars->index]
+			&& ft_strcmp(vars->piped[vars->index], "|") != 0)
+			++(vars->index);
+		while (vars->piped[vars->index]
+			&& ft_strcmp(vars->piped[vars->index], "|") == 0)
+			++(vars->index);
+		--(vars->nb_pipe);
+		return (1);
+	}
+	return (0);
 }
