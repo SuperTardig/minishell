@@ -6,13 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/24 09:24:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/10/26 11:37:04 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-
 
 int	put_new_var(t_vars *vars, char *new, int var_place, int env_place)
 {
