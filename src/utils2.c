@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/02 14:16:55 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/02 14:19:58 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,17 @@ void	free_arrarr(char **arr)
 		free(arr[i]);
 	free(arr[i]);
 	free(arr);
+}
+
+int	find_var_len(t_vars *vars, int env_place)
+{
+	char	*hold;
+
+	hold = vars->env[env_place];
+	while (*hold != '=')
+		hold++;
+	hold++;
+	return (ft_strlen(hold));
 }
 
 int	cmd_not_found(t_vars *vars)
