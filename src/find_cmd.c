@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/24 10:16:38 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:01:37 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ char	**get_args(t_vars *vars, int start)
 void	its_piping_time(t_vars *vars, char *path, int start)
 {
 	int		i;
-	int		pid;
+	pid_t	pid;
 	char	**args;
 
 	args = get_args(vars, start);
@@ -90,22 +90,27 @@ void	its_piping_time(t_vars *vars, char *path, int start)
 	if (pid == 0)
 	{
 		execve(path, args, vars->env);
-		perror("Could not execute execve\n");
+		perror(NULL);
+		exit(1);
 	}
 	while (args[++i])
 		free(args[i]);
 	free(args);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &vars->last_status, 0);
 }
 
 void	find_cmd(t_vars *vars)
 {
 	char	*cmd_path;
 
-	cmd_path = look_path(vars, vars->piped[0]);
+	if (vars->path_to_take == 8)
+		cmd_path = ft_exec(vars, 0);
+	else
+		cmd_path = look_path(vars, vars->piped[0]);
 	if (cmd_path == NULL)
 	{
-		printf("command does not exist\n");
+		printf("command not found: %s\n", vars->piped[0]);
+		vars->last_status = errno;
 		return ;
 	}
 	its_piping_time(vars, cmd_path, 0);

@@ -1,45 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   variables.c                                        :+:      :+:    :+:   */
+/*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/07 13:23:26 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/24 09:24:24 by bperron          ###   ########.fr       */
+/*   Created: 2022/10/26 11:35:48 by fleduc            #+#    #+#             */
+/*   Updated: 2022/11/02 14:01:33 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*get_cmd2(t_vars *vars)
+char	*ft_exec(t_vars *vars, int index)
 {
-	int		i;
-	char	*cmd;
+	char	*buf;
 
-	i = 0;
-	while (vars->cmd[vars->i_cmd + i])
-		++i;
-	cmd = malloc(sizeof(char) * i + 1);
-	i = 0;
-	while (vars->cmd[vars->i_cmd + i])
-	{
-		cmd[i] = vars->cmd[vars->i_cmd + i];
-		++i;
-	}
-	return (cmd);
-}
-
-void	variables(t_vars *vars)
-{
-	int		i;
-	char	*cmd;
-
-	i = 0;
-	cmd = get_cmd(vars);
-	if (getenv(cmd))
-		printf("%s", cmd);
-	else
-		printf("variable does not exist\n");
-	free(cmd);
+	buf = ft_calloc(1000, sizeof(char));
+	getcwd(buf, 1000);
+	buf = ft_strjoin(buf, "/");
+	ft_strlcat(buf, vars->piped[index], 1000);
+	return (buf);
 }

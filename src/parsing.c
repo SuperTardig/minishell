@@ -6,7 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/10/25 12:48:19 by bperron          ###   ########.fr       */
+=======
+/*   Updated: 2022/10/26 12:59:21 by fleduc           ###   ########.fr       */
+>>>>>>> 52e8ab394f5a333bf1aa62e235773df0c0889cba
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +56,19 @@ void	rm_exec(t_vars *vars, int index)
 {
 	char	*tmp;
 
+<<<<<<< HEAD
 	tmp = vars->piped[index];
 	free(vars->piped[index]);
 	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 	ft_substr(tmp, 2, ft_strlen(tmp) - 2);
 	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp));
+=======
+	tmp = ft_strdup(vars->piped[index]);
+	free(vars->piped[index]);
+	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
+	tmp = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
+	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp) + 1);
+>>>>>>> 52e8ab394f5a333bf1aa62e235773df0c0889cba
 }
 
 void	find_the_cmd(char *cmd, t_vars *vars, int index)
@@ -77,12 +89,13 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index)
 		vars->path_to_take = 6;
 	else if (cmp(cmd, "unset") == 1)
 		vars->path_to_take = 7;
-	else
+	else if (cmd[0] == '.' && cmd[1] == '/')
 	{
-		if (cmd[0] == '.' && cmd[1] == '/')
-			rm_exec(vars, index);
+		rm_exec(vars, index);
 		vars->path_to_take = 8;
 	}
+	else
+		vars->path_to_take = 9;
 }
 
 void	exec_cmd(t_vars *vars)

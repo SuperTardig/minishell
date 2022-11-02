@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 09:48:37 by fleduc            #+#    #+#             */
-/*   Updated: 2022/08/31 12:29:34 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/10/26 12:38:15 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	*ft_calloc(size_t count, size_t size)
 
 	buffer = malloc(count * size);
 	if (buffer == NULL)
-		return (NULL);
+		exit (1);
 	ft_bzero(buffer, count * size);
 	return (buffer);
 }
