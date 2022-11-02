@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 14:04:27 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:05:24 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,5 +146,7 @@ void	rm_exec(t_vars *vars, int index);
 char	*ft_exec(t_vars *vars, int index);
 char	**get_args(t_vars *vars, int start);
 void	piper(t_vars *vars, pid_t pid2);
+void	free_pipe_args(t_vars *vars);
+int		cmd_not_found(t_vars *vars);
 
 #endif
