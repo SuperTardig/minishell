@@ -6,66 +6,48 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/26 16:19:57 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:45:31 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	piper(t_vars *vars, int fd_in);
-
-void	last_cmd(t_vars *vars, int fd_in, char **args)
+pid_t	do_fork(void)
 {
 	pid_t	pid;
 
 	pid = fork();
 	if (pid < 0)
 	{
-		perror("fork2");
+		perror("fork");
 		exit(1);
 	}
-	else if (pid == 0)
-	{
-		if (fd_in != -1)
-		{
-			dup2(fd_in, STDIN_FILENO);
-			close(fd_in);
-		}
-		execve(vars->path, args, vars->env);
-		perror("execve");
-		exit(1);
-	}
-	waitpid(pid, &vars->last_status, 0);
+	return (pid);
 }
 
-void	all_cmd(t_vars *vars, int fd_in, char **args)
+void	dumpling(t_vars *vars, pid_t pid)
 {
-	int		fds[2];
-	pid_t	pid;
+	if (pid == 0)
+	{
+		dup2(vars->fd_pipe[1], STDOUT_FILENO);
+		close(vars->fd_pipe[0]);
+		close(vars->fd_pipe[1]);
+	}
+}
 
-	if (pipe(fds) == -1)
+void	do_execve(t_vars *vars, pid_t pid)
+{
+	if (pid == 0)
 	{
-		perror("pipe");
-		exit(1);
-	}
-	pid = fork();
-	if (pid < 0)
-	{
-		perror("fork1");
-		exit(1);
-	}
-	else if (pid == 0)
-	{
-		if (fd_in != -1)
-		{
-			dup2(fd_in, STDIN_FILENO);
-			close(fd_in);
-		}
-		dup2(fds[1], STDOUT_FILENO);
-		close(fds[1]);
-		execve(vars->path, args, vars->env);
+		execve(vars->path, vars->args, vars->env);
 		perror("execve");
 		exit(1);
+	}
+	if (vars->nb_pipe != 0)
+	{
+		dup2(vars->fd_pipe[0], STDIN_FILENO);
+		close(vars->fd_pipe[0]);
+		close(vars->fd_pipe[1]);
 	}
 	while (vars->piped[vars->index]
 		&& ft_strcmp(vars->piped[vars->index], "|") != 0)
@@ -73,34 +55,46 @@ void	all_cmd(t_vars *vars, int fd_in, char **args)
 	while (vars->piped[vars->index]
 		&& ft_strcmp(vars->piped[vars->index], "|") == 0)
 			++(vars->index);
-	piper(vars, fds[0]);
-	waitpid(pid, &vars->last_status, 0);
+	wait(&pid);
 }
 
-void	piper(t_vars *vars, int fd_in)
+void	do_pipe(t_vars *vars)
 {
-	int		i;
-	char	**args;
+	if (pipe(vars->fd_pipe) == -1)
+	{
+		perror("pipe");
+		exit(1);
+	}
+}
 
-	args = get_args(vars, vars->index);
-	vars->path = look_path(vars, vars->piped[vars->index]);
-	if (vars->path == NULL)
-	{
-		printf("command not found: %s\n", vars->piped[vars->index]);
-		vars->last_status = errno;
-		return ;
-	}
-	if (vars->nb_pipe == 0)
-	{
-		last_cmd(vars, fd_in, args);
-	}
-	else
-	{
-		--(vars->nb_pipe);
-		all_cmd(vars, fd_in, args);
-	}
+void	free_args(t_vars *vars)
+{
+	int	i;
+
 	i = -1;
-	while (args[++i])
-		free(args[i]);
-	free(args);
+	while (vars->args[++i])
+		free(vars->args[i]);
+	free(vars->args);
+	free(vars->path);
+	vars->args = NULL;
+	vars->path = NULL;
+}
+
+void	piper(t_vars *vars, pid_t pid2)
+{
+	pid_t	pid;
+
+	while (pid2 == 0 && vars->nb_pipe >= 0)
+	{
+		vars->args = get_args(vars, vars->index);
+		vars->path = look_path(vars, vars->piped[vars->index]);
+		if (vars->nb_pipe != 0)
+			do_pipe(vars);
+		pid = do_fork();
+		if (vars->nb_pipe != 0)
+			dumpling(vars, pid);
+		do_execve(vars, pid);
+		free_args(vars);
+		--(vars->nb_pipe);
+	}
 }

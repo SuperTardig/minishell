@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/26 15:57:11 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/01 14:46:11 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ typedef struct s_vars{
 	char			**piped;
 	char			*cmd;
 	char			*path;
+	char			**args;
 	char			*metas;
 	int				index;
 	int				last_status;
@@ -140,6 +141,6 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index);
 void	rm_exec(t_vars *vars, int index);
 char	*ft_exec(t_vars *vars, int index);
 char	**get_args(t_vars *vars, int start);
-void	piper(t_vars *vars, int fd_in);
+void	piper(t_vars *vars, pid_t pid2);
 
 #endif
