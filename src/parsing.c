@@ -6,11 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/10/25 12:48:19 by bperron          ###   ########.fr       */
-=======
-/*   Updated: 2022/10/26 12:59:21 by fleduc           ###   ########.fr       */
->>>>>>> 52e8ab394f5a333bf1aa62e235773df0c0889cba
+/*   Updated: 2022/11/02 14:03:48 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +52,11 @@ void	rm_exec(t_vars *vars, int index)
 {
 	char	*tmp;
 
-<<<<<<< HEAD
-	tmp = vars->piped[index];
-	free(vars->piped[index]);
-	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-	ft_substr(tmp, 2, ft_strlen(tmp) - 2);
-	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp));
-=======
 	tmp = ft_strdup(vars->piped[index]);
 	free(vars->piped[index]);
 	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
 	tmp = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
 	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp) + 1);
->>>>>>> 52e8ab394f5a333bf1aa62e235773df0c0889cba
 }
 
 void	find_the_cmd(char *cmd, t_vars *vars, int index)
