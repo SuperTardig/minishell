@@ -6,47 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/02 14:03:48 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 08:11:02 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/*int	meta_num(char *cmd)
-{
-	int	i;
-	int	num;
-
-	i = -1;
-	num = 0;
-	while (cmd[++i])
-	{
-		if (ft_strchr("$&| ()<>-'\"", (int) cmd[i]))
-			num++;
-	}
-	return (num);
-}
-
-void	ft_strtok(t_vars *vars)
-{
-	int		i;
-	int		j;
-
-	vars->metas = ft_calloc(sizeof(char), meta_num(vars->cmd));
-	i = 0;
-	j = 0;
-	while (vars->cmd[i])
-	{
-		if (ft_strchr("<>", vars->cmd[i]))
-		{
-			vars->is_meta = 1;
-			vars->metas[j++] = vars->cmd[i];
-			vars->cmd[i] = '\0';
-		}
-		i++;
-	}
-	vars->metas[j] = '\0';
-}*/
 
 void	rm_exec(t_vars *vars, int index)
 {

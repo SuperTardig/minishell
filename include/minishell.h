@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 14:05:24 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 08:54:35 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,15 +80,15 @@ void	parsing(t_vars *vars);
 //built_in.c
 void	ft_env(t_vars *vars);
 void	ft_export(t_vars *vars);
-void	create_new_env2(t_vars *vars, char **new_env);
+void	create_new_env2(t_vars *vars, int row, int size);
 void	ft_unset(t_vars *vars);
 
 //echo.c
 void	ft_echo(t_vars *vars);
 
 //export_utils.c
-int		check_if_exist(t_vars *vars);
-void	create_new_env(t_vars *vars);
+int		check_if_exist(t_vars *vars, int row);
+void	create_new_env(t_vars *vars, int row);
 void	sort_env(t_vars *vars);
 
 //cd_pwd.c

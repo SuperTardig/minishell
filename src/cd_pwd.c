@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/21 13:22:18 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 08:13:14 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,7 @@ static	char	*find_path(t_vars *vars)
 
 	i = -1;
 	if (ft_arrsize(vars->piped) > 1)
-	{
-		vars->row++;
-		return (vars->piped[vars->row]);
-	}
+		return (vars->piped[vars->index + 1]);
 	else
 	{
 		while (vars->env[++i])
@@ -86,7 +83,7 @@ void	ft_cd(t_vars *vars)
 	free(new);
 	if (vars->last_status == -1)
 	{
-		ft_fprintf(2, "cd: %s: ", vars->piped[vars->row]);
+		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index]);
 		perror("");
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/19 10:49:45 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 08:53:06 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,8 @@ void	ft_env(t_vars *vars)
 			printf("%s\n", vars->env[i]);
 	else
 	{
-		vars->row++;
 		errno = 2;
-		ft_fprintf(2, "cd: %s: ", vars->piped[vars->row]);
+		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 	}
 }
@@ -32,17 +31,19 @@ void	ft_env(t_vars *vars)
 void	ft_export(t_vars *vars)
 {
 	int		args;
+	int		row;
 
+	row = vars->index;
 	args = ft_arrsize(vars->piped);
 	if (args > 1)
 	{
-		while (args > 1)
+		while (args > 1 && vars->piped[row][0] != '|')
 		{
-			vars->row++;
-			if (ft_strchr(vars->piped[vars->row], '='))
+			row++;
+			if (ft_strchr(vars->piped[row], '='))
 			{	
-				if (check_if_exist(vars) == 0)
-					create_new_env(vars);
+				if (check_if_exist(vars, row) == 0)
+					create_new_env(vars, row);
 			}
 			args--;
 		}
@@ -51,46 +52,61 @@ void	ft_export(t_vars *vars)
 		sort_env(vars);
 }
 
-void	create_new_env2(t_vars *vars, char **new_env)
+void	create_new_env2(t_vars *vars, int row, int size)
 {
-	int	i;
-	int	j;
+	char	**new_env;
+	int		i;
+	int		j;
 
 	i = -1;
 	j = -1;
+	new_env = ft_calloc(sizeof(char *), size);
 	while (vars->env[++i])
 	{
-		if (ft_strncmp(vars->piped[vars->row], vars->env[i],
-				ft_strlen(vars->piped[vars->row])) == 0)
+		if (ft_strncmp(vars->piped[row], vars->env[i],
+				ft_strlen(vars->piped[row])) == 0)
 			i++;
 		new_env[++j] = vars->env[i];
 	}
 	new_env[++j] = 0;
+	free(vars->env);
 	vars->env = new_env;
+}
+
+void	check_if_good(t_vars *vars, int row, int *size, int *args)
+{
+	int	i;
+
+	i = -1;
+	while (vars->env[++i])
+	{
+		if (ft_strncmp(vars->piped[row], vars->env[i],
+				ft_strlen(vars->piped[row])) == 0)
+		{
+			*size -= 1;
+			*args -= 1;
+			return ;
+		}
+	}
 }
 
 void	ft_unset(t_vars *vars)
 {
-	char	**new_env;
+	int		row;
 	int		size;
-	int		i;
+	int		args;
 
-	i = -1;
+	row = vars->index + 1;
 	size = ft_arrsize(vars->env);
-	if (ft_arrsize(vars->piped) > 1)
+	args = ft_arrsize(vars->piped);
+	if (args > 1)
 	{
-		vars->row++;
-		while (vars->env[++i])
+		while (args > 1 && vars->piped[row][0] != '|')
 		{
-			if (ft_strncmp(vars->piped[vars->row], vars->env[i],
-					ft_strlen(vars->piped[vars->row])) == 0)
-			{
-				size--;
-				break ;
-			}
+			check_if_good(vars, row, &size, &args);
+			row++;
+			create_new_env2(vars, row, size);
 		}
-		new_env = ft_calloc(sizeof(char *), size);
-		create_new_env2(vars, new_env);
 	}
 	else
 	{

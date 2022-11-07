@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 08:12:29 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 08:05:50 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@ int	check_arg(char *arg)
 
 void	set_status(t_vars *vars, unsigned char *status)
 {
-	vars->row++;
-	if (check_arg(vars->piped[vars->row]) > 19)
+	if (check_arg(vars->piped[vars->index + 1]) > 19)
 	{
 		errno = 22;
 		ft_fprintf(2, "MiniShit: exit: %s: ", vars->cmd);
@@ -40,7 +39,7 @@ void	set_status(t_vars *vars, unsigned char *status)
 		*status = 255;
 	}
 	else
-		*status = atoll(vars->piped[vars->row]);
+		*status = atoll(vars->piped[vars->index + 1]);
 }
 
 void	ft_exit(t_vars *vars)
