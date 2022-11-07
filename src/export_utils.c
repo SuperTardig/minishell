@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 08:44:47 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 10:28:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,6 @@ void	create_new_env(t_vars *vars, int row)
 			ft_strlen(vars->piped[row]));
 	new_env[j + 1] = vars->env[j];
 	new_env[j + 2] = NULL;
-	free(vars->env);
 	vars->env = new_env;
 }
 

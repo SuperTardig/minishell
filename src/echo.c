@@ -6,17 +6,20 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 08:55:27 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 09:14:08 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	check2(t_vars *vars, int *i, int row)
+int	check2(t_vars *vars, int row)
 {
-	while (vars->piped[row][++*i])
+	int	i;
+
+	i = 0;
+	while (vars->piped[row][++i])
 	{
-		if (vars->piped[row][*i] != 'n')
+		if (vars->piped[row][i] != 'n')
 			return (1);
 	}
 	return (0);
@@ -26,19 +29,17 @@ int	check_flags(t_vars *vars, int *row)
 {
 	int		flags;
 	int		hold;
-	int		i;
 
 	flags = 0;
 	hold = *row;
 	if (ft_arrsize(vars->piped) > 1)
 	{
 		hold = ++*row;
-		i = 0;
 		while (vars->piped[*row])
 		{
 			if (vars->piped[*row][0] == '-')
 			{
-				if (check2(vars, &i, *row) == 1)
+				if (check2(vars, *row) == 1)
 					return (flags);
 				flags = 1;
 				hold++;

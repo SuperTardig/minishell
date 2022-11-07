@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 08:53:06 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 10:28:29 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	create_new_env2(t_vars *vars, int row, int size)
 
 	i = -1;
 	j = -1;
-	new_env = ft_calloc(sizeof(char *), size);
+	new_env = ft_calloc(sizeof(char *), size + 1);
 	while (vars->env[++i])
 	{
 		if (ft_strncmp(vars->piped[row], vars->env[i],
@@ -69,7 +69,6 @@ void	create_new_env2(t_vars *vars, int row, int size)
 		new_env[++j] = vars->env[i];
 	}
 	new_env[++j] = 0;
-	free(vars->env);
 	vars->env = new_env;
 }
 
@@ -97,15 +96,15 @@ void	ft_unset(t_vars *vars)
 	int		args;
 
 	row = vars->index + 1;
-	size = ft_arrsize(vars->env);
 	args = ft_arrsize(vars->piped);
 	if (args > 1)
 	{
 		while (args > 1 && vars->piped[row][0] != '|')
 		{
+			size = ft_arrsize(vars->env);
 			check_if_good(vars, row, &size, &args);
-			row++;
 			create_new_env2(vars, row, size);
+			row++;
 		}
 	}
 	else

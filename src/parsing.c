@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 08:11:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 10:28:57 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,16 +77,14 @@ void	parsing(t_vars *vars)
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
-	check_if_pipes(vars);
-	vars->row = 0;
+	//check_if_pipes(vars);
+	/* vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
-	while (vars->piped[vars->row])
+	while (vars->piped[vars->])
 	{
-		find_the_cmd(vars->piped[vars->row], vars, vars->row);
+		find_the_cmd(vars->piped[0], vars, vars->row);
 		exec_cmd(vars);
 		vars->row++;
-	}
-/* 	if (vars->is_meta == 1)
-		free(vars->metas); */
+	} */
 }
