@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/02 14:03:48 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 15:02:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,46 +63,46 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
-	else if (cmp(cmd, "echo") == 1 || cmp(cmd, "ECHO") == 1)
-		vars->path_to_take = 1;
 	else if (cmp(cmd, "exit") == 1)
-		vars->path_to_take = 2;
+		vars->path_to_take = 1;
 	else if (cmp(cmd, "cd") == 1)
-		vars->path_to_take = 3;
-	else if (cmp(cmd, "pwd") == 1 || cmp(cmd, "PWD") == 1)
-		vars->path_to_take = 4;
-	else if (cmp(cmd, "export") == 1)
-		vars->path_to_take = 5;
-	else if (cmp(cmd, "env") == 1 || cmp(cmd, "ENV") == 1)
-		vars->path_to_take = 6;
+		vars->path_to_take = 2;
 	else if (cmp(cmd, "unset") == 1)
-		vars->path_to_take = 7;
+		vars->path_to_take = 3;
 	else if (cmd[0] == '.' && cmd[1] == '/')
 	{
 		rm_exec(vars, index);
-		vars->path_to_take = 8;
+		vars->path_to_take = 4;
 	}
+	else if (cmp(cmd, "pwd") == 1 || cmp(cmd, "PWD") == 1)
+		vars->path_to_take = 5;
+	else if (cmp(cmd, "export") == 1)
+		vars->path_to_take = 6;
+	else if (cmp(cmd, "env") == 1 || cmp(cmd, "ENV") == 1)
+		vars->path_to_take = 7;
+	else if (cmp(cmd, "echo") == 1 || cmp(cmd, "ECHO") == 1)
+		vars->path_to_take = 8;
 	else
 		vars->path_to_take = 9;
 }
 
 void	exec_cmd(t_vars *vars)
 {
-	if (vars->path_to_take == 1)
+	if (vars->path_to_take == 8)
 		ft_echo(vars);
-	else if (vars->path_to_take == 2)
+	else if (vars->path_to_take == 1)
 		ft_exit(vars);
-	else if (vars->path_to_take == 3)
+	else if (vars->path_to_take == 2)
 		ft_cd(vars);
-	else if (vars->path_to_take == 4)
-		ft_pwd(vars);
 	else if (vars->path_to_take == 5)
-		ft_export(vars);
+		ft_pwd(vars);
 	else if (vars->path_to_take == 6)
-		ft_env(vars);
+		ft_export(vars);
 	else if (vars->path_to_take == 7)
+		ft_env(vars);
+	else if (vars->path_to_take == 5)
 		ft_unset(vars);
-	else
+	else if (vars->path_to_take == 4 || vars->path_to_take == 9)
 		find_cmd(vars);
 }
 
@@ -114,15 +114,13 @@ void	parsing(t_vars *vars)
 	check_pipe(vars);
 	split_args(vars);
 	check_if_pipes(vars);
-	vars->row = 0;
-	vars->i_cmd = 0;
-	vars->i_meta = 0;
+	/*vars->row = 0;
 	while (vars->piped[vars->row])
 	{
 		find_the_cmd(vars->piped[vars->row], vars, vars->row);
 		exec_cmd(vars);
 		vars->row++;
 	}
-/* 	if (vars->is_meta == 1)
+	if (vars->is_meta == 1)
 		free(vars->metas); */
 }

@@ -6,7 +6,7 @@
 #    By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/11/02 14:11:50 by fleduc           ###   ########.fr        #
+#    Updated: 2022/11/07 09:04:21 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ LIBFT = @$(MAKE) -sC ./libft
 LIBFTA = ./libft/libft.a
 
 HEADERS = include/minishell.h
-SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c src/find_cmd.c src/cd_pwd.c src/exec.c src/exit.c src/export_utils.c src/echo.c src/check_pipe.c src/change_var.c src/split_args.c src/utils2.c src/inspector_steve.c src/split_args_utils.c src/remove_quotes.c src/check_if_pipes.c src/pipe_cmd.c src/free.c
+SRCS = src/minishell.c src/signal.c src/utils.c src/parsing.c src/built_in.c src/find_cmd.c src/cd_pwd.c src/exec.c src/exit.c src/export_utils.c src/echo.c src/check_pipe.c src/change_var.c src/split_args.c src/utils2.c src/inspector_steve.c src/split_args_utils.c src/remove_quotes.c src/check_if_pipes.c src/pipe_cmd.c src/free.c src/redir.c
 OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)

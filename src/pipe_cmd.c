@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 14:11:27 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/07 11:17:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,17 @@ void	do_execve(t_vars *vars, pid_t pid)
 {
 	if (pid == 0)
 	{
-		execve(vars->path, vars->args, vars->env);
-		perror("execve");
+		redirections(vars);
+		if (vars->path_to_take != 4 && vars->path_to_take != 9)
+			exec_cmd(vars);
+		else
+		{
+			if (vars->redir_args)
+				execve(vars->path, vars->redir_args, vars->env);
+			else
+				execve(vars->path, vars->args, vars->env);
+			perror("execve");
+		}
 		exit(1);
 	}
 	if (vars->nb_pipe != 0)
@@ -49,12 +58,7 @@ void	do_execve(t_vars *vars, pid_t pid)
 		close(vars->fd_pipe[0]);
 		close(vars->fd_pipe[1]);
 	}
-	while (vars->piped[vars->index]
-		&& ft_strcmp(vars->piped[vars->index], "|") != 0)
-			++(vars->index);
-	while (vars->piped[vars->index]
-		&& ft_strcmp(vars->piped[vars->index], "|") == 0)
-			++(vars->index);
+	loop_index(vars);
 	waitpid(pid, &vars->last_status, 0);
 }
 
@@ -73,8 +77,8 @@ void	piper(t_vars *vars, pid_t pid2)
 
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
+		find_the_cmd(vars->piped[vars->index], vars, vars->index);
 		vars->args = get_args(vars, vars->index);
-		//redirections(vars);
 		vars->path = look_path(vars, vars->piped[vars->index]);
 		if (cmd_not_found(vars))
 			continue ;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 14:05:13 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/02 14:44:14 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,22 +32,6 @@ char	*look_path(t_vars *vars, char *cmd)
 			return (path);
 	}
 	return (NULL);
-}
-
-char	*get_cmd(t_vars *vars)
-{
-	int		len;
-	char	*cmd;
-
-	len = 0;
-	while (vars->cmd[vars->i_cmd])
-	{
-		vars->i_cmd++;
-		len++;
-	}
-	vars->i_cmd -= len;
-	cmd = ft_substr(vars->cmd, vars->i_cmd, len);
-	return (cmd);
 }
 
 char	**get_args(t_vars *vars, int start)
@@ -90,7 +74,7 @@ void	its_piping_time(t_vars *vars, char *path, int start)
 	if (pid == 0)
 	{
 		execve(path, args, vars->env);
-		perror(NULL);
+		perror("execve");
 		exit(1);
 	}
 	while (args[++i])

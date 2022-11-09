@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/02 14:05:24 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 10:24:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,19 +48,13 @@ typedef struct s_vars{
 	char			*cmd;
 	char			*path;
 	char			**args;
-	char			*metas;
+	char			**redir_args;
 	int				index;
 	int				last_status;
 	int				row;
 	int				singles;
 	int				doubles;
-	int				i_cmd;
-	int				cmd_len_each;
 	int				path_to_take;
-	int				i_meta;
-	int				variables;
-	int				is_malloc;
-	int				is_meta;
 	int				last_var;
 	int				nb_pipe;
 	int				fd_pipe[2];
@@ -148,5 +142,7 @@ char	**get_args(t_vars *vars, int start);
 void	piper(t_vars *vars, pid_t pid2);
 void	free_pipe_args(t_vars *vars);
 int		cmd_not_found(t_vars *vars);
+void	loop_index(t_vars *vars);
+void	redirections(t_vars *vars);
 
 #endif
