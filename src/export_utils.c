@@ -6,28 +6,28 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/20 13:15:50 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/07 10:28:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	check_if_exist(t_vars *vars)
+int	check_if_exist(t_vars *vars, int row)
 {
 	int	size;
 	int	i;
 
-	size = ft_strlen_until(vars->piped[vars->row], '=');
+	size = ft_strlen_until(vars->piped[row], '=');
 	i = -1;
 	while (vars->env[++i])
 	{
-		if (ft_strlen_until(vars->piped[vars->row], '=')
+		if (ft_strlen_until(vars->piped[row], '=')
 			== ft_strlen_until(vars->env[i], '='))
 		{
-			if (ft_strncmp(vars->piped[vars->row], vars->env[i], size) == 0)
+			if (ft_strncmp(vars->piped[row], vars->env[i], size) == 0)
 			{
-				vars->env[i] = ft_substr(vars->piped[vars->row], 0,
-						ft_strlen(vars->piped[vars->row]));
+				vars->env[i] = ft_substr(vars->piped[row], 0,
+						ft_strlen(vars->piped[row]));
 				return (1);
 			}
 		}
@@ -35,7 +35,7 @@ int	check_if_exist(t_vars *vars)
 	return (0);
 }
 
-void	create_new_env(t_vars *vars)
+void	create_new_env(t_vars *vars, int row)
 {
 	char	**new_env;
 	int		i;
@@ -48,8 +48,8 @@ void	create_new_env(t_vars *vars)
 	new_env = ft_calloc(i + 3, sizeof(char *));
 	while (++j < i - 1)
 		new_env[j] = vars->env[j];
-	new_env[j] = ft_substr(vars->piped[vars->row], 0,
-			ft_strlen(vars->piped[vars->row]));
+	new_env[j] = ft_substr(vars->piped[row], 0,
+			ft_strlen(vars->piped[row]));
 	new_env[j + 1] = vars->env[j];
 	new_env[j + 2] = NULL;
 	vars->env = new_env;
