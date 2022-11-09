@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/09 11:14:29 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/09 12:07:40 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void	exec_cmd(t_vars *vars)
 		ft_env(vars);
 	else if (vars->path_to_take == 5)
 		ft_unset(vars);
-	else if (vars->path_to_take == 4 || vars->path_to_take == 9)
-		find_cmd(vars);
 }
 
 void	parsing(t_vars *vars)

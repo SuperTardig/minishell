@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/07 11:17:45 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/09 15:23:13 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,13 @@ void	piper(t_vars *vars, pid_t pid2)
 
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
-		find_the_cmd(vars->piped[vars->index], vars, vars->index);
+		if (vars->path_to_take != 4)
+			find_the_cmd(vars->piped[vars->index], vars, vars->index);
 		vars->args = get_args(vars, vars->index);
-		vars->path = look_path(vars, vars->piped[vars->index]);
+		if (vars->path_to_take == 4)
+			vars->path = ft_exec(vars, vars->index);
+		else
+			vars->path = look_path(vars, vars->piped[vars->index]);
 		if (cmd_not_found(vars))
 			continue ;
 		if (vars->nb_pipe != 0)

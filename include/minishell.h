@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/09 11:14:41 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/09 14:47:31 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,5 +144,6 @@ void	free_pipe_args(t_vars *vars);
 int		cmd_not_found(t_vars *vars);
 void	loop_index(t_vars *vars);
 void	redirections(t_vars *vars);
+int		heredoc(t_vars *vars, int i);
 
 #endif

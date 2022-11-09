@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 11:35:48 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/09 12:14:46 by fleduc           ###   ########.fr       */
+/*   Created: 2022/11/09 14:37:49 by fleduc            #+#    #+#             */
+/*   Updated: 2022/11/09 16:10:04 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*ft_exec(t_vars *vars, int index)
+int	heredoc(t_vars *vars, int i)
 {
-	char	*buf;
+	int		fd;
+	char	*cmd;
 
-	buf = ft_calloc(1000, sizeof(char));
-	getcwd(buf, 1000);
-	buf = ft_strjoin(buf, "/");
-	ft_strlcat(buf, vars->piped[index], 1000);
-	return (buf);
+	while (1)
+	{
+		cmd = readline("> ");
+		if (ft_strcmp(cmd, vars->args[i + 1]) == 0)
+			break ;
+	}
+	fd = 1;
+	return (fd);
 }
