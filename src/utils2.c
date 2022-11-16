@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/09 12:03:40 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/10 11:03:52 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,16 @@ int	cmd_not_found(t_vars *vars)
 		return (1);
 	}
 	return (0);
+}
+
+int	redir_check(t_vars *vars, int i)
+{
+	i--;
+	while (i >= 0 && (vars->cmd[i] == ' ' || vars->cmd[i] == '\''
+			|| vars->cmd[i] == '\"'))
+		i--;
+	if (i >= 1)
+		if (vars->cmd[i - 1] == '<' && vars->cmd[i] == '<')
+			return (0);
+	return (1);
 }

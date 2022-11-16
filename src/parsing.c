@@ -3,14 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/09 12:07:40 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/16 11:15:08 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+/* signau en fonction du nombre de child
+
+mettre les << < > >> en arg tout seul*/
 
 void	rm_exec(t_vars *vars, int index)
 {
@@ -68,14 +72,29 @@ void	exec_cmd(t_vars *vars)
 		ft_unset(vars);
 }
 
+void	del_spaces2(t_vars *vars)
+{
+	char	**new;
+	int		i;
+
+	i = -1;
+	new = ft_calloc(ft_arrsize(vars->piped) + 1, sizeof(char *));
+	while (vars->piped[++i])
+		new[i] = ft_strtrim(vars->piped[i], " ");
+	free_arrarr(vars->piped);
+	vars->piped = new;
+}
+
 void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
 	del_spaces(vars);
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
+	check_redir(vars);
+	del_spaces2(vars);
 	split_args(vars);
-	check_if_pipes(vars);
+	//check_if_pipes(vars);
 	/* vars->row = 0;
 	vars->i_cmd = 0;
 	vars->i_meta = 0;
