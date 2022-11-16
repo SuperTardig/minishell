@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/10 11:03:52 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/16 14:26:57 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,27 @@ int	redir_check(t_vars *vars, int i)
 		if (vars->cmd[i - 1] == '<' && vars->cmd[i] == '<')
 			return (0);
 	return (1);
+}
+
+int	ft_argsize(char **args)
+{
+	int	arg;
+	int	j;
+	int	max;
+
+	arg = 0;
+	j = 0;
+	if (args[j])
+	{
+		max = ft_arrsize(args);
+		while (j < max)
+		{
+			if (args[j][0] == '|' && args[j][0] == '|'
+				&& args[j][0] == '|')
+				break ;
+			arg++;
+			j++;
+		}
+	}
+	return (arg);
 }

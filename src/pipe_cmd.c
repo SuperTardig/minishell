@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/09 15:23:13 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/16 14:01:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,12 +71,18 @@ void	do_pipe(t_vars *vars)
 	}
 }
 
+void lol(int sig)
+{
+	printf("ok %d\n", sig);
+}
+
 void	piper(t_vars *vars, pid_t pid2)
 {
 	pid_t	pid;
 
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
+		signal(SIGINT, SIG_DFL);
 		if (vars->path_to_take != 4)
 			find_the_cmd(vars->piped[vars->index], vars, vars->index);
 		vars->args = get_args(vars, vars->index);

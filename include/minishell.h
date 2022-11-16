@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/16 11:10:40 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/16 14:15:31 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define MINISHELL_H
 
 # include <stdio.h>
-# include "../readline/readline.h"
-# include "../readline/rlconf.h"
-# include "../readline/history.h" 
+# include "readline.h"
+# include "rlconf.h"
+# include "history.h" 
 # include <unistd.h>
 # include <stdlib.h>
 # include <fcntl.h>
@@ -106,6 +106,7 @@ void		go_to_next(t_vars *vars);
 void		free_arrarr(char **arr);
 int			find_var_len(t_vars *vars, int env_place);
 int			redir_check(t_vars *vars, int i);
+int			ft_argsize(char **args);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
