@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/09 12:01:30 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/17 14:51:48 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,12 @@ void	loop_index(t_vars *vars)
 
 void	check_if_pipes(t_vars *vars)
 {
-	pid_t	pid2;
+	int		stdinout_cp[2];
 
 	find_the_cmd(vars->piped[0], vars, 0);
+	if (ft_strcmp(vars->piped[0], "") == 0
+		|| ft_strcmp(vars->piped[0], ".") == 0)
+		return ;
 	if (vars->nb_pipe == 0 && (vars->path_to_take == 0
 			|| vars->path_to_take == 1 || vars->path_to_take == 2
 			|| vars->path_to_take == 3))
@@ -34,10 +37,12 @@ void	check_if_pipes(t_vars *vars)
 	else
 	{
 		vars->index = 0;
-		pid2 = fork();
-		piper(vars, pid2);
-		if (pid2 == 0)
-			exit(1);
-		wait(&pid2);
+		stdinout_cp[1] = dup(STDOUT_FILENO);
+		stdinout_cp[0] = dup(STDIN_FILENO);
+		piper(vars);
+		dup2(stdinout_cp[1], STDOUT_FILENO);
+		dup2(stdinout_cp[0], STDIN_FILENO);
+		close(stdinout_cp[0]);
+		close(stdinout_cp[1]);
 	}
 }

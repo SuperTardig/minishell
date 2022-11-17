@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/10/19 10:23:45 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:42:03 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,17 @@ void	rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 	vars->cmd = buffer;
 }
 
-void	quotes_error(int quote, int dquote)
+int	quotes_error(int quote, int dquote)
 {
 	if (quote % 2 == 1 || dquote % 2 == 1)
 	{
 		printf("unclosed quotes or double quotes\n");
-		exit(1);
+		return (1);
 	}
+	return (0);
 }
 
-void	search_quotes(t_vars *vars, int quote_pos, int dquote_pos, int i)
+int	search_quotes(t_vars *vars, int quote_pos, int dquote_pos, int i)
 {
 	int	j;
 
@@ -69,14 +70,18 @@ void	search_quotes(t_vars *vars, int quote_pos, int dquote_pos, int i)
 		else if (dquote_pos % 2 == 0 && vars->cmd[i] == '\'')
 			quote_pos++;
 	}
-	quotes_error(quote_pos, dquote_pos);
+	if (quotes_error(quote_pos, dquote_pos))
+		return (1);
 	quote_pos = 0;
 	dquote_pos = 0;
 	rm_spaces(vars, i - j + 1, quote_pos, dquote_pos);
+	return (0);
 }
 
-void	del_spaces(t_vars *vars)
+int	del_spaces(t_vars *vars)
 {
 	vars->cmd = ft_strtrim(vars->cmd, " ");
-	search_quotes(vars, 0, 0, -1);
+	if (search_quotes(vars, 0, 0, -1))
+		return (1);
+	return (0);
 }

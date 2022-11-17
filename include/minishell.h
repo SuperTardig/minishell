@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/09 14:47:31 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:43:20 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ typedef struct s_vars{
 	int				last_var;
 	int				nb_pipe;
 	int				fd_pipe[2];
+	int				redir_fd[2];
+	int				redirs;
 	t_split			split;
 }	t_vars;
 
@@ -110,7 +112,7 @@ char	*get_cmd(t_vars *vars);
 void	find_cmd(t_vars *vars);
 
 //variables.c
-void	del_spaces(t_vars *vars);
+int		del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 
 //check_pipe.c
@@ -139,11 +141,12 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index);
 void	rm_exec(t_vars *vars, int index);
 char	*ft_exec(t_vars *vars, int index);
 char	**get_args(t_vars *vars, int start);
-void	piper(t_vars *vars, pid_t pid2);
+void	piper(t_vars *vars);//, pid_t pid2);
 void	free_pipe_args(t_vars *vars);
 int		cmd_not_found(t_vars *vars);
 void	loop_index(t_vars *vars);
 void	redirections(t_vars *vars);
 int		heredoc(t_vars *vars, int i);
+void	duplicate(t_vars *vars);
 
 #endif

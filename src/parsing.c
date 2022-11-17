@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/09 12:07:40 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/17 15:42:48 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,18 +71,10 @@ void	exec_cmd(t_vars *vars)
 void	parsing(t_vars *vars)
 {
 	vars->last_var = -1;
-	del_spaces(vars);
+	if (del_spaces(vars))
+		return ;
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars);
 	split_args(vars);
 	check_if_pipes(vars);
-	/* vars->row = 0;
-	vars->i_cmd = 0;
-	vars->i_meta = 0;
-	while (vars->piped[vars->])
-	{
-		find_the_cmd(vars->piped[0], vars, vars->row);
-		exec_cmd(vars);
-		vars->row++;
-	} */
 }
