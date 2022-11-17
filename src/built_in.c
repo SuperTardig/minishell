@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 10:28:29 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/17 08:01:05 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,13 @@ void	ft_env(t_vars *vars)
 	int	i;
 
 	i = -1;
-	if (ft_arrsize(vars->piped) == 1)
+	if (ft_argsize(vars->piped) == 1)
 		while (vars->env[++i])
 			printf("%s\n", vars->env[i]);
 	else
 	{
 		errno = 2;
-		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index + 1]);
+		ft_fprintf(2, "env: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 	}
 }
@@ -34,7 +34,7 @@ void	ft_export(t_vars *vars)
 	int		row;
 
 	row = vars->index;
-	args = ft_arrsize(vars->piped);
+	args = ft_argsize(vars->piped);
 	if (args > 1)
 	{
 		while (args > 1 && vars->piped[row][0] != '|')
@@ -96,7 +96,7 @@ void	ft_unset(t_vars *vars)
 	int		args;
 
 	row = vars->index + 1;
-	args = ft_arrsize(vars->piped);
+	args = ft_argsize(vars->piped);
 	if (args > 1)
 	{
 		while (args > 1 && vars->piped[row][0] != '|')
@@ -106,9 +106,5 @@ void	ft_unset(t_vars *vars)
 			create_new_env2(vars, row, size);
 			row++;
 		}
-	}
-	else
-	{
-		ft_fprintf(2, "unset: not enough arguments\n");
 	}
 }
