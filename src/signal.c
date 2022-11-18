@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/16 13:32:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:51:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,17 @@ void	sighandlerc(int signum)
 	}
 }
 
+void	sighush(int signum)
+{
+	(void) signum;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	return ;
+}
+
 void	signal_handling(void)
 {
-	struct sigaction	sig;
-
-	ft_memset(&sig, 0, sizeof(sig));
-	sig.sa_mask = SA_SIGINFO;
-	sig.sa_handler = &sighandlerc;
 	signal(SIGQUIT, SIG_IGN);
-	sigaction(SIGINT, &sig, NULL);
+	signal(SIGINT, sighandlerc);
 }

@@ -6,15 +6,11 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/16 14:22:53 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/17 10:22:22 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-/* signau en fonction du nombre de child
-
-mettre les << < > >> en arg tout seul*/
 
 void	rm_exec(t_vars *vars, int index)
 {
@@ -87,6 +83,8 @@ void	del_spaces2(t_vars *vars)
 
 void	parsing(t_vars *vars)
 {
+	if (!vars->cmd[0])
+		return ;
 	vars->last_var = -1;
 	vars->index = 0;
 	del_spaces(vars);

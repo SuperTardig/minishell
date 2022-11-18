@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:10:38 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/16 11:14:58 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:52:02 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@ static int	find_size(char *str, int i, int doubles, int singles)
 				doubles++;
 			else if (str[i] == '\'' && doubles % 2 == 0)
 				singles++;
-			if ((str[i] == '>' || str[i] == '<') && singles % 2 == 0 && doubles % 2 == 0)
+			if ((str[i] == '>' || str[i] == '<')
+				&& singles % 2 == 0 && doubles % 2 == 0)
 				break ;
 			size++;
 			i++;
@@ -40,7 +41,7 @@ static int	find_size(char *str, int i, int doubles, int singles)
 	return (size);
 }
 
-char	*new_str(t_vars *vars, int *j,int *i)
+char	*new_str(t_vars *vars, int *j, int *i)
 {
 	char	*str;
 	int		k;

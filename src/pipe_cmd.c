@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/16 14:01:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/17 10:18:23 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,17 +71,13 @@ void	do_pipe(t_vars *vars)
 	}
 }
 
-void lol(int sig)
-{
-	printf("ok %d\n", sig);
-}
-
 void	piper(t_vars *vars, pid_t pid2)
 {
 	pid_t	pid;
 
 	while (pid2 == 0 && vars->nb_pipe >= 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
 		signal(SIGINT, SIG_DFL);
 		if (vars->path_to_take != 4)
 			find_the_cmd(vars->piped[vars->index], vars, vars->index);

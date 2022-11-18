@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/16 14:15:31 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:49:35 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_vars{
 void		signal_handling(void);
 void		sighandler(int signum);
 void		sighandlerc(int signum);
+void		sighush(int signum);
 
 //parsing.c
 int			meta_num(char *cmd);
