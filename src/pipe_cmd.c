@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/17 14:38:16 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 11:00:59 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,9 @@ void	do_execve(t_vars *vars, pid_t pid)
 			exec_cmd(vars);
 		else
 		{
-			if (vars->redir_args)
+			if (vars->path == NULL)
+				exit(0);
+			else if (vars->redir_args)
 				execve(vars->path, vars->redir_args, vars->env);
 			else
 				execve(vars->path, vars->args, vars->env);

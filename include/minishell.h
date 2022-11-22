@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/17 15:43:20 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 10:41:12 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,5 +148,6 @@ void	loop_index(t_vars *vars);
 void	redirections(t_vars *vars);
 int		heredoc(t_vars *vars, int i);
 void	duplicate(t_vars *vars);
+int		redir_len(t_vars *vars);
 
 #endif

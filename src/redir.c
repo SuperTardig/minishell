@@ -6,11 +6,24 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:30:44 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/22 09:47:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 11:00:26 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	redir_len(t_vars *vars)
+{
+	int	i;
+
+	i = 0;
+	while (vars->args[i + 2] && (ft_strcmp(vars->args[i + 2], "<<") != 0
+			|| ft_strcmp(vars->args[i + 2], ">>") != 0
+			|| ft_strcmp(vars->args[i + 2], "<") != 0
+			|| ft_strcmp(vars->args[i + 2], ">") != 0))
+		++i;
+	return (i);
+}
 
 void	duplicate(t_vars *vars)
 {
@@ -29,9 +42,26 @@ void	duplicate(t_vars *vars)
 	}
 	if (vars->redirs != -1)
 	{
-		vars->redir_args = ft_calloc(vars->redirs + 1, sizeof(char *));
-		while (++j < vars->redirs)
-			vars->redir_args[j] = vars->args[j];
+		if (ft_strcmp(vars->args[0], "<<") == 0
+			|| ft_strcmp(vars->args[0], ">>") == 0
+			|| ft_strcmp(vars->args[0], "<") == 0
+			|| ft_strcmp(vars->args[0], ">") == 0)
+		{
+			if (vars->args[2] && (ft_strcmp(vars->args[2], "<<") != 0
+					|| ft_strcmp(vars->args[2], ">>") != 0
+					|| ft_strcmp(vars->args[2], "<") != 0
+					|| ft_strcmp(vars->args[2], ">") != 0))
+				vars->path = look_path(vars, vars->args[2]);
+			vars->redir_args = ft_calloc(redir_len(vars) + 1, sizeof(char *));
+			while (++j < redir_len(vars))
+				vars->redir_args[j] = vars->args[j + 2];
+		}
+		else
+		{
+			vars->redir_args = ft_calloc(vars->redirs + 1, sizeof(char *));
+			while (++j < vars->redirs)
+				vars->redir_args[j] = vars->args[j];
+		}
 	}
 }
 
