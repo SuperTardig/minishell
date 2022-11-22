@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:10:38 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/18 08:52:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/22 13:34:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,16 +82,16 @@ void	check_redir(t_vars *vars)
 	int		j;
 	int		k;
 
-	nb_redir = count_redir(vars, 0, 0) + 1;
+	nb_redir = count_redir(vars, 0, 0);
 	if (nb_redir > 2)
 	{
 		new_piped = ft_calloc(nb_redir + 1, sizeof(char *));
 		i = -1;
 		j = 0;
 		k = 0;
-		while (++i < nb_redir)
+		while (++i <= nb_redir)
 		{
-			if (i == nb_redir - 1)
+			if (i == nb_redir)
 				new_piped[i] = NULL;
 			else
 				new_piped[i] = help_redir(vars, &j, &k);
