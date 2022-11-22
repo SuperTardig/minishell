@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/09 12:48:19 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/17 16:01:43 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	signal_handling(void)
 {
 	struct sigaction	sig;
 
-	//ft_memset(&sig, 0, sizeof(sig));
+//ft_memset(&sig, 0, sizeof(sig));
 	sig.sa_mask = SA_SIGINFO;
-	//sig.__sigaction_u.__sa_handler = SIG_IGN;
+//sig.__sigaction_u.__sa_handler = SIG_IGN;
 	sig.sa_handler = &sighandlerc;
 	sigaction(SIGQUIT, &sig, NULL);
 	sigaction(SIGINT, &sig, NULL);
