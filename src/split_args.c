@@ -6,13 +6,13 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/25 12:45:10 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/10 13:20:44 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-int	find_size(t_vars *vars, int row, int start)
+static int	find_size(t_vars *vars, int row, int start)
 {
 	int	i;
 	int	quotes;

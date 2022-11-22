@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/17 14:38:16 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 09:50:06 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,8 @@ void	piper(t_vars *vars)
 
 	while (vars->nb_pipe >= 0)
 	{
+		signal(SIGQUIT, SIG_DFL);
+		signal(SIGINT, SIG_DFL);
 		if (vars->path_to_take != 4)
 			find_the_cmd(vars->piped[vars->index], vars, vars->index);
 		vars->args = get_args(vars, vars->index);

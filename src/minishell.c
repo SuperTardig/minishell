@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/14 08:05:31 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/18 08:49:31 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_readline(t_vars *vars)
 		free(vars->cmd);
 		vars->cmd = NULL;
 	}
-	vars->cmd = readline("Minishell > ");
+	vars->cmd = readline("Minishit > ");
 	if (vars->cmd == NULL)
 		return (0);
 	if (vars->cmd && *(vars->cmd))
@@ -36,12 +36,14 @@ int	main(int argc, char **argv, char **envp)
 	{
 		vars.env = envp;
 		vars.last_status = 0;
-		signal_handling();
 		while (1)
 		{
+			signal_handling();
 			vars.cmd = NULL;
 			if (!ft_readline(&vars))
 				return (0);
+			signal(SIGQUIT, sighush);
+			signal(SIGINT, sighush);
 			parsing(&vars);
 		}
 	}

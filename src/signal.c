@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:36:56 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/17 16:01:43 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 09:50:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,34 @@
 
 void	sighandlerc(int signum)
 {
-	if (signum == SIGINT)
+	int	pid;
+
+	pid = getpid();
+	if (pid == 0)
+		exit (0);
+	else
 	{
-		write(1, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
+		if (signum == SIGINT)
+		{
+			write(1, "\n", 1);
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
 	}
+}
+
+void	sighush(int signum)
+{
+	(void) signum;
+	printf("\n");
+	rl_on_new_line();
+	rl_replace_line("", 0);
+	return ;
 }
 
 void	signal_handling(void)
 {
-	struct sigaction	sig;
-
-//ft_memset(&sig, 0, sizeof(sig));
-	sig.sa_mask = SA_SIGINFO;
-//sig.__sigaction_u.__sa_handler = SIG_IGN;
-	sig.sa_handler = &sighandlerc;
-	sigaction(SIGQUIT, &sig, NULL);
-	sigaction(SIGINT, &sig, NULL);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, sighandlerc);
 }

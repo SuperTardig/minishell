@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/17 13:02:27 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 09:50:58 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	check_flags(t_vars *vars, int *row)
 
 	flags = 0;
 	hold = *row;
-	if (ft_arrsize(vars->piped) > 1)
+	if (ft_argsize(vars->piped) > 1)
 	{
 		hold = ++*row;
 		while (vars->piped[*row])
@@ -56,9 +56,9 @@ void	print(t_vars *vars, int row)
 {
 	int	arg;
 
-	if (ft_arrsize(vars->piped) > 1)
+	if (ft_argsize(vars->piped) > 1)
 	{
-		arg = ft_arrsize(vars->piped) - row - 2;
+		arg = ft_argsize(vars->piped) - row - 2;
 		while (arg-- > -1)
 			if (vars->piped[row] != NULL && vars->piped[row][0] != '|')
 				printf("%s ", vars->piped[row++]);
