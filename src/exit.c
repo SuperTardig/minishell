@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/16 14:26:35 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/22 13:37:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_status(t_vars *vars, unsigned char *status)
 	if (check_arg(vars->piped[vars->index + 1]) > 19)
 	{
 		errno = 22;
-		ft_fprintf(2, "MiniShell: exit: %s: ", vars->piped[vars->index + 1]);
+		ft_fprintf(2, "Minihell: exit: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 		*status = 255;
 	}

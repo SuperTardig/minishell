@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redir.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:30:44 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/22 11:30:34 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:41:24 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,15 @@ int	redir_len(t_vars *vars)
 
 	i = 0;
 	while (vars->args[i + 2] && (ft_strcmp(vars->args[i + 2], "<<") != 0
-			|| ft_strcmp(vars->args[i + 2], ">>") != 0
-			|| ft_strcmp(vars->args[i + 2], "<") != 0
-			|| ft_strcmp(vars->args[i + 2], ">") != 0))
+			&& ft_strcmp(vars->args[i + 2], ">>") != 0
+			&& ft_strcmp(vars->args[i + 2], "<") != 0
+			&& ft_strcmp(vars->args[i + 2], ">") != 0))
 		++i;
 	return (i);
 }
 
-void	duplicate(t_vars *vars)
+void	make_redir_args(t_vars *vars, int j)
 {
-	int	j;
-
-	j = -1;
-	if (vars->redir_fd[0] != 0)
-	{
-		dup2(vars->redir_fd[0], STDIN_FILENO);
-		close(vars->redir_fd[0]);
-	}
-	if (vars->redir_fd[1] != 1)
-	{
-		dup2(vars->redir_fd[1], STDOUT_FILENO);
-		close(vars->redir_fd[1]);
-	}
 	if (vars->redirs != -1)
 	{
 		if (ft_strcmp(vars->args[0], "<<") == 0
@@ -63,6 +50,24 @@ void	duplicate(t_vars *vars)
 				vars->redir_args[j] = vars->args[j];
 		}
 	}
+}
+
+void	duplicate(t_vars *vars)
+{
+	int	j;
+
+	j = -1;
+	if (vars->redir_fd[0] != 0)
+	{
+		dup2(vars->redir_fd[0], STDIN_FILENO);
+		close(vars->redir_fd[0]);
+	}
+	if (vars->redir_fd[1] != 1)
+	{
+		dup2(vars->redir_fd[1], STDOUT_FILENO);
+		close(vars->redir_fd[1]);
+	}
+	make_redir_args(vars, j);
 }
 
 void	redirections2(t_vars *vars, int i)

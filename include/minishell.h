@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/22 11:21:31 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/22 13:40:44 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,9 @@ typedef struct s_vars{
 }	t_vars;
 
 //signal.c
-void		signal_handling(void);
-void		sighandler(int signum);
-void		sighandlerc(int signum);
-void		sighush(int signum);
+void	sighandlerc(int signum);
+void	signal_handling(void);
+void	sighush(int signum);
 
 //parsing.c
 int			meta_num(char *cmd);
@@ -153,7 +152,7 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index);
 void	rm_exec(t_vars *vars, int index);
 char	*ft_exec(t_vars *vars, int index);
 char	**get_args(t_vars *vars, int start);
-void	piper(t_vars *vars);//, pid_t pid2);
+void	piper(t_vars *vars);
 void	free_pipe_args(t_vars *vars);
 int		cmd_not_found(t_vars *vars);
 void	loop_index(t_vars *vars);
@@ -161,5 +160,6 @@ void	redirections(t_vars *vars);
 int		heredoc(t_vars *vars, int i);
 void	duplicate(t_vars *vars);
 int		redir_len(t_vars *vars);
+void	make_redir_args(t_vars *vars, int j);
 
 #endif
