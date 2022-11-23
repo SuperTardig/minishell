@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 14:12:22 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 14:49:26 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,16 @@ void	ft_pwd(t_vars *vars)
 {
 	char	*buf;
 
-	if (ft_arrsize(vars->piped) == 1)
-	{
-		buf = ft_calloc(sizeof(char), 1000);
-		getcwd(buf, 1000);
-		if (buf[0] != '\0')
-			printf("%s\n", buf);
-		else
-		{
-			vars->last_status = errno;
-			perror("pwd");
-		}
-		free(buf);
-	}
+	buf = ft_calloc(sizeof(char), 1000);
+	getcwd(buf, 1000);
+	if (buf[0] != '\0')
+		printf("%s\n", buf);
 	else
 	{
-		vars->last_status = 7;
-		errno = 7;
-		ft_fprintf(2, "pwd: too many arguments\n");
+		vars->last_status = errno;
+		perror("pwd");
 	}
+	free(buf);
 }
 
 void	change_pwd(char *old, char *new, t_vars *vars)
@@ -56,7 +47,7 @@ char	*find_path(t_vars *vars)
 	int	i;
 
 	i = -1;
-	if (ft_arrsize(vars->piped) > 1)
+	if (ft_argsize(vars->piped) > 1)
 		return (vars->piped[vars->index + 1]);
 	else
 	{
