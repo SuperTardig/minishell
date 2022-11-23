@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/10/25 12:52:47 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 09:06:48 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	put_pipe(t_vars *vars, int *i, int *nb_pipe)
 	*nb_pipe -= 1;
 }
 
-void	check_pipe(t_vars *vars)
+void	check_pipe(t_vars *vars, int size)
 {
 	int	i;
 	int	j;
@@ -89,4 +89,7 @@ void	check_pipe(t_vars *vars)
 		while (*vars->cmd == ' ' && *vars->cmd)
 			vars->cmd++;
 	}
+	while (size-- >= 0)
+		vars->cmd--;
+	free(vars->cmd);
 }

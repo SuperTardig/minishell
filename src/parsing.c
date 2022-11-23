@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 14:05:47 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 14:44:42 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,31 @@ void	exec_cmd(t_vars *vars)
 		ft_unset(vars);
 }
 
+void	del_spaces2(t_vars *vars)
+{
+	char	**new;
+	int		i;
+
+	i = -1;
+	new = ft_calloc(ft_arrsize(vars->piped) + 1, sizeof(char *));
+	while (vars->piped[++i])
+		new[i] = ft_strtrim(vars->piped[i], " ");
+	free_arrarr(vars->piped);
+	vars->piped = new;
+}
+
 void	parsing(t_vars *vars)
 {
+	if (!vars->cmd[0])
+		return ;
 	vars->last_var = -1;
+	vars->index = 0;
 	if (del_spaces(vars))
 		return ;
 	loop_var(vars, -1, 0, 0);
-	check_pipe(vars);
+	check_pipe(vars, ft_strlen(vars->cmd));
+	check_redir(vars);
+	del_spaces2(vars);
 	split_args(vars);
 	check_if_pipes(vars);
 }

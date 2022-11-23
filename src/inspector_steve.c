@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inspector_steve.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/17 15:42:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 08:36:21 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 	int		i;
 	int		j;
 
-	buffer = ft_calloc(sizeof(char), (len + 10000));
+	buffer = ft_calloc(sizeof(char), (len));
 	i = -1;
 	j = -1;
 	while (vars->cmd[++i])
@@ -72,15 +72,17 @@ int	search_quotes(t_vars *vars, int quote_pos, int dquote_pos, int i)
 	}
 	if (quotes_error(quote_pos, dquote_pos))
 		return (1);
-	quote_pos = 0;
-	dquote_pos = 0;
-	rm_spaces(vars, i - j + 1, quote_pos, dquote_pos);
+	rm_spaces(vars, i - j + 1, 0, 0);
 	return (0);
 }
 
 int	del_spaces(t_vars *vars)
 {
-	vars->cmd = ft_strtrim(vars->cmd, " ");
+	char	*hold;
+
+	hold = ft_strtrim(vars->cmd, " ");
+	free(vars->cmd);
+	vars->cmd = hold;
 	if (search_quotes(vars, 0, 0, -1))
 		return (1);
 	return (0);

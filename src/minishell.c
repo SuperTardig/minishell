@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 11:56:46 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 10:22:56 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_readline(t_vars *vars)
 		free(vars->cmd);
 		vars->cmd = NULL;
 	}
-	vars->cmd = readline("Minishell > ");
+	vars->cmd = readline("Minishit > ");
 	if (vars->cmd == NULL)
 		return (0);
 	if (vars->cmd && *(vars->cmd))
@@ -34,6 +34,7 @@ int	main(int argc, char **argv, char **envp)
 	(void) argv;
 	if (argc == 1)
 	{
+		vars.is_malloc = 0;
 		vars.env = envp;
 		vars.last_status = 0;
 		while (1)
@@ -45,6 +46,7 @@ int	main(int argc, char **argv, char **envp)
 			signal(SIGQUIT, sighush);
 			signal(SIGINT, sighush);
 			parsing(&vars);
+			free_arrarr(vars.piped);
 		}
 	}
 	else
