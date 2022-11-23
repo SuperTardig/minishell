@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/17 15:42:48 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 14:05:47 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	rm_exec(t_vars *vars, int index)
 
 	tmp = ft_strdup(vars->piped[index]);
 	free(vars->piped[index]);
-	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-	tmp = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
-	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp) + 1);
+	vars->piped[index] = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
+	free(tmp);
 }
 
 void	find_the_cmd(char *cmd, t_vars *vars, int index)
