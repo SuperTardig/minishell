@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/22 13:40:44 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:15:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_vars{
 	char			*path;
 	char			**args;
 	char			**redir_args;
+	int				is_malloc;
 	int				index;
 	int				last_status;
 	int				row;
@@ -120,7 +121,7 @@ int		del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 
 //check_pipe.c
-void		check_pipe(t_vars *vars);
+void		check_pipe(t_vars *vars, int size);
 
 //check_redir.c
 void		check_redir(t_vars *vars);

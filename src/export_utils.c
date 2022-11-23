@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/07 10:28:36 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 10:21:26 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@ void	create_new_env(t_vars *vars, int row)
 			ft_strlen(vars->piped[row]));
 	new_env[j + 1] = vars->env[j];
 	new_env[j + 2] = NULL;
+	if (vars->is_malloc == 1)
+		free_arrarr(vars->env);
 	vars->env = new_env;
 }
 
@@ -107,4 +109,5 @@ void	sort_env(t_vars *vars)
 		sorted[i] = vars->env[i];
 	sorting(sorted, size);
 	print_sorted(sorted);
+	free_arrarr(sorted);
 }

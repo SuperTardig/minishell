@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 13:15:15 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 08:42:28 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,11 @@ void	parsing(t_vars *vars)
 	if (!vars->cmd[0])
 		return ;
 	vars->last_var = -1;
+	vars->index = 0;
 	if (del_spaces(vars))
 		return ;
 	loop_var(vars, -1, 0, 0);
-	check_pipe(vars);
+	check_pipe(vars, ft_strlen(vars->cmd));
 	check_redir(vars);
 	del_spaces2(vars);
 	split_args(vars);

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 13:40:26 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 08:15:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,8 @@ int	ft_argsize(char **args)
 		max = ft_arrsize(args);
 		while (j < max)
 		{
-			if (args[j][0] == '|' && args[j][0] == '|'
-				&& args[j][0] == '|')
+			if (args[j][0] == '|' || args[j][0] == '<'
+				|| args[j][0] == '>')
 				break ;
 			arg++;
 			j++;
