@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:10:38 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 13:34:36 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/24 09:54:02 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ static int	find_size(char *str, int i, int doubles, int singles)
 	size = 0;
 	if ((str[i] == '>' || str[i] == '<'))
 	{
-		size++;
-		while ((str[i++] == '>' || str[i] == '<') && str[i])
+		while ((str[i] == '>' || str[i] == '<') && str[i++])
 			size++;
 	}
 	else
@@ -83,7 +82,7 @@ void	check_redir(t_vars *vars)
 	int		k;
 
 	nb_redir = count_redir(vars, 0, 0);
-	if (nb_redir > 2)
+	if (nb_redir >= 2)
 	{
 		new_piped = ft_calloc(nb_redir + 1, sizeof(char *));
 		i = -1;
