@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 13:37:11 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/23 14:49:26 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	change_pwd(char *old, char *new, t_vars *vars)
 	}
 }
 
-static	char	*find_path(t_vars *vars)
+char	*find_path(t_vars *vars)
 {
 	int	i;
 

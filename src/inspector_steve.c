@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 14:18:52 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/23 08:36:21 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/24 12:59:58 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	rm_spaces(t_vars *vars, int len, int quote_pos, int dquote_pos)
 	int		i;
 	int		j;
 
-	buffer = ft_calloc(sizeof(char), (len));
+	buffer = ft_calloc(sizeof(char), (len) + 2);
 	i = -1;
 	j = -1;
 	while (vars->cmd[++i])

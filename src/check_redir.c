@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:10:38 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/24 09:54:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/24 11:42:05 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*new_str(t_vars *vars, int *j, int *i)
 
 	k = 0;
 	size = find_size(&vars->piped[*j][*i], 0, 0, 0);
-	str = ft_calloc(size + 1, sizeof(char));
+	str = ft_calloc(size, sizeof(char));
 	while (size-- > 0)
 	{
 		str[k++] = vars->piped[*j][*i];

@@ -6,13 +6,13 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/22 09:50:44 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/23 14:49:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-char	*look_path(t_vars *vars, char *cmd)
+char	*look_path2(t_vars *vars, char *cmd)
 {
 	char	*path;
 	char	*slash_path;
@@ -20,23 +20,31 @@ char	*look_path(t_vars *vars, char *cmd)
 	int		i;
 
 	i = 0;
+	while (ft_strnstr(vars->env[i], "PATH=", 5) == NULL)
+		++i;
+	sep_path = ft_split(vars->env[i] + 5, ':');
+	i = -1;
+	while (sep_path[++i])
+	{
+		slash_path = ft_strjoin(sep_path[i], "/");
+		path = ft_strjoin(slash_path, cmd);
+		free(slash_path);
+		if (access(path, F_OK) == 0)
+		{
+			free_arrarr(sep_path);
+			return (path);
+		}
+		free(path);
+	}
+	free_arrarr(sep_path);
+	return (NULL);
+}
+
+char	*look_path(t_vars *vars, char *cmd)
+{
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
-	else
-	{
-		while (ft_strnstr(vars->env[i], "PATH=", 5) == NULL)
-			++i;
-		sep_path = ft_split(vars->env[i] + 5, ':');
-		i = -1;
-		while (sep_path[++i])
-		{
-			slash_path = ft_strjoin(sep_path[i], "/");
-			path = ft_strjoin(slash_path, cmd);
-			if (access(path, F_OK) == 0)
-				return (path);
-		}
-	}
-	return (NULL);
+	return (look_path2(vars, cmd));
 }
 
 char	**get_args(t_vars *vars, int start)

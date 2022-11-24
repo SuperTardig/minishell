@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 10:22:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/24 11:38:12 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	main(int argc, char **argv, char **envp)
 			signal(SIGQUIT, sighush);
 			signal(SIGINT, sighush);
 			parsing(&vars);
-			free_arrarr(vars.piped);
 		}
 	}
 	else

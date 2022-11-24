@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/24 11:26:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/24 13:00:40 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ void	rm_exec(t_vars *vars, int index)
 
 	tmp = ft_strdup(vars->piped[index]);
 	free(vars->piped[index]);
-	vars->piped[index] = ft_calloc(ft_strlen(tmp) + 1, sizeof(char));
-	tmp = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
-	ft_strlcpy(vars->piped[index], tmp, ft_strlen(tmp) + 1);
+	vars->piped[index] = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
+	free(tmp);
 }
 
 void	find_the_cmd(char *cmd, t_vars *vars, int index)
@@ -88,11 +87,12 @@ void	parsing(t_vars *vars)
 	vars->last_var = -1;
 	vars->index = 0;
 	if (del_spaces(vars))
-		return ;
+		return 
 	loop_var(vars, -1, 0, 0);
 	check_pipe(vars, ft_strlen(vars->cmd));
 	check_redir(vars);
 	del_spaces2(vars);
 	split_args(vars);
 	check_if_pipes(vars);
+	free_arrarr(vars->piped);
 }
