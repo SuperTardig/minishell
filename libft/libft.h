@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 11:09:40 by fleduc            #+#    #+#             */
-/*   Updated: 2022/09/21 08:22:03 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/29 09:26:19 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ long long	ft_atoll(const char *str);
 size_t		ft_strlen(const char *c);
 size_t		ft_strlcpy(char *dst, const char *src, size_t dstsize);
 size_t		ft_strlcat(char *dst, const char *src, size_t dstsize);
+int			ft_strlen_until(char *str, char c);
 
 t_list		*ft_lstlast(t_list *lst);
 t_list		*ft_lstnew(void *content);

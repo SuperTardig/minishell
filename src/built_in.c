@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 10:21:14 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 09:53:25 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,11 @@ void	ft_env(t_vars *vars)
 
 	i = -1;
 	if (ft_argsize(vars->piped) == 1)
+	{
 		while (vars->env[++i])
 			printf("%s\n", vars->env[i]);
+		vars->last_status = 0;
+	}
 	else
 	{
 		errno = 2;
@@ -51,6 +54,7 @@ void	ft_export(t_vars *vars)
 	}
 	else
 		sort_env(vars);
+	vars->last_status = 0;
 }
 
 void	create_new_env2(t_vars *vars, int row, int size)
@@ -70,8 +74,8 @@ void	create_new_env2(t_vars *vars, int row, int size)
 		new_env[++j] = vars->env[i];
 	}
 	new_env[++j] = 0;
-	if (vars->is_malloc == 1)
-		free_arrarr(vars->env);
+//	if (vars->is_malloc == 1)
+//		free_arrarr(vars->env);
 	vars->env = new_env;
 }
 
@@ -102,7 +106,7 @@ void	ft_unset(t_vars *vars)
 	args = ft_argsize(vars->piped);
 	if (args > 1)
 	{
-		while (args > 1 && vars->piped[row][0] != '|')
+		while (args > 1 && vars->piped[row] && vars->piped[row][0] != '|')
 		{
 			size = ft_arrsize(vars->env);
 			check_if_good(vars, row, &size, &args);
@@ -110,4 +114,5 @@ void	ft_unset(t_vars *vars)
 			row++;
 		}
 	}
+	vars->last_status = 0;
 }

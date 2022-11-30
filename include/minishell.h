@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/23 10:15:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/29 14:20:51 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@
 # include <errno.h>
 # include "../libft/libft.h"
 # include "../libft/ft_fprintf/ft_fprintf.h"
-
-#define TEST printf("ok\n");
 
 typedef struct s_spilt{
 	int	ok;
@@ -121,7 +119,7 @@ int		del_spaces(t_vars *vars);
 void	change_variables(t_vars *vars);
 
 //check_pipe.c
-void		check_pipe(t_vars *vars, int size);
+void		check_pipe(t_vars *vars, int i, int x);
 
 //check_redir.c
 void		check_redir(t_vars *vars);
@@ -143,24 +141,24 @@ void		do_plus_plus(int *i, int *j);
 void		remove_quotes(t_vars *vars, int i, int single, int doubles);
 
 //change_var.c
-void	find_var(t_vars *vars, int i);
-void	loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+void		find_var(t_vars *vars, int i);
+void		loop_var(t_vars *vars, int i, int d_quotes, int quotes);
 
-void	its_piping_time(t_vars *vars, char *path, int start);
-void	check_if_pipes(t_vars *vars);
-void	exec_cmd(t_vars *vars);
-void	find_the_cmd(char *cmd, t_vars *vars, int index);
-void	rm_exec(t_vars *vars, int index);
-char	*ft_exec(t_vars *vars, int index);
-char	**get_args(t_vars *vars, int start);
-void	piper(t_vars *vars);
-void	free_pipe_args(t_vars *vars);
-int		cmd_not_found(t_vars *vars);
-void	loop_index(t_vars *vars);
-void	redirections(t_vars *vars);
-int		heredoc(t_vars *vars, int i);
-void	duplicate(t_vars *vars);
-int		redir_len(t_vars *vars);
-void	make_redir_args(t_vars *vars, int j);
+void		its_piping_time(t_vars *vars, char *path, int start);
+void		check_if_pipes(t_vars *vars);
+void		exec_cmd(t_vars *vars);
+void		find_the_cmd(char *cmd, t_vars *vars, int index);
+void		rm_exec(t_vars *vars, int index);
+char		*ft_exec(t_vars *vars, int index);
+char		**get_args(t_vars *vars, int start);
+void		piper(t_vars *vars);
+void		free_pipe_args(t_vars *vars);
+int			cmd_not_found(t_vars *vars);
+void		loop_index(t_vars *vars);
+void		redirections(t_vars *vars);
+int			heredoc(t_vars *vars, int i);
+void		duplicate(t_vars *vars);
+int			redir_len(t_vars *vars);
+void		make_redir_args(t_vars *vars, int j);
 
 #endif

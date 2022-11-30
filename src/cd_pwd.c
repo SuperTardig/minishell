@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 14:49:26 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/29 14:21:18 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ void	ft_pwd(t_vars *vars)
 	buf = ft_calloc(sizeof(char), 1000);
 	getcwd(buf, 1000);
 	if (buf[0] != '\0')
+	{
 		printf("%s\n", buf);
+		vars->last_status = 0;
+	}
 	else
 	{
 		vars->last_status = errno;
@@ -60,7 +63,7 @@ char	*find_path(t_vars *vars)
 	return (NULL);
 }
 
-void	ft_cd(t_vars *vars)
+void	ft_cd(t_vars *vars) 
 {
 	char	*old;
 	char	*new;
@@ -77,4 +80,6 @@ void	ft_cd(t_vars *vars)
 		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index]);
 		perror("");
 	}
+	else
+		vars->last_status = 0;
 }

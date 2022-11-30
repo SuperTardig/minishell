@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/22 13:37:19 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 09:20:54 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,5 @@ void	ft_echo(t_vars *vars)
 	}
 	else
 		print(vars, row);
+	exit(0);
 }

@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   ft_strlen_until.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/29 09:26:37 by bperron          ###   ########.fr       */
+/*   Created: 2022/11/29 09:25:05 by bperron           #+#    #+#             */
+/*   Updated: 2022/11/29 09:26:16 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "libft.h"
 
-int	cmp(char *cmd, char *try)
+int	ft_strlen_until(char *str, char c)
 {
 	int	i;
 
 	i = 0;
-	while (cmd[i] && try[i] && cmd[i] == try[i])
+	while (str[i] && str[i] != c)
 		i++;
-	if (cmd[i] || try[i])
-		return (0);
-	return (1);
+	return (i);
 }

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/24 11:49:37 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/29 13:30:02 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	status(t_vars *vars)
 	int		k;
 
 	nb = ft_itoa(vars->last_status);
-	new = ft_calloc(ft_strlen(vars->cmd) - 2 + ft_strlen(nb) + 1, sizeof(char));
+	new = ft_calloc(ft_strlen(vars->cmd) + ft_strlen(nb) - 1, sizeof(char));
 	i = -1;
 	j = -1;
 	k = -1;
