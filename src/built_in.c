@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 09:53:25 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:13:06 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,11 @@ void	ft_env(t_vars *vars)
 	else
 	{
 		errno = 2;
+		vars->last_status = 2;
 		ft_fprintf(2, "env: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 	}
+	exit(vars->last_status);
 }
 
 void	ft_export(t_vars *vars)
@@ -74,8 +76,6 @@ void	create_new_env2(t_vars *vars, int row, int size)
 		new_env[++j] = vars->env[i];
 	}
 	new_env[++j] = 0;
-//	if (vars->is_malloc == 1)
-//		free_arrarr(vars->env);
 	vars->env = new_env;
 }
 

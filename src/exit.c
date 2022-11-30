@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 08:15:04 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:50:45 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,5 @@ void	ft_exit(t_vars *vars)
 		perror("MiniShell: exit");
 		return ;
 	}
-	exit (status);
+	free_garbage(vars, status);
 }

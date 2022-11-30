@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/29 13:20:43 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:53:13 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,4 @@ void	check_pipe(t_vars *vars, int i, int x)
 		while (vars->cmd[x] == ' ' && vars->cmd[x])
 			x++;
 	}
-	free(vars->cmd);
 }

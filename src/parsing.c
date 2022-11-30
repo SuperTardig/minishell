@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 09:21:41 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:49:10 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index)
 
 void	exec_cmd(t_vars *vars)
 {
-	if (vars->path_to_take == 8)
-		ft_echo(vars);
-	else if (vars->path_to_take == 1)
+	if (vars->path_to_take == 1)
 		ft_exit(vars);
 	else if (vars->path_to_take == 2)
 		ft_cd(vars);
+	else if (vars->path_to_take == 3)
+		ft_unset(vars);
 	else if (vars->path_to_take == 5)
 		ft_pwd(vars);
 	else if (vars->path_to_take == 6)
 		ft_export(vars);
 	else if (vars->path_to_take == 7)
 		ft_env(vars);
-	else if (vars->path_to_take == 3)
-		ft_unset(vars);
+	else if (vars->path_to_take == 8)
+		ft_echo(vars);
 }
 
 void	del_spaces2(t_vars *vars)

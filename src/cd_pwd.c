@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/29 14:21:18 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 14:11:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	ft_pwd(t_vars *vars)
 		perror("pwd");
 	}
 	free(buf);
+	exit(vars->last_status);
 }
 
 void	change_pwd(char *old, char *new, t_vars *vars)
@@ -63,7 +64,7 @@ char	*find_path(t_vars *vars)
 	return (NULL);
 }
 
-void	ft_cd(t_vars *vars) 
+void	ft_cd(t_vars *vars)
 {
 	char	*old;
 	char	*new;

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/29 14:20:51 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:49:26 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,11 @@ typedef struct s_spilt{
 }	t_split;
 
 typedef struct s_vars{
+	char			*cmd;
+	char			*path;
 	char			**env;
 	char			**new_env;
 	char			**piped;
-	char			*cmd;
-	char			*path;
 	char			**args;
 	char			**redir_args;
 	int				is_malloc;
@@ -62,6 +62,7 @@ typedef struct s_vars{
 	int				redir_fd[2];
 	int				redirs;
 	t_split			split;
+	t_list			*garbage;
 }	t_vars;
 
 //signal.c
@@ -99,6 +100,7 @@ void		ft_exit(t_vars *vars);
 
 //utils.c
 int			ft_strlen_until(char *str, char c);
+void		free_garbage(t_vars *vars, int status);
 int			cmp(char *cmp, char *try);
 int			check_args(t_vars *vars);
 void		go_to_next(t_vars *vars);

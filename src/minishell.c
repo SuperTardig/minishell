@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/03 09:40:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/29 10:08:29 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:43:52 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,9 @@ int	main(int argc, char **argv, char **envp)
 		{
 			signal_handling();
 			vars.cmd = NULL;
+			vars.piped = NULL;
 			if (!ft_readline(&vars))
-				return (0);
+				free_garbage(&vars, 0);
 			signal(SIGQUIT, sighush);
 			signal(SIGINT, sighush);
 			parsing(&vars);
