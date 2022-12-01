@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/01 09:37:01 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/01 13:46:42 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,4 +95,5 @@ void	parsing(t_vars *vars)
 	split_args(vars);
 	check_if_pipes(vars);
 	free_arrarr(vars->piped);
+	free(vars->cmd);
 }
