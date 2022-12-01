@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+         #
+#    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/11/24 11:29:12 by bperron          ###   ########.fr        #
+#    Updated: 2022/12/01 09:36:37 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ all: $(NAME)
 
 $(NAME): $(SRCS) $(OBJS) $(HEADERS)
 	$(LIBFT)
-	$(CC) $(CFLAGS) -lreadline -L /Users/fleduc/.brew/opt/readline/lib -I /Users/fleduc/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline -L /Users/bperron/.brew/opt/readline/lib -I /Users/bperron/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
 #	-L./include -lreadline ./include/libreadline.a ./include/libhistory.a
 #	-lreadline -L /Users/bperron/.brew/opt/readline/lib -I /Users/bperron/.brew/opt/readline/include
 	echo "Mandatory compilation done"

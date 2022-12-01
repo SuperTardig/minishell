@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/01 08:14:43 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/01 09:37:01 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ void	parsing(t_vars *vars)
 	if (del_spaces(vars))
 		return ;
 	loop_var(vars, -1, 0, 0);
-	printf("%s\n", vars->cmd);
 	check_pipe(vars, 0, 0);
 	check_redir(vars);
 	del_spaces2(vars);
