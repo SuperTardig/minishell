@@ -1,7 +1,0 @@
-Makefile
-include
-libft
-minishell
-outfile
-readline
-src

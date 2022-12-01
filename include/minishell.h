@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/30 12:49:26 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/01 08:22:12 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,7 +99,7 @@ void		set_status(t_vars *vars, unsigned char *status);
 void		ft_exit(t_vars *vars);
 
 //utils.c
-int			ft_strlen_until(char *str, char c);
+void		remove_var(t_vars *vars, int var_place, int size)
 void		free_garbage(t_vars *vars, int status);
 int			cmp(char *cmp, char *try);
 int			check_args(t_vars *vars);

@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/04 11:35:34 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/29 13:30:02 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/01 08:21:42 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,21 +80,17 @@ void	find_var(t_vars *vars, int i)
 	}
 	if (exist == 1)
 		change_var(vars, i - 1, j, ft_strlen(var));
+	else
+		remove_var(vars, i - 1, ft_strlen(var));
 }
 
-void	status(t_vars *vars)
+void	status(t_vars *vars, int i, int j, int k)
 {
 	char	*nb;
 	char	*new;
-	int		i;
-	int		j;
-	int		k;
 
 	nb = ft_itoa(vars->last_status);
 	new = ft_calloc(ft_strlen(vars->cmd) + ft_strlen(nb) - 1, sizeof(char));
-	i = -1;
-	j = -1;
-	k = -1;
 	while (vars->cmd[++i] != '$' && vars->cmd[i + 1] != '?')
 		new[++j] = vars->cmd[i];
 	i += 1;
@@ -128,7 +124,7 @@ void	loop_var(t_vars *vars, int i, int d_quotes, int quotes)
 		else if (vars->cmd[i] == '$' && quotes % 2 != 1
 			&& vars->cmd[i + 1] == '?' && i > vars->last_var)
 		{
-			status(vars);
+			status(vars, -1, -1, -1);
 			break ;
 		}
 	}

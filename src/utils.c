@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 12:55:20 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/01 08:21:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,4 +43,27 @@ void	free_garbage(t_vars *vars, int status)
 		}
 	}
 	exit(status);
+}
+
+void	remove_var(t_vars *vars, int var_place, int size)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	new = ft_calloc(ft_strlen(vars->cmd) - size + 1, sizeof(char));
+	i = -1;
+	j = -1;
+	while (vars->cmd[++i])
+	{
+		if (i == var_place)
+		{
+			while (size--)
+				i++;
+		}
+		new[++j] = vars->cmd[i];
+	}
+	free(vars->cmd);
+	vars->cmd = new;
+	loop_var(vars, -1, 0, 0);
 }
