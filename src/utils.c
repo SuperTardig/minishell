@@ -3,24 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/02 13:15:43 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/01 08:21:36 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
-
-int	ft_strlen_until(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
-}
 
 int	cmp(char *cmd, char *try)
 {
@@ -32,4 +22,48 @@ int	cmp(char *cmd, char *try)
 	if (cmd[i] || try[i])
 		return (0);
 	return (1);
+}
+
+void	free_garbage(t_vars *vars, int status)
+{
+	t_list	*hold;
+
+	if (vars->cmd)
+		free(vars->cmd);
+	if (vars->piped)
+		free_arrarr(vars->piped);
+	if (vars->garbage)
+	{
+		hold = vars->garbage;
+		while (hold != NULL)
+		{
+			hold = vars->garbage->next;
+			free(vars->garbage->content);
+			vars->garbage = hold;
+		}
+	}
+	exit(status);
+}
+
+void	remove_var(t_vars *vars, int var_place, int size)
+{
+	char	*new;
+	int		i;
+	int		j;
+
+	new = ft_calloc(ft_strlen(vars->cmd) - size + 1, sizeof(char));
+	i = -1;
+	j = -1;
+	while (vars->cmd[++i])
+	{
+		if (i == var_place)
+		{
+			while (size--)
+				i++;
+		}
+		new[++j] = vars->cmd[i];
+	}
+	free(vars->cmd);
+	vars->cmd = new;
+	loop_var(vars, -1, 0, 0);
 }

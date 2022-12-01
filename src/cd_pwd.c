@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 14:44:36 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/30 14:11:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,17 @@ void	ft_pwd(t_vars *vars)
 	buf = ft_calloc(sizeof(char), 1000);
 	getcwd(buf, 1000);
 	if (buf[0] != '\0')
+	{
 		printf("%s\n", buf);
+		vars->last_status = 0;
+	}
 	else
 	{
 		vars->last_status = errno;
 		perror("pwd");
 	}
 	free(buf);
+	exit(vars->last_status);
 }
 
 void	change_pwd(char *old, char *new, t_vars *vars)
@@ -77,4 +81,6 @@ void	ft_cd(t_vars *vars)
 		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index]);
 		perror("");
 	}
+	else
+		vars->last_status = 0;
 }

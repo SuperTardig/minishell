@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/23 14:45:58 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/11/29 10:15:16 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	check_if_pipes(t_vars *vars)
 		return ;
 	if (vars->nb_pipe == 0 && (vars->path_to_take == 0
 			|| vars->path_to_take == 1 || vars->path_to_take == 2
-			|| vars->path_to_take == 3))
+			|| vars->path_to_take == 3 || vars->path_to_take == 6))
 		exec_cmd(vars);
 	else
 	{

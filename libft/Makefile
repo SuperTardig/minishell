@@ -6,7 +6,7 @@
 #    By: bperron <bperron@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 09:41:33 by fleduc            #+#    #+#              #
-#    Updated: 2022/09/21 08:22:27 by bperron          ###   ########.fr        #
+#    Updated: 2022/11/30 11:09:30 by bperron          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ SRCS = ft_atoi.c ft_bzero.c ft_calloc.c ft_isalnum.c ft_isalpha.c ft_isascii.c \
 	   ft_putstr_fd.c ft_split.c ft_strchr.c ft_strdup.c ft_striteri.c ft_strjoin.c \
 	   ft_strlcat.c ft_strlcpy.c ft_strlen.c ft_strmapi.c ft_strncmp.c ft_strnstr.c \
 	   ft_strrchr.c ft_strtrim.c ft_substr.c ft_tolower.c ft_toupper.c ft_atoll.c \
-	   ft_strcmp.c get_next_line.c ft_arrsize.c
+	   ft_strcmp.c get_next_line.c ft_arrsize.c ft_strlen_until.c \
+	   ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c \
+	   ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 
 OBJS = $(SRCS:.c=.o)
 

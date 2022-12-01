@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 09:06:48 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:53:13 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	find_nb_pipe(t_vars *vars, int *nb)
 	}
 }
 
-int	ft_strlen_until_pipe(t_vars *vars)
+int	ft_strlen_until_pipe(char *cmd)
 {
 	int	singles;
 	int	doubles;
@@ -45,13 +45,13 @@ int	ft_strlen_until_pipe(t_vars *vars)
 	singles = 0;
 	doubles = 0;
 	i = -1;
-	while (vars->cmd[++i])
+	while (cmd[++i])
 	{
-		if (vars->cmd[i] == '"')
+		if (cmd[i] == '"')
 			doubles++;
-		if (vars->cmd[i] == '\'')
+		if (cmd[i] == '\'')
 			singles++;
-		if (vars->cmd[i] == '|' && singles % 2 == 0 && doubles % 2 == 0)
+		if (cmd[i] == '|' && singles % 2 == 0 && doubles % 2 == 0)
 			return (i);
 	}
 	return (i);
@@ -65,9 +65,8 @@ void	put_pipe(t_vars *vars, int *i, int *nb_pipe)
 	*nb_pipe -= 1;
 }
 
-void	check_pipe(t_vars *vars, int size)
+void	check_pipe(t_vars *vars, int i, int x)
 {
-	int	i;
 	int	j;
 	int	k;
 	int	nb_pipe;
@@ -75,21 +74,17 @@ void	check_pipe(t_vars *vars, int size)
 	nb_pipe = 1;
 	find_nb_pipe(vars, &nb_pipe);
 	vars->piped = ft_calloc(sizeof(char *), nb_pipe + 1);
-	i = 0;
 	while (nb_pipe-- >= 1)
 	{
-		k = ft_strlen_until_pipe(vars);
+		k = ft_strlen_until_pipe(&vars->cmd[x]);
 		j = 0;
-		vars->piped[i++] = ft_substr(vars->cmd, 0,
-				ft_strlen_until_pipe(vars));
+		vars->piped[i++] = ft_substr(&vars->cmd[x], 0,
+				ft_strlen_until_pipe(&vars->cmd[x]));
 		if (nb_pipe >= 1)
 			put_pipe(vars, &i, &nb_pipe);
 		while (j++ <= k)
-			vars->cmd++;
-		while (*vars->cmd == ' ' && *vars->cmd)
-			vars->cmd++;
+			x++;
+		while (vars->cmd[x] == ' ' && vars->cmd[x])
+			x++;
 	}
-	while (size-- >= 0)
-		vars->cmd--;
-	free(vars->cmd);
 }

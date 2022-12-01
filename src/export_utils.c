@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 10:21:26 by bperron          ###   ########.fr       */
+/*   Updated: 2022/11/30 12:50:07 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,24 +50,25 @@ void	create_new_env(t_vars *vars, int row)
 		new_env[j] = vars->env[j];
 	new_env[j] = ft_substr(vars->piped[row], 0,
 			ft_strlen(vars->piped[row]));
+	ft_lstadd_back(&vars->garbage, ft_lstnew((void *) new_env[j]));
 	new_env[j + 1] = vars->env[j];
 	new_env[j + 2] = NULL;
-	if (vars->is_malloc == 1)
-		free_arrarr(vars->env);
 	vars->env = new_env;
 }
 
 void	print_sorted(char **sorted)
 {
 	int	i;
+	int	j;
 
 	i = -1;
 	while (sorted[++i])
 	{
+		j = -1;
 		ft_fprintf(1, "declare -x ");
-		while (*sorted[i] != '=')
-			ft_putchar_fd(*sorted[i]++, 1);
-		ft_putchar_fd(*sorted[i]++, 1);
+		while (sorted[i][++j] != '=')
+			ft_putchar_fd(sorted[i][j], 1);
+		ft_putchar_fd(sorted[i][j++], 1);
 		ft_fprintf(1, "\"%s\"\n", sorted[i]);
 	}
 }
@@ -103,11 +104,11 @@ void	sort_env(t_vars *vars)
 	size = 0;
 	while (vars->env[size])
 		size++;
-	sorted = ft_calloc(size, sizeof(char *));
+	sorted = ft_calloc(size + 1, sizeof(char *));
 	i = -1;
 	while (vars->env[++i])
 		sorted[i] = vars->env[i];
 	sorting(sorted, size);
 	print_sorted(sorted);
-	free_arrarr(sorted);
+	free(sorted);
 }

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/23 14:44:42 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/01 08:14:43 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,20 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index)
 
 void	exec_cmd(t_vars *vars)
 {
-	if (vars->path_to_take == 8)
-		ft_echo(vars);
-	else if (vars->path_to_take == 1)
+	if (vars->path_to_take == 1)
 		ft_exit(vars);
 	else if (vars->path_to_take == 2)
 		ft_cd(vars);
+	else if (vars->path_to_take == 3)
+		ft_unset(vars);
 	else if (vars->path_to_take == 5)
 		ft_pwd(vars);
 	else if (vars->path_to_take == 6)
 		ft_export(vars);
 	else if (vars->path_to_take == 7)
 		ft_env(vars);
-	else if (vars->path_to_take == 5)
-		ft_unset(vars);
+	else if (vars->path_to_take == 8)
+		ft_echo(vars);
 }
 
 void	del_spaces2(t_vars *vars)
@@ -89,9 +89,11 @@ void	parsing(t_vars *vars)
 	if (del_spaces(vars))
 		return ;
 	loop_var(vars, -1, 0, 0);
-	check_pipe(vars, ft_strlen(vars->cmd));
+	printf("%s\n", vars->cmd);
+	check_pipe(vars, 0, 0);
 	check_redir(vars);
 	del_spaces2(vars);
 	split_args(vars);
 	check_if_pipes(vars);
+	free_arrarr(vars->piped);
 }
