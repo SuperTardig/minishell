@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_pipes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
 /*   Updated: 2022/11/29 10:15:16 by bperron          ###   ########.fr       */
