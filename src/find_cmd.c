@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/23 14:49:30 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/01 12:07:13 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,15 @@ char	*look_path2(t_vars *vars, char *cmd)
 
 char	*look_path(t_vars *vars, char *cmd)
 {
+	int	i;
+
+	i = -1;
 	if (access(cmd, F_OK) == 0)
 		return (cmd);
-	return (look_path2(vars, cmd));
+	while (vars->env[++i])
+		if (ft_strnstr(vars->env[i], "PATH=", 5) != NULL)
+			return (look_path2(vars, cmd));
+	return (cmd);
 }
 
 char	**get_args(t_vars *vars, int start)
