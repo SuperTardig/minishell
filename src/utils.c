@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/01 08:21:36 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:21:23 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	free_garbage(t_vars *vars, int status)
 {
 	t_list	*hold;
 
+	if (vars->is_malloc == 1)
+		free(vars->env);
 	if (vars->cmd)
 		free(vars->cmd);
 	if (vars->piped)
@@ -37,8 +39,10 @@ void	free_garbage(t_vars *vars, int status)
 		hold = vars->garbage;
 		while (hold != NULL)
 		{
+			
 			hold = vars->garbage->next;
 			free(vars->garbage->content);
+			free(vars->garbage);
 			vars->garbage = hold;
 		}
 	}

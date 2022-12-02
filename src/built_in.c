@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/10 09:09:52 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 14:13:06 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:43:20 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	create_new_env2(t_vars *vars, int row, int size)
 		new_env[++j] = vars->env[i];
 	}
 	new_env[++j] = 0;
+	if (vars->is_malloc == 1)
+		free(vars->env);
 	vars->env = new_env;
 }
 
@@ -113,6 +115,7 @@ void	ft_unset(t_vars *vars)
 			create_new_env2(vars, row, size);
 			row++;
 		}
+		vars->is_malloc = 1;
 	}
 	vars->last_status = 0;
 }

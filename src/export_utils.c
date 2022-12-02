@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/08 11:05:24 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 12:50:07 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/02 13:43:57 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ void	create_new_env(t_vars *vars, int row)
 			ft_strlen(vars->piped[row]));
 	ft_lstadd_back(&vars->garbage, ft_lstnew((void *) new_env[j]));
 	new_env[j + 1] = vars->env[j];
-	new_env[j + 2] = NULL;
+	if (vars->is_malloc == 1)
+		free(vars->env);
 	vars->env = new_env;
 }
 
