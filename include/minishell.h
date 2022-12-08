@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/01 09:34:56 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/08 12:45:21 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,14 +102,17 @@ void		ft_exit(t_vars *vars);
 void		remove_var(t_vars *vars, int var_place, int size);
 void		free_garbage(t_vars *vars, int status);
 int			cmp(char *cmp, char *try);
-int			check_args(t_vars *vars);
-void		go_to_next(t_vars *vars);
+void		init_redirs(t_vars *vars);
 
 //utils2.c
 void		free_arrarr(char **arr);
 int			find_var_len(t_vars *vars, int env_place);
 int			redir_check(t_vars *vars, int i);
+void		good_file(t_vars *vars);
 int			ft_argsize(char **args);
+
+//utils3.c
+int			redirections2(t_vars *vars, int i);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
@@ -157,7 +160,7 @@ void		piper(t_vars *vars);
 void		free_pipe_args(t_vars *vars);
 int			cmd_not_found(t_vars *vars);
 void		loop_index(t_vars *vars);
-void		redirections(t_vars *vars);
+int			redirections(t_vars *vars);
 int			heredoc(t_vars *vars, int i);
 void		duplicate(t_vars *vars);
 int			redir_len(t_vars *vars);

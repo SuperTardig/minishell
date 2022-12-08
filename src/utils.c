@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/02 13:21:23 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/08 12:45:07 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	free_garbage(t_vars *vars, int status)
 		hold = vars->garbage;
 		while (hold != NULL)
 		{
-			
 			hold = vars->garbage->next;
 			free(vars->garbage->content);
 			free(vars->garbage);
@@ -70,4 +69,19 @@ void	remove_var(t_vars *vars, int var_place, int size)
 	free(vars->cmd);
 	vars->cmd = new;
 	loop_var(vars, -1, 0, 0);
+}
+
+void	init_redirs(t_vars *vars)
+{
+	vars->redirs = -1;
+	vars->redir_fd[0] = 0;
+	vars->redir_fd[1] = 1;
+}
+
+void	good_file(t_vars *vars)
+{
+	if (redirections(vars))
+	{
+		exit(1);
+	}	
 }

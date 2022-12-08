@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/11/29 14:20:42 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/08 13:05:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	do_execve(t_vars *vars, pid_t pid)
 {
 	if (pid == 0)
 	{
-		redirections(vars);
+		good_file(vars);
 		if (vars->path_to_take != 4 && vars->path_to_take != 9)
 			exec_cmd(vars);
 		else
