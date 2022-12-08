@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 13:30:44 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 13:04:09 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/08 13:45:37 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,6 @@ int	redir_len(t_vars *vars)
 			&& ft_strcmp(vars->args[i + 2], ">>") != 0
 			&& ft_strcmp(vars->args[i + 2], "<") != 0
 			&& ft_strcmp(vars->args[i + 2], ">") != 0))
-		++i;
-	return (i);
-}
-
-int	redir_len2(t_vars *vars)
-{
-	int	i;
-
-	i = 0;
-	while (vars->args[i + 3] && (ft_strcmp(vars->args[i + 3], "<<") != 0
-			&& ft_strcmp(vars->args[i + 3], ">>") != 0
-			&& ft_strcmp(vars->args[i + 3], "<") != 0
-			&& ft_strcmp(vars->args[i + 3], ">") != 0))
 		++i;
 	return (i);
 }
@@ -55,16 +42,6 @@ void	make_redir_args(t_vars *vars, int j)
 			vars->redir_args = ft_calloc(redir_len(vars) + 1, sizeof(char *));
 			while (++j < redir_len(vars))
 				vars->redir_args[j] = vars->args[j + 2];
-		}
-		else if (ft_strcmp(vars->args[1], "<<") == 0
-			|| ft_strcmp(vars->args[1], ">>") == 0
-			|| ft_strcmp(vars->args[1], "<") == 0
-			|| ft_strcmp(vars->args[1], ">") == 0)
-		{
-			vars->redir_args = ft_calloc(redir_len2(vars) + 1, sizeof(char *));
-			vars->redir_args[0] = vars->args[0];
-			while (++j < redir_len2(vars))
-				vars->redir_args[j + 1] = vars->args[j + 3];
 		}
 		else
 		{
@@ -99,8 +76,6 @@ int	redirections(t_vars *vars)
 
 	i = -1;
 	init_redirs(vars);
-	if (vars->redir_args)
-		free(vars->redir_args);
 	while (vars->args[++i])
 	{
 		if (ft_strcmp(vars->args[i], ">") == 0)
@@ -109,6 +84,8 @@ int	redirections(t_vars *vars)
 				vars->redirs = i;
 			if (vars->redir_fd[1] != 1)
 				close(vars->redir_fd[1]);
+			if (bad_access(vars, i))
+				return (1);
 			vars->redir_fd[1] = open(vars->args[i + 1],
 					O_WRONLY | O_CREAT | O_TRUNC, 0644);
 		}

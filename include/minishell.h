@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 12:45:21 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/08 13:42:57 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int			ft_argsize(char **args);
 
 //utils3.c
 int			redirections2(t_vars *vars, int i);
+int			bad_access(t_vars *vars, int i);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
@@ -120,8 +121,8 @@ char		*get_cmd(t_vars *vars);
 void		find_cmd(t_vars *vars);
 
 //variables.c
-int		del_spaces(t_vars *vars);
-void	change_variables(t_vars *vars);
+int			del_spaces(t_vars *vars);
+void		change_variables(t_vars *vars);
 
 //check_pipe.c
 void		check_pipe(t_vars *vars, int i, int x);

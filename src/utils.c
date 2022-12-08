@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 10:40:21 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/08 12:45:07 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/08 13:45:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,12 +76,12 @@ void	init_redirs(t_vars *vars)
 	vars->redirs = -1;
 	vars->redir_fd[0] = 0;
 	vars->redir_fd[1] = 1;
+	if (vars->redir_args)
+		free(vars->redir_args);
 }
 
 void	good_file(t_vars *vars)
 {
 	if (redirections(vars))
-	{
 		exit(1);
-	}	
 }
