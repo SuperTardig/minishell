@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   find_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/01 13:56:16 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/08 14:42:38 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,9 @@ char	*look_path(t_vars *vars, char *cmd)
 	int	i;
 
 	i = -1;
-	if (access(cmd, F_OK) == 0)
+	if (ft_strcmp(cmd, "minishell") == 0)
+		return (NULL);
+	if (access(cmd, F_OK | X_OK) == 0)
 		return (cmd);
 	while (vars->env[++i])
 		if (ft_strnstr(vars->env[i], "PATH=", 5) != NULL)

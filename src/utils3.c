@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 12:40:21 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 13:45:24 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/08 14:15:44 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,16 @@ int	bad_access(t_vars *vars, int i)
 			printf("%s: Permission denied\n", vars->args[i + 1]);
 			return (1);
 		}
+	}
+	return (0);
+}
+
+int	valid_exec(t_vars *vars)
+{
+	if (access(vars->args[0], X_OK) != 0)
+	{
+		printf("%s: Permission denied\n", vars->args[0]);
+		return (1);
 	}
 	return (0);
 }
