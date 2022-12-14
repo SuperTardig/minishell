@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 14:08:16 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:23:19 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,7 @@ int			ft_argsize(char **args);
 int			redirections2(t_vars *vars, int i);
 int			bad_access(t_vars *vars, int i);
 int			valid_exec(t_vars *vars);
+int			check_char(char *str, char c);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);

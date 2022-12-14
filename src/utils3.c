@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 12:40:21 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 14:15:44 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 10:22:55 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,4 +81,16 @@ int	valid_exec(t_vars *vars)
 		return (1);
 	}
 	return (0);
+}
+
+int	check_char(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	while (str[i] == c)
+		i++;
+	if (i != (int) ft_strlen(str))
+		return (0);
+	return (1);
 }

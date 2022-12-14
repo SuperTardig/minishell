@@ -6,7 +6,7 @@
 /*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 09:24:02 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 09:20:54 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/14 09:47:20 by bperron          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	print(t_vars *vars, int row)
 {
 	int	arg;
 
-	if (ft_argsize(vars->piped) > 1)
+	if (ft_argsize(vars->piped) > 0)
 	{
 		arg = ft_argsize(vars->piped) - row - 2;
 		while (arg-- > -1)
