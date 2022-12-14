@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:04:15 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:15:51 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:34:08 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,24 @@ void	piper2(t_vars *vars)
 	do_execve(vars, pid);
 	free_pipe_args(vars);
 	vars->nb_pipe -= 1;
+}
+
+void	ft_status(t_vars *vars, int i, int j, int k)
+{
+	char	*nb;
+	char	*new;
+
+	nb = ft_itoa(vars->last_status);
+	new = ft_calloc(ft_strlen(vars->h_cmd) + ft_strlen(nb) - 1, sizeof(char));
+	while (vars->h_cmd[++i] != '$' && vars->h_cmd[i + 1] != '?')
+		new[++j] = vars->h_cmd[i];
+	i += 1;
+	while (nb[++k])
+		new[++j] = nb[k];
+	while (vars->h_cmd[++i])
+		new[++j] = vars->h_cmd[i];
+	free(vars->h_cmd);
+	free(nb);
+	vars->h_cmd = new;
+	loop_the_var(vars, -1);
 }

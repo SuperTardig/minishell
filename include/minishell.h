@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:19:12 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:33:44 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,7 @@ int			check_char(char *str, char c);
 int			ft_charchr(char *str, int c);
 void		ft_cutstr(t_vars *vars, int start, int end);
 void		piper2(t_vars *vars);
+void		ft_status(t_vars *vars, int i, int j, int k);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
@@ -178,7 +179,11 @@ void		free_pipe_args(t_vars *vars);
 int			cmd_not_found(t_vars *vars);
 void		loop_index(t_vars *vars);
 int			redirections(t_vars *vars);
+
+//heredoc.c
 int			heredoc(t_vars *vars, int i);
+void		loop_the_var(t_vars *vars, int i);
+
 void		duplicate(t_vars *vars);
 int			redir_len(t_vars *vars);
 void		make_redir_args(t_vars *vars, int j);

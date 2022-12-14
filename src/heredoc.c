@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:37:49 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:08:22 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:31:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ void	loop_the_var(t_vars *vars, int i)
 		}
 		else if (vars->h_cmd[i] == '$' && vars->h_cmd[i + 1] == '?')
 		{
-			status(vars, -1, -1, -1);
+			ft_status(vars, -1, -1, -1);
 			break ;
 		}
 	}
