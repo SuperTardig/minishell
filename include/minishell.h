@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 10:23:19 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:08:37 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_spilt{
 }	t_split;
 
 typedef struct s_vars{
+	char			*h_cmd;
 	char			*cmd;
 	char			*path;
 	char			**env;
@@ -117,6 +118,10 @@ int			bad_access(t_vars *vars, int i);
 int			valid_exec(t_vars *vars);
 int			check_char(char *str, char c);
 
+//utils4.c
+int			ft_charchr(char *str, int c);
+void		ft_cutstr(t_vars *vars, int start, int end);
+
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
 char		*get_cmd(t_vars *vars);
@@ -151,6 +156,7 @@ void		remove_quotes(t_vars *vars, int i, int single, int doubles);
 //change_var.c
 void		find_var(t_vars *vars, int i);
 void		loop_var(t_vars *vars, int i, int d_quotes, int quotes);
+void		status(t_vars *vars, int i, int j, int k);
 
 void		its_piping_time(t_vars *vars, char *path, int start);
 void		check_if_pipes(t_vars *vars);
