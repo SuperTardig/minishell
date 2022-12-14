@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:08:37 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:19:12 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,6 +121,7 @@ int			check_char(char *str, char c);
 //utils4.c
 int			ft_charchr(char *str, int c);
 void		ft_cutstr(t_vars *vars, int start, int end);
+void		piper2(t_vars *vars);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);
@@ -165,7 +166,14 @@ void		find_the_cmd(char *cmd, t_vars *vars, int index);
 void		rm_exec(t_vars *vars, int index);
 char		*ft_exec(t_vars *vars, int index);
 char		**get_args(t_vars *vars, int start);
+
+//pipe_cmd.c
 void		piper(t_vars *vars);
+pid_t		do_fork(void);
+void		do_pipe(t_vars *vars);
+void		dumpling(t_vars *vars, pid_t pid);
+void		do_execve(t_vars *vars, pid_t pid);
+
 void		free_pipe_args(t_vars *vars);
 int			cmd_not_found(t_vars *vars);
 void		loop_index(t_vars *vars);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/02 09:46:29 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 12:50:45 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/14 16:23:11 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	set_status(t_vars *vars, unsigned char *status)
 	if (check_arg(vars->piped[vars->index + 1]) > 19)
 	{
 		errno = 22;
-		ft_fprintf(2, "Minihell: exit: %s: ", vars->piped[vars->index + 1]);
+		ft_fprintf(2, "Minishell: exit: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 		*status = 255;
 	}
@@ -58,7 +58,7 @@ void	ft_exit(t_vars *vars)
 	{
 		errno = 7;
 		vars->last_status = 7;
-		perror("MiniShell: exit");
+		perror("Minishell: exit");
 		return ;
 	}
 	free_garbage(vars, status);

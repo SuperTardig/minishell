@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:04:15 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:08:26 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:15:51 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,18 @@ void	ft_cutstr(t_vars *vars, int start, int end)
 	new_str[i] = '\0';
 	free(vars->h_cmd);
 	vars->h_cmd = new_str;
+}
+
+void	piper2(t_vars *vars)
+{
+	pid_t	pid;
+
+	if (vars->nb_pipe != 0)
+		do_pipe(vars);
+	pid = do_fork();
+	if (vars->nb_pipe != 0)
+		dumpling(vars, pid);
+	do_execve(vars, pid);
+	free_pipe_args(vars);
+	vars->nb_pipe -= 1;
 }

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 14:26:13 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/14 16:15:46 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ void	do_pipe(t_vars *vars)
 
 void	piper(t_vars *vars)
 {
-	pid_t	pid;
-
 	while (vars->nb_pipe >= 0)
 	{
 		if (vars->path_to_take != 4)
@@ -98,13 +96,6 @@ void	piper(t_vars *vars)
 			vars->nb_pipe -= 1;
 			continue ;
 		}
-		if (vars->nb_pipe != 0)
-			do_pipe(vars);
-		pid = do_fork();
-		if (vars->nb_pipe != 0)
-			dumpling(vars, pid);
-		do_execve(vars, pid);
-		free_pipe_args(vars);
-		vars->nb_pipe -= 1;
+		piper2(vars);
 	}
 }
