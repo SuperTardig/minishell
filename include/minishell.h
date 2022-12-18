@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:33:44 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 12:26:19 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ int			ft_charchr(char *str, int c);
 void		ft_cutstr(t_vars *vars, int start, int end);
 void		piper2(t_vars *vars);
 void		ft_status(t_vars *vars, int i, int j, int k);
+void		dup_for_exec(t_vars *vars);
 
 //find_cmd.c
 char		*look_path(t_vars *vars, char *cmd);

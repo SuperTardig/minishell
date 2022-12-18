@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 15:04:15 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:34:08 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 12:26:02 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,14 @@ void	ft_status(t_vars *vars, int i, int j, int k)
 	free(nb);
 	vars->h_cmd = new;
 	loop_the_var(vars, -1);
+}
+
+void	dup_for_exec(t_vars *vars)
+{
+	if (vars->nb_pipe != 0)
+	{
+		dup2(vars->fd_pipe[0], STDIN_FILENO);
+		close(vars->fd_pipe[0]);
+		close(vars->fd_pipe[1]);
+	}
 }
