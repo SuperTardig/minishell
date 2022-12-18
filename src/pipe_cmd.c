@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:15:46 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 12:09:37 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void	do_execve(t_vars *vars, pid_t pid)
 		close(vars->fd_pipe[1]);
 	}
 	loop_index(vars);
-	waitpid(pid, &vars->last_status, 0);
+	if (ft_strcmp(vars->path, "bin/cat") != 0 && vars->nb_pipe == 0)
+		waitpid(pid, &vars->last_status, 0);
 }
 
 void	do_pipe(t_vars *vars)
