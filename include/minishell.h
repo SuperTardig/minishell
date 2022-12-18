@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/18 12:26:19 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:09:52 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void		sighush(int signum);
 int			meta_num(char *cmd);
 void		ft_strtok(t_vars *vars);
 void		parsing(t_vars *vars);
+int			ft_exec(char *cmd);
 
 //built_in.c
 void		ft_env(t_vars *vars);
@@ -164,9 +165,7 @@ void		status(t_vars *vars, int i, int j, int k);
 void		its_piping_time(t_vars *vars, char *path, int start);
 void		check_if_pipes(t_vars *vars);
 void		exec_cmd(t_vars *vars);
-void		find_the_cmd(char *cmd, t_vars *vars, int index);
-void		rm_exec(t_vars *vars, int index);
-char		*ft_exec(t_vars *vars, int index);
+void		find_the_cmd(char *cmd, t_vars *vars);
 char		**get_args(t_vars *vars, int start);
 
 //pipe_cmd.c

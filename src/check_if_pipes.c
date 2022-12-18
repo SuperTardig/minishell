@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:18:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 12:57:18 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	check_if_pipes(t_vars *vars)
 {
 	int		stdinout_cp[2];
 
-	find_the_cmd(vars->piped[0], vars, 0);
+	find_the_cmd(vars->piped[0], vars);
 	if (ft_strcmp(vars->piped[0], "") == 0
 		|| ft_strcmp(vars->piped[0], ".") == 0)
 		return ;

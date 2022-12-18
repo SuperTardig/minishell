@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:04 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/18 12:19:22 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:03:39 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,7 @@ int	cmd_not_found(t_vars *vars)
 		|| ft_strcmp(vars->args[0], ">>") == 0
 		|| ft_strcmp(vars->args[0], "<<") == 0)
 		return (0);
-	else if (vars->path == NULL && (vars->path_to_take == 9
-			|| vars->path_to_take == 4))
+	else if (vars->path == NULL && vars->path_to_take == 9)
 	{
 		free_pipe_args(vars);
 		printf("command not found: %s\n", vars->piped[vars->index]);

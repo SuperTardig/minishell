@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/18 12:26:33 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:27:31 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	do_execve(t_vars *vars, pid_t pid)
 	if (pid == 0)
 	{
 		good_file(vars);
-		if (vars->path_to_take != 4 && vars->path_to_take != 9)
+		if (vars->path_to_take != 9)
 			exec_cmd(vars);
 		else
 		{
@@ -56,7 +56,9 @@ void	do_execve(t_vars *vars, pid_t pid)
 	}
 	dup_for_exec(vars);
 	loop_index(vars);
-	if (ft_strcmp(vars->path, "bin/cat") != 0 && vars->nb_pipe == 0)
+	if (ft_strcmp(vars->path, "/bin/cat") == 0 && vars->nb_pipe != 0)
+		return ;
+	else
 		waitpid(pid, &vars->last_status, 0);
 }
 
@@ -73,21 +75,15 @@ void	piper(t_vars *vars)
 {
 	while (vars->nb_pipe >= 0)
 	{
-		if (vars->path_to_take != 4)
-			find_the_cmd(vars->piped[vars->index], vars, vars->index);
+		find_the_cmd(vars->piped[vars->index], vars);
 		vars->args = get_args(vars, vars->index);
-		if (vars->path_to_take == 4)
-		{
-			vars->path = ft_exec(vars, vars->index);
-			if (valid_exec(vars))
-			{
-				vars->nb_pipe -= 1;
-				continue ;
-			}
-		}
-		else
-			vars->path = look_path(vars, vars->piped[vars->index]);
+		vars->path = look_path(vars, vars->piped[vars->index]);
 		if (cmd_not_found(vars))
+		{
+			vars->nb_pipe -= 1;
+			continue ;
+		}
+		if (valid_exec(vars))
 		{
 			vars->nb_pipe -= 1;
 			continue ;

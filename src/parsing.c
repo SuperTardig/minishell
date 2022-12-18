@@ -3,26 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/14 09:45:10 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/18 14:29:29 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	rm_exec(t_vars *vars, int index)
+int	ft_exec(char *cmd)
 {
+	char	*buf;
 	char	*tmp;
 
-	tmp = ft_strdup(vars->piped[index]);
-	free(vars->piped[index]);
-	vars->piped[index] = ft_substr(tmp, 2, ft_strlen(tmp) - 2);
+	buf = ft_calloc(sizeof(char), 1000);
+	getcwd(buf, 1000);
+	ft_strlcat(buf, "/", ft_strlen(buf) + 2);
+	tmp = ft_substr(cmd, 2, ft_strlen(cmd) - 2);
+	ft_strlcat(buf, tmp, ft_strlen(buf) + ft_strlen(tmp) + 1);
 	free(tmp);
+	if (access(buf, F_OK | X_OK) == 0)
+	{
+		free(buf);
+		return (1);
+	}
+	free(buf);
+	return (0);
 }
 
-void	find_the_cmd(char *cmd, t_vars *vars, int index)
+void	find_the_cmd(char *cmd, t_vars *vars)
 {
 	if (cmp(cmd, "CD") == 1)
 		vars->path_to_take = 0;
@@ -32,11 +42,6 @@ void	find_the_cmd(char *cmd, t_vars *vars, int index)
 		vars->path_to_take = 2;
 	else if (cmp(cmd, "unset") == 1)
 		vars->path_to_take = 3;
-	else if (cmd[0] == '.' && cmd[1] == '/')
-	{
-		rm_exec(vars, index);
-		vars->path_to_take = 4;
-	}
 	else if (cmp(cmd, "pwd") == 1 || cmp(cmd, "PWD") == 1)
 		vars->path_to_take = 5;
 	else if (cmp(cmd, "export") == 1)

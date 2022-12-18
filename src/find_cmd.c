@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 11:09:56 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/08 14:42:38 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/18 14:28:12 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,16 @@ char	*look_path2(t_vars *vars, char *cmd)
 
 char	*look_path(t_vars *vars, char *cmd)
 {
-	int	i;
+	int		i;
 
 	i = -1;
-	if (ft_strcmp(cmd, "minishell") == 0)
-		return (NULL);
-	if (access(cmd, F_OK | X_OK) == 0)
-		return (cmd);
+	if (cmd[0] == '.' && cmd[1] == '/')
+	{
+		if (ft_exec(cmd))
+			return (ft_substr(cmd, 2, ft_strlen(cmd) - 2));
+		else
+			return (NULL);
+	}
 	while (vars->env[++i])
 		if (ft_strnstr(vars->env[i], "PATH=", 5) != NULL)
 			return (look_path2(vars, cmd));

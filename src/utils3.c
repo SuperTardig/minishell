@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils3.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/08 12:40:21 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 10:22:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/18 13:23:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	bad_access(t_vars *vars, int i)
 
 int	valid_exec(t_vars *vars)
 {
-	if (access(vars->args[0], X_OK) != 0)
+	if (access(vars->path, X_OK) != 0)
 	{
 		printf("%s: Permission denied\n", vars->args[0]);
 		return (1);
