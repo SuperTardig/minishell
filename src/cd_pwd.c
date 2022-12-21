@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 09:07:15 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 14:11:55 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/21 14:45:53 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	ft_cd(t_vars *vars)
 	free(new);
 	if (vars->last_status == -1)
 	{
-		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index]);
+		ft_fprintf(2, "cd: %s: ", vars->piped[vars->index + 1]);
 		perror("");
 	}
 	else

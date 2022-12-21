@@ -6,11 +6,35 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/18 12:57:18 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:35:03 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
+
+int	check_pipes_syntax(t_vars *vars)
+{
+	(void)vars;
+	// int	i;
+
+	// i = -1;
+	// if (ft_strcmp(vars->piped[1], "|") == 0)
+	// {
+	// 	printf("Minishell: syntax error near unexpected token '|'\n");
+	// 	vars->last_status = 1;
+	// 	return (1);
+	// }
+	// while (vars->piped[++i + 1])
+	// {
+	// 	if (ft_strcmp(vars->piped[i], vars->piped[i + 1]) == 0)
+	// 	{
+	// 		printf("Minishell: syntax error near unexpected token '|'\n");
+	// 		vars->last_status = 1;
+	// 		return (1);
+	// 	}
+	// }
+	return (0);
+}
 
 void	loop_index(t_vars *vars)
 {

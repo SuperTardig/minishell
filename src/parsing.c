@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/18 14:29:29 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:29:29 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ void	del_spaces2(t_vars *vars)
 
 void	parsing(t_vars *vars)
 {
+	int	i;
+
+	i = -1;
 	if (!vars->cmd[0])
 		return ;
 	vars->last_var = -1;
@@ -98,6 +101,8 @@ void	parsing(t_vars *vars)
 	check_redir(vars);
 	del_spaces2(vars);
 	split_args(vars);
+	if (check_pipes_syntax(vars))
+		return ;
 	check_if_pipes(vars);
 	free_arrarr(vars->piped);
 	free(vars->cmd);

@@ -6,7 +6,7 @@
 /*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/07 10:34:29 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/18 14:09:52 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/21 15:15:30 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,6 +167,7 @@ void		check_if_pipes(t_vars *vars);
 void		exec_cmd(t_vars *vars);
 void		find_the_cmd(char *cmd, t_vars *vars);
 char		**get_args(t_vars *vars, int start);
+int			check_pipes_syntax(t_vars *vars);
 
 //pipe_cmd.c
 void		piper(t_vars *vars);
