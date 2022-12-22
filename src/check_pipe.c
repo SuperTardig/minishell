@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_pipe.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/28 11:29:09 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 12:53:13 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/22 12:18:51 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,9 @@ int	ft_strlen_until_pipe(char *cmd)
 
 void	put_pipe(t_vars *vars, int *i, int *nb_pipe)
 {
-	vars->piped[*i] = ft_calloc(sizeof(char), 2);
+	vars->piped[*i] = ft_calloc(2, sizeof(char));
 	vars->piped[*i][0] = '|';
+	vars->piped[*i][1] = '\0';
 	*i += 1;
 	*nb_pipe -= 1;
 }
@@ -78,7 +79,9 @@ void	check_pipe(t_vars *vars, int i, int x)
 	{
 		k = ft_strlen_until_pipe(&vars->cmd[x]);
 		j = 0;
-		vars->piped[i++] = ft_substr(&vars->cmd[x], 0,
+		if (ft_strcmp(ft_substr(&vars->cmd[x], 0,
+				ft_strlen_until_pipe(&vars->cmd[x])), "") != 0)
+			vars->piped[i++] = ft_substr(&vars->cmd[x], 0,
 				ft_strlen_until_pipe(&vars->cmd[x]));
 		if (nb_pipe >= 1)
 			put_pipe(vars, &i, &nb_pipe);

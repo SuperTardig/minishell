@@ -3,16 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 14:37:49 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/14 16:31:53 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:34:45 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-void	loop_the_var(t_vars *vars, int i);
+void	loop_the_var(t_vars *vars, int i)
+{
+	while (vars->h_cmd[++i])
+	{
+		if (vars->h_cmd[i] == '$'
+			&& ((vars->h_cmd[i + 1] >= 'a' && vars->h_cmd[i + 1] <= 'z')
+				|| (vars->h_cmd[i + 1] >= 'A' && vars->h_cmd[i + 1] <= 'Z')
+				|| vars->h_cmd[i + 1] == '_'))
+		{
+			find_the_var(vars, i + 1);
+			break ;
+		}
+		else if (vars->h_cmd[i] == '$' && vars->h_cmd[i + 1] == '?')
+		{
+			ft_status(vars, -1, -1, -1);
+			break ;
+		}
+	}
+}
 
 int	put_the_new_var(t_vars *vars, char *new, int var_place, int env_place)
 {
@@ -84,26 +102,6 @@ void	find_the_var(t_vars *vars, int i)
 		change_the_var(vars, i - 1, j, ft_strlen(var));
 	else
 		ft_cutstr(vars, i - 1, i + ft_strlen(var) - 2);
-}
-
-void	loop_the_var(t_vars *vars, int i)
-{
-	while (vars->h_cmd[++i])
-	{
-		if (vars->h_cmd[i] == '$'
-			&& ((vars->h_cmd[i + 1] >= 'a' && vars->h_cmd[i + 1] <= 'z')
-				|| (vars->h_cmd[i + 1] >= 'A' && vars->h_cmd[i + 1] <= 'Z')
-				|| vars->h_cmd[i + 1] == '_'))
-		{
-			find_the_var(vars, i + 1);
-			break ;
-		}
-		else if (vars->h_cmd[i] == '$' && vars->h_cmd[i + 1] == '?')
-		{
-			ft_status(vars, -1, -1, -1);
-			break ;
-		}
-	}
 }
 
 int	heredoc(t_vars *vars, int i)

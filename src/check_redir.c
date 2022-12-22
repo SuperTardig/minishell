@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   check_redir.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 11:10:38 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/30 10:41:12 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/22 12:29:09 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	find_size(char *str, int i, int doubles, int singles)
+int	find_size(char *str, int i, int doubles, int singles)
 {
 	int	size;
 

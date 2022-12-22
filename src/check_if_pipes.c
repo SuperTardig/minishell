@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_if_pipes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 12:30:24 by fleduc            #+#    #+#             */
-/*   Updated: 2022/12/21 15:35:03 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:12:05 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,25 +14,24 @@
 
 int	check_pipes_syntax(t_vars *vars)
 {
-	(void)vars;
-	// int	i;
+	int	i;
 
-	// i = -1;
-	// if (ft_strcmp(vars->piped[1], "|") == 0)
-	// {
-	// 	printf("Minishell: syntax error near unexpected token '|'\n");
-	// 	vars->last_status = 1;
-	// 	return (1);
-	// }
-	// while (vars->piped[++i + 1])
-	// {
-	// 	if (ft_strcmp(vars->piped[i], vars->piped[i + 1]) == 0)
-	// 	{
-	// 		printf("Minishell: syntax error near unexpected token '|'\n");
-	// 		vars->last_status = 1;
-	// 		return (1);
-	// 	}
-	// }
+	i = -1;
+	if (ft_strcmp(vars->piped[0], "|") == 0)
+	{
+		printf("Minishell: syntax error near unexpected token '|'\n");
+		vars->last_status = 1;
+		return (1);
+	}
+	while (vars->piped[++i + 1])
+	{
+		if (ft_strcmp(vars->piped[i], vars->piped[i + 1]) == 0)
+		{
+			printf("Minishell: syntax error near unexpected token '|'\n");
+			vars->last_status = 1;
+			return (1);
+		}
+	}
 	return (0);
 }
 

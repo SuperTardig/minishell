@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: fleduc <fleduc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 09:33:43 by bperron           #+#    #+#             */
-/*   Updated: 2022/12/21 15:29:29 by fleduc           ###   ########.fr       */
+/*   Updated: 2022/12/22 12:16:55 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,6 @@ void	del_spaces2(t_vars *vars)
 
 void	parsing(t_vars *vars)
 {
-	int	i;
-
-	i = -1;
 	if (!vars->cmd[0])
 		return ;
 	vars->last_var = -1;

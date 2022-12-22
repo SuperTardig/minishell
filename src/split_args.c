@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   split_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bperron <bperron@student.42.fr>            +#+  +:+       +#+        */
+/*   By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/07 15:32:58 by bperron           #+#    #+#             */
-/*   Updated: 2022/11/10 13:20:44 by bperron          ###   ########.fr       */
+/*   Updated: 2022/12/22 12:30:21 by fleduc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/minishell.h"
 
-static int	find_size(t_vars *vars, int row, int start)
+int	size_find(t_vars *vars, int row, int start)
 {
 	int	i;
 	int	quotes;
@@ -40,7 +40,7 @@ void	splitter2(t_vars *vars, int i, int *j, char **new_piped)
 {
 	vars->split.ok = 0;
 	if (!(new_piped[vars->split.k]))
-			new_piped[vars->split.k] = ft_calloc(find_size(vars, i, *j) + 1,
+			new_piped[vars->split.k] = ft_calloc(size_find(vars, i, *j) + 1,
 				sizeof(char));
 	if (vars->piped[i][*j] == '"' && vars->singles % 2 == 0)
 		vars->doubles++;
