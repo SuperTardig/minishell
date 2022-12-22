@@ -6,7 +6,7 @@
 #    By: fleduc <fleduc@student.42quebec.com>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/26 13:16:40 by bperron           #+#    #+#              #
-#    Updated: 2022/12/22 11:36:50 by fleduc           ###   ########.fr        #
+#    Updated: 2022/12/22 13:19:50 by fleduc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,8 +27,7 @@ all: $(NAME)
 
 $(NAME): $(SRCS) $(OBJS) $(HEADERS)
 	$(LIBFT)
-	#$(CC) $(CFLAGS) -lreadline -L $(HOME)/.brew/opt/readline/lib -I $(HOME)/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
-	$(CC) $(CFLAGS) -lreadline -L /opt/homebrew/Cellar/readline/8.2.1/lib -I /opt/homebrew/Cellar/readline/8.2.1/include $(LIBFTA) $(OBJS) -o $(NAME)
+	$(CC) $(CFLAGS) -lreadline -L $(HOME)/.brew/opt/readline/lib -I $(HOME)/.brew/opt/readline/include $(LIBFTA) $(OBJS) -o $(NAME)
 	echo "Mandatory compilation done"
 	echo "Mandatory compilation done"
 
